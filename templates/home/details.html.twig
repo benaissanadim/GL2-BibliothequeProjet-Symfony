@@ -1,0 +1,630 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home | Books Library eCommerce Store</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{asset("assets/css/plugins.css")  }}">
+    <link rel="stylesheet" href="{{asset("style.css")  }}">
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')  }}">
+    <link rel="apple-touch-icon" href="{{asset('assets/images/icon.png')  }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,600,600i,700,700i,800"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset("assets/css/custom.css")  }}">
+    <script src="{{asset("assets/js/vendor/modernizr-3.5.0.min.js") }}"></script>
+</head>
+<body>
+
+<div class="wrapper" id="wrapper">
+
+    <!-- Header -->
+    <header id="wn__header" class="oth-page header__area header__absolute sticky__header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="{{asset('assets/images/logo/3.png')}}" alt="logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8 d-none d-lg-block">
+                    <nav class="mainmenu__nav">
+                        <ul class="meninmenu d-flex justify-content-start">
+                            <li><a href="{{ path("home") }}">Home</a></li>
+                            <li class="drop"><a href="shop-grid.html">Buy Books</a>
+                                <div class="megamenu dropdown">
+                                    <ul class="item item01">
+                                        <li class="title">Categories</li>
+                                        <li><a href="#">UniversityBooks</a></li>
+                                        <li><a href="#">BiographyBooks</a></li>
+                                        <li><a href="#">KidBooks</a></li>
+                                        <li><a href="#">CookBooks</a></li>
+                                        <li><a href="#">HeathBooks</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="drop"><a href="shop-grid.html">Borrow Books</a>
+                                <div class="megamenu dropdown">
+                                    <ul class="item item01">
+                                        <li class="title">Categories</li>
+                                        <li><a href="#" >UniversityBooks</a></li>
+                                        <li><a href="#">BiographyBooks</a></li>
+                                        <li><a href="#">KidBooks</a></li>
+                                        <li><a href="#">CookBooks</a></li>
+                                        <li><a href="#">HeathBooks</a></li>
+                                </div>
+                            </li>
+
+                            <li><a href="blog.html">Blogs</a> </li>
+
+                            <li><a href="contact.html">Contact</a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                    <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
+                        <li class="shop_search"><a class="search__active" href="#"></a></li>
+                        <li class="wishlist"><a href="wishlist.html"></a></li>
+
+                        <li class="shopcart" > <a href="cart.html" ></a>
+
+
+                        <li class="setting__bar__icon"><a class="setting__active" href="#"></a>
+                            <div class="searchbar__content setting__block">
+                                <div class="content-inner">
+
+                                    <div class="switcher-currency">
+
+                                        <div class="switcher-options">
+                                            <div class="switcher-currency-trigger">
+                                                <div class="setting__menu">
+                                                    <span><a href="#">Sign In</a></span>
+                                                    <span><a href="#">Create An Account</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Start Mobile Menu -->
+                    <div class="row d-none">
+                        <div class="col-lg-12 d-none">
+                            <nav class="mobilemenu__nav">
+                                <ul class="meninmenu">
+                                    <li><a href="index-2.html">Home</a></li>
+
+
+
+                                    <li><a href="shop-grid.html"> Borrow Books</a>
+                                        <ul>
+                                            <li><a href="shop-grid.html">UniversityBooks</a></li>
+                                            <li><a href="shop-grid.html">BiographyBooks</a></li>
+                                            <li><a href="shop-grid.html">KidBooks</a></li>
+                                            <li><a href="shop-grid.html">CookBooks</a></li>
+                                            <li><a href="shop-grid.html">HeathBooks</a></li>
+                                        </ul>
+
+                                    </li>
+                                    <li><a href="shop-grid.html"> Borrow Books</a>
+                                        <ul>
+                                            <li><a href="shop-grid.html">UniversityBooks</a></li>
+                                            <li><a href="shop-grid.html">BiographyBooks</a></li>
+                                            <li><a href="shop-grid.html">KidBooks</a></li>
+                                            <li><a href="shop-grid.html">CookBooks</a></li>
+                                            <li><a href="shop-grid.html">HeathBooks</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- End Mobile Menu -->
+                    <div class="mobile-menu d-block d-lg-none">
+                    </div>
+                    <!-- Mobile Menu -->
+                </div> </header>
+    <!-- //Header -->
+    <!-- Start Search Popup -->
+    <div class="box-search-content search_active block-bg close__top">
+        <form id="search_mini_form" class="minisearch" action="#">
+            <div class="field__search">
+                <input type="text" placeholder="Search entire store here...">
+                <div class="action">
+                    <a href="#"><i class="zmdi zmdi-search"></i></a>
+                </div>
+            </div>
+        </form>
+        <div class="close__wrap">
+            <span>close</span>
+        </div>
+    </div>
+    <!-- End Search Popup -->
+    <!-- Start breadcrumb area -->
+    <div class="ht__breadcrumb__area bg-image--6" style="background-image: url('{{asset('assets/images/bg/6.jpg')}}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__inner text-center">
+                        <h2 class="breadcrumb-title">Shop Grid</h2>
+                        <nav class="breadcrumb-content">
+                            <a class="breadcrumb_item" href="index.html">Home</a>
+                            <span class="brd-separator">/</span>
+                            <span class="breadcrumb_item active">Shop Grid</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumb area -->
+    <!-- Start Shop Page -->
+    <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
+                    <div class="shop__sidebar">
+                        <aside class="widget__categories products--cat">
+                            <h3 class="widget__title">Product Categories</h3>
+                            <ul>
+                                {% for category in Categories %}
+                                    <li><a href="#">{{ category.name }} <span>(3)</span></a></li>
+                                {% endfor %}
+
+                            </ul>
+                        </aside>
+                        <aside class="widget__categories pro--range">
+                            <h3 class="widget__title">Filter by price</h3>
+                            <div class="content-shopby">
+                                <div class="price_filter s-filter clear">
+                                    <form action="#" method="GET">
+
+                                        <div id="slider-range"></div>
+                                        <div class="slider__range--output">
+                                            <div class="price__output--wrap">
+                                                <div class="price--output">
+                                                    <span>Price :</span><input type="text" id="amount" readonly=""> abc
+                                                </div>
+                                                <div class="price--filter">
+                                                    <a href="#">Filter</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </aside>
+                        <aside class="widget__categories products--tag">
+                            <h3 class="widget__title">Product Tags</h3>
+                            <ul>
+                                <li><a href="#">Biography</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Cookbooks</a></li>
+                                <li><a href="#">Health & Fitness</a></li>
+                                <li><a href="#">History</a></li>
+                                <li><a href="#">Mystery</a></li>
+                                <li><a href="#">Inspiration</a></li>
+
+                            </ul>
+                        </aside>
+                        <aside class="widget__categories sidebar--banner">
+                            <img src="images/others/banner_left.jpg" alt="banner images">
+                            <div class="text">
+                                <h2>new products</h2>
+                                <h6>save up to <br> <strong>40%</strong>off</h6>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+
+
+                <div class="maincontent bg--white pt--80 pb--55">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-9 col-12">
+                                <div class="wn__single__product">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
+                                            <div class="wn__fotorama__wrapper">
+                                                <div class="fotorama wn__fotorama__action" data-nav="thumbs">
+                                                    <img src="{{ asset(produit.path) }}" alt="">
+                                                    <img src="{{ asset(produit.path2) }}" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <div class="product__info__main">
+                                                <h1>{{ produit.name }}</h1>
+                                                <div class="product-reviews-summary d-flex">
+                                                    <ul class="rating-summary d-flex">
+                                                        <li><i class="zmdi zmdi-star-outline"></i></li>
+                                                        <li><i class="zmdi zmdi-star-outline"></i></li>
+                                                        <li class="on"><i class="zmdi zmdi-star-outline"></i></li>
+                                                        <li class="off"><i class="zmdi zmdi-star-outline"></i></li>
+                                                        <li class="off"><i class="zmdi zmdi-star-outline"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price-box">
+                                                    <span>{{ produit.price }} DT</span>
+                                                </div>
+                                                <div class="product__overview">
+                                                    {{ produit.description }}
+                                                </div>
+                                                <div class="box-tocart d-flex">
+                                                    <span>Qty</span>
+                                                    <input id="qty" class="input-text qty" name="qty" min="1" value="1"
+                                                           title="Qty" type="number">
+                                                    <div class="addtocart__actions">
+                                                        <button class="tocart" type="submit" title="Add to Cart">Add to
+                                                            Cart</button>
+                                                    </div>
+                                                    <div class="product-addto-links clearfix">
+                                                        <a class="wishlist" href="#"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="product_meta">
+											<span class="posted_in">Category:
+												<a href="#">{{ produit.category.name }}</a>,
+											</span>
+                                                </div>
+                                                <div class="product-share">
+                                                    <ul>
+                                                        <li class="categories-title">Share :</li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <i class="icon-social-twitter icons"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <i class="icon-social-tumblr icons"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <i class="icon-social-facebook icons"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <i class="icon-social-linkedin icons"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-md-center">
+
+                                        <div class="col-md-auto">
+                                            <i class="far fa-star fa-2x" data-index="0"></i>
+                                            <i class="far fa-star fa-2x" data-index="1"></i>
+                                            <i class="far fa-star fa-2x" data-index="2"></i>
+                                            <i class="far fa-star fa-2x" data-index="3"></i>
+                                            <i class="far fa-star fa-2x" data-index="4"></i>
+                                        </div>
+
+                                        <div class="col-md-auto">
+                                            <h5 id="stars" > </h5>
+                                        </div>
+                                        <div class="col-md-auto">
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="grix xs2 sm3 gutter-0 card">
+                                        <div class="col-xs2 col-sm3">
+                                            <h3>Send Mail</h3>
+                                            {{ form_start(formmail) }}
+                                            {{ form_end(formmail) }}
+                                        </div></div>
+
+
+
+
+
+
+                                            <div class="grix xs2 sm3 gutter-0 card">
+                                    <div class="col-xs2 col-sm3">
+                                        <h3>Liste des commentaires</h3>
+                                        {% for comment in produit.comments %}
+                                            {% if comment.parent == null %}
+                                                {{comment.nickname}}
+                                                : {% if comment.updtaedAt == null %}
+                                            Published {{comment.createdAt|date("d/m/Y H:i") }}
+                                            {% else %}
+                                                Updated {{comment.updtaedAt|date("d/m/Y H:i") }}
+                                                {% endif %}
+                                                <div>{{comment.content|raw}}</div>
+                                                <p><a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" class="btn primary press">Répondre</a></p>
+
+
+                                                {# On affiche les réponses #}
+                                                {% for reply in comment.replies %}
+                                                    <p>Réponse publiée par {{reply.nickname}} le {{reply.createdAt|date("d/m/Y H:i") }}</p>
+                                                    <div>{{reply.content|raw}}</div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="grix xs2 sm3 gutter-0 card">
+                                    <div class="col-xs2 col-sm3" id="ajout-commentaire">
+                                        <h2>Ajouter un commentaire</h2>
+                                        {{ form_start(commentForm) }}
+                                        {{ form_row(commentForm.nickname) }}
+                                        <p>Message</p>
+                                        <div id="editor"></div>
+                                        {{ form_end(commentForm) }}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                        <div class="product__info__detailed">
+                                    <div class="pro_details_nav nav justify-content-start" role="tablist">
+                                        <a class="nav-item nav-link" data-toggle="tab" href="#nav-details"
+                                           role="tab">Details</a>
+                                        <a class="nav-item nav-link active" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>
+                                    </div>
+
+                                    <div class="tab__container">
+                                        <!-- Start Single Tab Content -->
+                                        <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
+                                            <div class="description__attribute">
+                                                <p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises
+                                                    superior warmth with every wear. Thick material blocks out the wind as
+                                                    ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather
+                                                    training or work outdoors, the Chaz Hoodie promises superior warmth with
+                                                    every wear. Thick material blocks out the wind as ribbed cuffs and bottom
+                                                    band seal in body heat.Ideal for cold-weather training or work outdoors, the
+                                                    Chaz Hoodie promises superior warmth with every wear. Thick material blocks
+                                                    out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for
+                                                    cold-weather training or work outdoors, the Chaz Hoodie promises superior
+                                                    warmth with every wear. Thick material blocks out the wind as ribbed cuffs
+                                                    and bottom band seal in body heat.</p>
+                                                <ul>
+                                                    <li>• Two-tone gray heather hoodie.</li>
+                                                    <li>• Drawstring-adjustable hood. </li>
+                                                    <li>• Machine wash/dry.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- End Single Tab Content -->
+                                        <!-- Start Single Tab Content -->
+                                        <div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
+                                            <div class="review__attribute">
+                                                <h1>Customer Reviews</h1>
+                                                <h2>Hastech</h2>
+                                                <div class="review__ratings__type d-flex">
+                                                    <div class="review-ratings">
+                                                        <div class="rating-summary d-flex">
+                                                            <span>Quality</span>
+                                                            <ul class="rating d-flex">
+                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <div class="rating-summary d-flex">
+                                                            <span>Price</span>
+                                                            <ul class="rating d-flex">
+                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="rating-summary d-flex">
+                                                            <span>value</span>
+                                                            <ul class="rating d-flex">
+                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                <li><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-content">
+                                                        <p>Hastech</p>
+                                                        <p>Review by Hastech</p>
+                                                        <p>Posted on 11/6/2018</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="review-fieldset">
+                                                <h2>You're reviewing:</h2>
+                                                <h3>Chaz Kangeroo Hoodie</h3>
+                                                <div class="review-field-ratings">
+                                                    <div class="product-review-table">
+                                                        <div class="review-field-rating d-flex">
+                                                            <span>Quality</span>
+                                                            <ul class="rating d-flex">
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="review-field-rating d-flex">
+                                                            <span>Price</span>
+                                                            <ul class="rating d-flex">
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="review-field-rating d-flex">
+                                                            <span>Value</span>
+                                                            <ul class="rating d-flex">
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="review_form_field">
+                                                    <div class="input__box">
+                                                        <span>Nickname</span>
+                                                        <input id="nickname_field" type="text" name="nickname">
+                                                    </div>
+                                                    <div class="input__box">
+                                                        <span>Summary</span>
+                                                        <input id="summery_field" type="text" name="summery">
+                                                    </div>
+                                                    <div class="input__box">
+                                                        <span>Review</span>
+                                                        <textarea name="review"></textarea>
+                                                    </div>
+                                                    <div class="review-form-actions">
+                                                        <button>Submit Review</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Single Tab Content -->
+                                    </div>
+                                </div>
+
+    <!-- Footer Area -->
+    <footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
+        <div class="footer-static-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer__widget footer__menu">
+                            <div class="ft__logo">
+                                <a href="index.html">
+                                    <img src="images/logo/3.png" alt="logo">
+                                </a>
+                                <p>There are many variations of passages of Lorem Ipsum available, but the majority
+                                    have suffered duskam alteration variations of passages</p>
+                            </div>
+                            <div class="footer__content">
+                                <ul class="social__net social__net--2 d-flex justify-content-center">
+                                    <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                                    <li><a href="#"><i class="bi bi-google"></i></a></li>
+                                    <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                                    <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="bi bi-youtube"></i></a></li>
+                                </ul>
+                                <ul class="mainmenu d-flex justify-content-center">
+                                    <li><a href="index.html">Trending</a></li>
+                                    <li><a href="index.html">Best Seller</a></li>
+                                    <li><a href="index.html">All Product</a></li>
+                                    <li><a href="index.html">Wishlist</a></li>
+                                    <li><a href="index.html">Blog</a></li>
+                                    <li><a href="index.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright__wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="copyright">
+                            <div class="copy__right__inner text-left">
+                                <p>Copyright <i class="fa fa-copyright"></i> <a href="#">Boighor.</a> All Rights
+                                    Reserved</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="payment text-right">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //Footer Area -->
+
+</div>
+<!-- //Main wrapper -->
+                            <script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+                            <script>
+                                var stars = document.querySelector('#stars');
+                                var ratedIndex = 1;
+                                $(document).ready(function () {
+                                    resetStarColors();
+                                    $('.fa-star').on('click', function () {
+                                        ratedIndex = parseInt($(this).data('index'));
+                                        stars.textContent = ratedIndex ;
+                                        document.querySelector("#rating_nbstars").value=ratedIndex ;
+                                    });
+
+                                    $('.fa-star').mouseover(function () {
+                                        resetStarColors();
+                                        var currentIndex = parseInt($(this).data('index'));
+                                        setStars(currentIndex);
+                                    });
+
+                                    $('.fa-star').mouseleave(function () {
+                                        resetStarColors();
+                                        if (ratedIndex != -1)
+                                            setStars(ratedIndex);
+                                    });
+                                });
+
+                                function setStars(max) {
+                                    for (var i=0; i <= max; i++)
+                                        $('.fa-star:eq('+i+')').css('color', '#ce7852');
+                                }
+                                function resetStarColors() {
+                                    $('.fa-star').css('color', 'black');
+                                }
+                            </script>
+<script src="{{asset('assets/js/popper.min.js')  }}"></script>
+<script src="{{asset('assets/js/bootstrap.min.js')  }}"></script>
+<script src="{{asset('assets/js/vendor/jquery-3.2.1.min.js')  }}"></script>
+<script src="{{asset('assets/js/plugins.js')  }}"></script>
+<script src="{{asset('assets/js/active.js')  }}"></script>
+                            <script>
+                                window.onload = () => {
+                                    document.querySelectorAll("[data-reply]").forEach(element => {
+                                        element.addEventListener("click", function(){
+                                            document.querySelector("#comments_parentid").value = this.dataset.id;
+                                        });
+                                    });
+                                }
+                            </script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="MySQL - sfGL2021@localhost" uuid="b1159e66-41a3-4aa6-bcb2-068bb6f3c190">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/sfGL2021</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+      <time-zone>GMT</time-zone>
+    </data-source>
+  </component>
+</project>
