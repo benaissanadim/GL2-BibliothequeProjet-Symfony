@@ -505,6 +505,19 @@ a:active {
   text-decoration: none;
   outline: none; }
 
+.container1 {
+  display: flex;
+}
+.box1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.box1:first-child > span { margin-right: auto; }
+
+.box1:last-child  > span { margin-left: auto;  }
+
 /**
 Helper Class
 */
