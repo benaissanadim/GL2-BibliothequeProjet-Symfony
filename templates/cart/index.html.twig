@@ -32,11 +32,14 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 ol-lg-12">
                         <form action="#">
+                            <div class="section__title--3">
+                                <h3><span>  Bought : </span> </h3> <br>
+                            </div>
                             <div class="table-content wnro__table table-responsive">
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>produit</th>
+                                        <th>Product</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
                                         <th>Total</th>
@@ -72,6 +75,63 @@
                                     <tr>
                                         <td colspan="3">Total</td>
                                         <td class="text-end">{{ total }} €</td>
+                                        <td>
+                                            <a href="{{path("cart_delete_all")}}" class="btn btn-danger">
+                                                <i class="bi bi-cart-x"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="section__title--3">
+                                <h3><span>  Borrowed : </span> </h3> <br>
+                            </div>
+                            <div class="table-content wnro__table table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Started</th>
+                                        <th>Returned</th>
+                                        <th>Fee</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for element in data %}
+                                        <tr>
+                                            <td>{{ element.produit.name }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-end">{{ element.produit.price }} €</td>
+                                            <td>{{ element.quantite }}</td>
+                                            <td class="text-end">{{ element.quantite * element.produit.price }} €</td>
+                                            <td>
+                                                <a href="{{path("cart_add", {id: element.produit.id})}}" class="btn btn-outline-success">
+                                                    <i class="bi bi-plus"></i>
+                                                </a>
+                                                <a href="{{path("cart_remove", {id: element.produit.id})}}" class="btn btn-outline-warning">
+                                                    <i class="bi bi-dash"></i>
+                                                </a>
+                                                <a href="{{path("cart_delete", {id: element.produit.id})}}" class="btn btn-outline-danger">
+                                                    <i class="bi bi-cart-x"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="5" class="text-center">Your cart is empty. Consider adding some items to it</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="3">Total</td>
+                                        <td class="text-end">{{ total }} €</td>
+                                        <td class="text-end" colspan="2"></td>
                                         <td>
                                             <a href="{{path("cart_delete_all")}}" class="btn btn-danger">
                                                 <i class="bi bi-cart-x"></i>
@@ -163,10 +223,8 @@
                 </div>
             </div>
         </footer>
-        <!-- //Footer Area -->
 
     </div>
-    <!-- //Main wrapper -->
 
     <!-- JS Files -->
 
