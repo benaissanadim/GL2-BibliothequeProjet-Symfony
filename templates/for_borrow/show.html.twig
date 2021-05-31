@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ForBorrow{% endblock %}
+
+{% block body %}
+    <h1>ForBorrow</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ for_borrow.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ for_borrow.name }}</td>
+            </tr>
+            <tr>
+                <th>Starting_date</th>
+                <td>{{ for_borrow.startingDate ? for_borrow.startingDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Return_date</th>
+                <td>{{ for_borrow.returnDate ? for_borrow.returnDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fee</th>
+                <td>{{ for_borrow.fee }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('for_borrow_index') }}">back to list</a>
+
+    <a href="{{ path('for_borrow_edit', {'id': for_borrow.id}) }}">edit</a>
+
+    {{ include('for_borrow/_delete_form.html.twig') }}
+{% endblock %}
