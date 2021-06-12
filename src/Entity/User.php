@@ -91,7 +91,7 @@ class User implements UserInterface, \Serializable
     {
         return serialize([
             $this->id,
-            $this->usrname,
+            $this->username,
             $this->email,
             $this->password
         ]);
@@ -102,7 +102,7 @@ class User implements UserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->usrname,
+            $this->username,
             $this->email,
             $this->password
             ) = $this->unserialize(String, ['allowed_classes' => false]);
