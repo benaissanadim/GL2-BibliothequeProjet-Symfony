@@ -1940,7 +1940,7 @@
             "target-dir": "Nomaya/SocialBundle",
             "source": {
                 "type": "git",
-                "url": "git@github.com:nomayann/NomayaSocialButtonsBundle.git",
+                "url": "https://github.com/nomayann/NomayaSocialButtonsBundle.git",
                 "reference": "5a8a24954189e6f2d39368f755498bc2e13e0e6f"
             },
             "dist": {
@@ -1996,6 +1996,10 @@
                 "symfony2bundle",
                 "twitter"
             ],
+            "support": {
+                "issues": "https://github.com/nomayann/NomayaSocialButtonsBundle/issues",
+                "source": "https://github.com/nomayann/NomayaSocialButtonsBundle/tree/master"
+            },
             "time": "2016-01-28T15:39:34+00:00"
         },
         {
