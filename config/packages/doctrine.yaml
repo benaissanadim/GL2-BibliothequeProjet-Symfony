@@ -1,5 +1,6 @@
 doctrine:
     dbal:
+        driver: 'pdo_sqlite'
         override_url: true
         url: '%env(resolve:DATABASE_URL)%'
 
