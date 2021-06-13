@@ -60,6 +60,6 @@ class UserController extends AbstractController
 
     public function goToLogin($name) {
         return
-        $this->render('loginInscription/login.html.twig' , array('name' =>$name)) ;
+        $this->redirectToRoute("app_login") ;
     }
 }

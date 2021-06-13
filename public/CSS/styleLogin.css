@@ -1,0 +1,122 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+body{
+    overflow: hidden;
+}
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom , #f1f4f9 , #dff1ff);
+
+}
+section .color {
+    position: absolute;
+    filter: blur(150px);
+}
+section .color:nth-child(4) {
+    top: -250px;
+    left: 100px;
+    width: 600px;
+    height: 600px;
+    background: #9face6;
+}
+section .color:nth-child(2) {
+    bottom: -150px;
+    left: 100px;
+    width: 550px;
+    height: 550px;
+    background: #79CBCA ;
+}
+section .color:nth-child(3) {
+    bottom: 100px;
+    right: 160px;
+    width: 550px;
+    height: 550px;
+    background: #77A1D3 ;
+}
+
+div.container {
+    z-index: 2;
+}
+div.container.box  {
+    position: relative;
+    width: 400px;
+    min-height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+
+
+}
+
+div.container.box div.square  {
+    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(5px);
+    position: absolute  ;
+    z-index: 1;
+
+    border-radius: 10px;
+    animation: animate 10s linear infinite;
+    animation-delay: calc(-1s * var(--i));
+
+}
+div.container.box div.square:nth-child(1) {
+    top:-50px;
+    left:350px;
+    width: 100px;
+    height: 100px;
+}
+div.container.box div.square:nth-child(2) {
+    top:100px;
+    right:370px;
+    width: 100px;
+    height: 100px;
+    z-index: 3;
+}
+div.container.box div.square:nth-child(3) {
+    top:350px;
+    left:370px;
+    width: 120px;
+    height: 120px;
+    z-index: 3;
+}
+div.container.box div.square:nth-child(4) {
+    top:-50px;
+    left:100px;
+    width: 60px;
+    height: 60px;
+    z-index: 3;
+}
+div.container.box div.square:nth-child(5) {
+    bottom:-50px;
+    left:40px;
+    width: 60px;
+    height: 60px;
+
+}
+@keyframes animate {
+    0%,100% {
+        transform: translateY(-40px);
+    }
+    50%{
+        transform: translateY(40px);
+    }
+
+}
