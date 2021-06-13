@@ -1,0 +1,628 @@
+Index: templates/layout.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\"\r\n          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n    {% block stylesheets %}\r\n        <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/darkly/bootstrap.min.css\">\r\n    {% endblock %}\r\n    <title>\r\n        {% block title %}\r\n            Document\r\n        {% endblock %}\r\n    </title>\r\n</head>\r\n<body>\r\n<div class=\"container\">\r\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\r\n        <a class=\"navbar-brand\" href=\"#\">Navbar</a>\r\n        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarColor01\" aria-controls=\"navbarColor01\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n            <span class=\"navbar-toggler-icon\"></span>\r\n        </button>\r\n\r\n        <div class=\"collapse navbar-collapse\" id=\"navbarColor01\">\r\n            <ul class=\"navbar-nav mr-auto\">\r\n                <li class=\"nav-item active\">\r\n                    <a class=\"nav-link\" href=\"#\">Home\r\n                        <span class=\"sr-only\">(current)</span>\r\n                    </a>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a class=\"nav-link\" >Todo</a>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a class=\"nav-link\" >Session</a>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a class=\"nav-link\" >Add Todo</a>\r\n                </li>\r\n                <li class=\"nav-item dropdown\">\r\n                    <a class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown</a>\r\n                    <div class=\"dropdown-menu\">\r\n                        <a class=\"dropdown-item\" href=\"#\">Action</a>\r\n                        <a class=\"dropdown-item\" href=\"#\">Another action</a>\r\n                        <a class=\"dropdown-item\" href=\"#\">Something else here</a>\r\n                        <div class=\"dropdown-divider\"></div>\r\n                        <a class=\"dropdown-item\" href=\"#\">Separated link</a>\r\n                    </div>\r\n                </li>\r\n            </ul>\r\n            <form class=\"form-inline my-2 my-lg-0\">\r\n                <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">\r\n                <button class=\"btn btn-secondary my-2 my-sm-0\" type=\"submit\">Search</button>\r\n            </form>\r\n        </div>\r\n    </nav>\r\n    {% for  message in  app.session.flashBag.get('info') %}\r\n        <div class=\"alert alert-info\">\r\n            {{ message }}\r\n        </div>\r\n    {% endfor %}\r\n    {% for  message in  app.session.flashBag.get('success') %}\r\n        <div class=\"alert alert-success\">\r\n            {{ message }}\r\n        </div>\r\n    {% endfor %}\r\n    {% for  message in  app.session.flashBag.get('error') %}\r\n        <div class=\"alert alert-danger\">\r\n            {{ message }}\r\n        </div>\r\n    {% endfor %}\r\n    {% block body %}\r\n        <h1>Body</h1>\r\n    {% endblock %}\r\n</div>\r\n</body>\r\n</html>\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/layout.html.twig b/templates/layout.html.twig
+--- a/templates/layout.html.twig	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/templates/layout.html.twig	(date 1623591805456)
+@@ -15,46 +15,49 @@
+     </title>
+ </head>
+ <body>
+-<div class="container">
+-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+-        <a class="navbar-brand" href="#">Navbar</a>
+-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+-            <span class="navbar-toggler-icon"></span>
+-        </button>
++{% block body %}
++    {% block navbar %}
++    <div class="container">
++        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
++            <a class="navbar-brand" href="#">Navbar</a>
++            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
++                <span class="navbar-toggler-icon"></span>
++            </button>
+ 
+-        <div class="collapse navbar-collapse" id="navbarColor01">
+-            <ul class="navbar-nav mr-auto">
+-                <li class="nav-item active">
+-                    <a class="nav-link" href="#">Home
+-                        <span class="sr-only">(current)</span>
+-                    </a>
+-                </li>
+-                <li class="nav-item">
+-                    <a class="nav-link" >Todo</a>
+-                </li>
+-                <li class="nav-item">
+-                    <a class="nav-link" >Session</a>
+-                </li>
+-                <li class="nav-item">
+-                    <a class="nav-link" >Add Todo</a>
+-                </li>
+-                <li class="nav-item dropdown">
+-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+-                    <div class="dropdown-menu">
+-                        <a class="dropdown-item" href="#">Action</a>
+-                        <a class="dropdown-item" href="#">Another action</a>
+-                        <a class="dropdown-item" href="#">Something else here</a>
+-                        <div class="dropdown-divider"></div>
+-                        <a class="dropdown-item" href="#">Separated link</a>
+-                    </div>
+-                </li>
+-            </ul>
+-            <form class="form-inline my-2 my-lg-0">
+-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+-            </form>
+-        </div>
+-    </nav>
++            <div class="collapse navbar-collapse" id="navbarColor01">
++                <ul class="navbar-nav mr-auto">
++                    <li class="nav-item active">
++                        <a class="nav-link" href="#">Home
++                            <span class="sr-only">(current)</span>
++                        </a>
++                    </li>
++                    <li class="nav-item">
++                        <a class="nav-link" >Todo</a>
++                    </li>
++                    <li class="nav-item">
++                        <a class="nav-link" >Session</a>
++                    </li>
++                    <li class="nav-item">
++                        <a class="nav-link" >Add Todo</a>
++                    </li>
++                    <li class="nav-item dropdown">
++                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
++                        <div class="dropdown-menu">
++                            <a class="dropdown-item" href="#">Action</a>
++                            <a class="dropdown-item" href="#">Another action</a>
++                            <a class="dropdown-item" href="#">Something else here</a>
++                            <div class="dropdown-divider"></div>
++                            <a class="dropdown-item" href="#">Separated link</a>
++                        </div>
++                    </li>
++                </ul>
++                <form class="form-inline my-2 my-lg-0">
++                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
++                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
++                </form>
++            </div>
++        </nav>
++    {% endblock %}
+     {% for  message in  app.session.flashBag.get('info') %}
+         <div class="alert alert-info">
+             {{ message }}
+@@ -70,9 +73,7 @@
+             {{ message }}
+         </div>
+     {% endfor %}
+-    {% block body %}
+-        <h1>Body</h1>
+-    {% endblock %}
++        {% endblock %}
+ </div>
+ </body>
+ </html>
+Index: templates/base.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{% block head %}\r\n<!doctype html>\r\n<html class=\"no-js\" lang=\"zxx\" xmlns=\"http://www.w3.org/1999/html\">\r\n<head>\r\n    <meta charset=\"utf-8\">\r\n    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\r\n    <title>Home | Books Library eCommerce Store</title>\r\n    <meta name=\"description\" content=\"\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n</head>\r\n{% endblock %}\r\n{% block stylesheet %}\r\n    <link rel=\"stylesheet\" href=\"{{ asset('assets/css/bootstrap.min.css') }}\">\r\n    <link rel=\"stylesheet\" href=\"{{asset(\"assets/css/plugins.css\")  }}\">\r\n    <link rel=\"stylesheet\" href=\"{{asset(\"style.css\")  }}\">\r\n    <link rel=\"shortcut icon\" href=\"{{asset('assets/images/favicon.ico')  }}\">\r\n    <link rel=\"apple-touch-icon\" href=\"{{asset('assets/images/icon.png')  }}\">\r\n    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800\" rel=\"stylesheet\">\r\n    <link href=\"https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,600,600i,700,700i,800\"\r\n          rel=\"stylesheet\">\r\n    <link href=\"https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900\" rel=\"stylesheet\">\r\n    <link rel=\"stylesheet\" href=\"{{asset(\"assets/css/custom.css\")  }}\">\r\n{% endblock %}\r\n{% block Js %}\r\n    <script src=\"{{asset(\"assets/js/vendor/modernizr-3.5.0.min.js\") }}\"></script>\r\n{% endblock %}\r\n\r\n{% block header %}\r\n<header id=\"wn__header\" class=\"header__area header__absolute sticky__header\">\r\n    <div class=\"container-fluid\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-6 col-sm-6 col-6 col-lg-2\">\r\n                <div class=\"logo\">\r\n                    <a href=\"index.html\">\r\n                        <img src=\"{{asset('assets/images/logo/3.png')}}\" alt=\"logo\">\r\n                    </a>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-lg-8 d-none d-lg-block\">\r\n                <nav class=\"mainmenu__nav\">\r\n                    <ul class=\"meninmenu d-flex justify-content-start\">\r\n                        <li><a href=\"{{ path(\"home\") }}\">Home</a></li>\r\n\r\n                        <li class=\"drop\"><a href=\"shop-grid.html\">Buy Books</a>\r\n                            <div class=\"megamenu dropdown\">\r\n                                <ul class=\"item item01\">\r\n                                    <li class=\"title\">Categories</li>\r\n                                    <li><a href=\"shop-grid.html\">UniversityBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">BiographyBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">KidBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">CookBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">HeathBooks</a></li>\r\n                                </ul>\r\n                            </div>\r\n                        </li>\r\n\r\n                        <li class=\"drop\"><a href=\"shop-grid.html\">Borrow Books</a>\r\n                            <div class=\"megamenu dropdown\">\r\n                                <ul class=\"item item01\">\r\n                                    <li class=\"title\">Categories</li>\r\n                                    <li><a href=\"shop-grid.html\">UniversityBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">BiographyBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">KidBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">CookBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">HeathBooks</a></li>\r\n                            </div>\r\n                        </li>\r\n\r\n                        <li><a href=\"blog.html\">Blogs</a> </li>\r\n\r\n                        <li><a href=\"contact.html\">Contact</a></li>\r\n\r\n                    </ul>\r\n                </nav>\r\n            </div>\r\n\r\n            <div class=\"col-md-6 col-sm-6 col-6 col-lg-2\">\r\n                <ul class=\"header__sidebar__right d-flex justify-content-end align-items-center\">\r\n                    <li class=\"shop_search\"><a class=\"search__active\" href=\"#\"></a></li>\r\n                    <li class=\"wishlist\"><a href=\"wishlist.html\"></a></li>\r\n\r\n                    <li class=\"shopcart\" > <a href=\"cart.html\" ></a>\r\n\r\n\r\n                    <li class=\"setting__bar__icon\"><a class=\"setting__active\" href=\"#\"></a>\r\n                        <div class=\"searchbar__content setting__block\">\r\n                            <div class=\"content-inner\">\r\n\r\n                                <div class=\"switcher-currency\">\r\n\r\n                                    <div class=\"switcher-options\">\r\n                                        <div class=\"switcher-currency-trigger\">\r\n                                            <div class=\"setting__menu\">\r\n                                                <span><a href=\"#\">Sign In</a></span>\r\n                                                <span><a href=\"#\">Create An Account</a></span>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </li>\r\n                </ul>\r\n\r\n                <!-- Start Mobile Menu -->\r\n                <div class=\"row d-none\">\r\n                    <div class=\"col-lg-12 d-none\">\r\n                        <nav class=\"mobilemenu__nav\">\r\n                            <ul class=\"meninmenu\">\r\n                                <li><a href=\"index-2.html\">Home</a></li>\r\n\r\n\r\n\r\n                                <li><a href=\"shop-grid.html\"> Borrow Books</a>\r\n                                    <ul>\r\n                                        <li><a href=\"shop-grid.html\">UniversityBooks</a></li>\r\n                                        <li><a href=\"shop-grid.html\">BiographyBooks</a></li>\r\n                                        <li><a href=\"shop-grid.html\">KidBooks</a></li>\r\n                                        <li><a href=\"shop-grid.html\">CookBooks</a></li>\r\n                                        <li><a href=\"shop-grid.html\">HeathBooks</a></li>\r\n                                    </ul>\r\n\r\n                                </li>\r\n                                <li><a href=\"shop-grid.html\"> Borrow Books</a>\r\n                                    <ul>\r\n                                        <li><a href=\"shop-grid.html\">UniversityBooks</a></li>\r\n                                        <li><a href=\"shop-grid.html\">BiographyBooks</a></li>\r\n                                        <li><a href=\"shop-grid.html\">KidBooks</a></li>\r\n                                        <li><a href=\"shop-grid.html\">CookBooks</a></li>\r\n                                        <li><a href=\"shop-grid.html\">HeathBooks</a></li>\r\n                                    </ul>\r\n                                </li>\r\n\r\n                                <li><a href=\"blog.html\">Blog</a></li>\r\n                                <li><a href=\"contact.html\">Contact</a></li>\r\n                            </ul>\r\n                        </nav>\r\n                    </div>\r\n                </div>\r\n                <!-- End Mobile Menu -->\r\n                <div class=\"mobile-menu d-block d-lg-none\">\r\n                </div>\r\n                <!-- Mobile Menu -->\r\n            </div>\r\n</header>\r\n    <div class=\"brown--color box-search-content search_active block-bg close__top\">\r\n        <form id=\"search_mini_form\" class=\"minisearch\" action=\"#\">\r\n            <div class=\"field__search\">\r\n                <input type=\"text\" placeholder=\"Search entire store here...\">\r\n                <div class=\"action\">\r\n                    <a href=\"#\"><i class=\"zmdi zmdi-search\"></i></a>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"close__wrap\">\r\n            <span>close</span>\r\n        </div>\r\n    </div>\r\n{% endblock %}\r\n{% block body %}\r\n<body>\r\n</body>\r\n</html>\r\n{% endblock %}\r\n\r\n{% block flashbag %}\r\n    {% for  message in  app.session.flashBag.get('info') %}\r\n        <div class=\"alert alert-info\">\r\n            {{ message }}\r\n        </div>\r\n    {% endfor %}\r\n    {% for  message in  app.session.flashBag.get('success') %}\r\n        <div class=\"alert alert-success\">\r\n            {{ message }}\r\n        </div>\r\n    {% endfor %}\r\n    {% for  message in  app.session.flashBag.get('error') %}\r\n        <div class=\"alert alert-danger\">\r\n            {{ message }}\r\n        </div>\r\n    {% endfor %}\r\n{% endblock %}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+--- a/templates/base.html.twig	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/templates/base.html.twig	(date 1623592100883)
+@@ -159,24 +159,24 @@
+ {% endblock %}
+ {% block body %}
+ <body>
+-</body>
+-</html>
+-{% endblock %}
+-
+-{% block flashbag %}
++<div class="flashbag">
++    <main>
+     {% for  message in  app.session.flashBag.get('info') %}
+-        <div class="alert alert-info">
++      <div class="alert alert-info">
+             {{ message }}
+         </div>
+     {% endfor %}
+     {% for  message in  app.session.flashBag.get('success') %}
+-        <div class="alert alert-success">
+-            {{ message }}
+-        </div>
++      <div class="alert alert-success">
++           {{ message }}
++      </div>
+     {% endfor %}
+     {% for  message in  app.session.flashBag.get('error') %}
+         <div class="alert alert-danger">
+             {{ message }}
+         </div>
+-    {% endfor %}
+-{% endblock %}
+\ No newline at end of file
++    </main>
++</div>
++{% endfor %}
++{% endblock %}
++
+Index: templates/cart/index.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{% extends 'base.html.twig' %}\r\n\r\n{% block title %}My Shopping Cart{% endblock %}\r\n{% block stylesheet %}\r\n    {{ parent() }}\r\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css\">\r\n{% endblock %}\r\n{% block body %}\r\n    <!-- Main wrapper -->\r\n    <div class=\"wrapper\" id=\"wrapper\">\r\n        <!-- Start breadcrumb area -->\r\n        <div class=\"ht__breadcrumb__area bg-image--3\">\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-12\">\r\n                        <div class=\"breadcrumb__inner text-center\">\r\n                            <h2 class=\"breadcrumb-title\">Shopping Cart</h2>\r\n                            <nav class=\"breadcrumb-content\">\r\n                                <a class=\"breadcrumb_item\" href=\"{{ path('welcome') }}\">Home</a>\r\n                                <span class=\"brd-separator\">/</span>\r\n                                <span class=\"breadcrumb_item active\">Shopping Cart</span>\r\n                            </nav>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- End breadcrumb area -->\r\n        <!-- cart-main-area start -->\r\n        <div class=\"cart-main-area section-padding--lg bg--white\">\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12 col-sm-12 ol-lg-12\">\r\n                        <form action=\"#\">\r\n                            <div class=\"section__title--3\">\r\n                                <h3><span>  Bought : </span> </h3> <br>\r\n                            </div>\r\n                            <div class=\"table-content wnro__table table-responsive\">\r\n                                <table class=\"table\">\r\n                                    <thead>\r\n                                    <tr>\r\n                                        <th>Product</th>\r\n                                        <th>Price</th>\r\n                                        <th>Quantity</th>\r\n                                        <th>Total</th>\r\n                                        <th>Actions</th>\r\n                                    </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                    {% for element in data %}\r\n                                        <tr>\r\n                                            <td>{{ element.produit.name }}</td>\r\n                                            <td class=\"text-end\">{{ element.produit.price }} €</td>\r\n                                            <td>{{ element.quantite }}</td>\r\n                                            <td class=\"text-end\">{{ element.quantite * element.produit.price }} €</td>\r\n                                            <td>\r\n                                                <a href=\"{{path(\"cart_add\", {id: element.produit.id})}}\" class=\"btn btn-outline-success\">\r\n                                                    <i class=\"bi bi-plus\"></i>\r\n                                                </a>\r\n                                                <a href=\"{{path(\"cart_remove\", {id: element.produit.id})}}\" class=\"btn btn-outline-warning\">\r\n                                                    <i class=\"bi bi-dash\"></i>\r\n                                                </a>\r\n                                                <a href=\"{{path(\"cart_delete\", {id: element.produit.id})}}\" class=\"btn btn-outline-danger\">\r\n                                                    <i class=\"bi bi-cart-x\"></i>\r\n                                                </a>\r\n                                            </td>\r\n                                        </tr>\r\n                                    {% else %}\r\n                                        <tr>\r\n                                            <td colspan=\"5\" class=\"text-center\">Your cart is empty. Consider adding some items to it</td>\r\n                                        </tr>\r\n                                    {% endfor %}\r\n                                    </tbody>\r\n                                    <tfoot>\r\n                                    <tr>\r\n                                        <td colspan=\"3\">Total</td>\r\n                                        <td class=\"text-end\">{{ total }} €</td>\r\n                                        <td>\r\n                                            <a href=\"{{path(\"cart_delete_all\")}}\" class=\"btn btn-danger\">\r\n                                                <i class=\"bi bi-cart-x\"></i>\r\n                                            </a>\r\n                                        </td>\r\n                                    </tr>\r\n                                    </tfoot>\r\n                                </table>\r\n                            </div>\r\n                            <div class=\"section__title--3\">\r\n                                <h3><span>  Borrowed : </span> </h3> <br>\r\n                            </div>\r\n                            <div class=\"table-content wnro__table table-responsive\">\r\n                                <table class=\"table\">\r\n                                    <thead>\r\n                                    <tr>\r\n                                        <th>Product</th>\r\n                                        <th>Started</th>\r\n                                        <th>Returned</th>\r\n                                        <th>Fee</th>\r\n                                        <th>Quantity</th>\r\n                                        <th>Total</th>\r\n                                        <th>Actions</th>\r\n                                    </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                    {% for element in data %}\r\n                                        <tr>\r\n                                            <td>{{ element.produit.name }}</td>\r\n                                            <td></td>\r\n                                            <td></td>\r\n                                            <td class=\"text-end\">{{ element.produit.price }} €</td>\r\n                                            <td>{{ element.quantite }}</td>\r\n                                            <td class=\"text-end\">{{ element.quantite * element.produit.price }} €</td>\r\n                                            <td>\r\n                                                <a href=\"{{path(\"cart_add\", {id: element.produit.id})}}\" class=\"btn btn-outline-success\">\r\n                                                    <i class=\"bi bi-plus\"></i>\r\n                                                </a>\r\n                                                <a href=\"{{path(\"cart_remove\", {id: element.produit.id})}}\" class=\"btn btn-outline-warning\">\r\n                                                    <i class=\"bi bi-dash\"></i>\r\n                                                </a>\r\n                                                <a href=\"{{path(\"cart_delete\", {id: element.produit.id})}}\" class=\"btn btn-outline-danger\">\r\n                                                    <i class=\"bi bi-cart-x\"></i>\r\n                                                </a>\r\n                                            </td>\r\n                                        </tr>\r\n                                    {% else %}\r\n                                        <tr>\r\n                                            <td colspan=\"5\" class=\"text-center\">Your cart is empty. Consider adding some items to it</td>\r\n                                        </tr>\r\n                                    {% endfor %}\r\n                                    </tbody>\r\n                                    <tfoot>\r\n                                    <tr>\r\n                                        <td colspan=\"3\">Total</td>\r\n                                        <td class=\"text-end\">{{ total }} €</td>\r\n                                        <td class=\"text-end\" colspan=\"2\"></td>\r\n                                        <td>\r\n                                            <a href=\"{{path(\"cart_delete_all\")}}\" class=\"btn btn-danger\">\r\n                                                <i class=\"bi bi-cart-x\"></i>\r\n                                            </a>\r\n                                        </td>\r\n                                    </tr>\r\n                                    </tfoot>\r\n                                </table>\r\n                            </div>\r\n                        </form>\r\n                        <div class=\"cartbox__btn\">\r\n                            <ul\r\n                                    class=\"cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between\">\r\n\r\n                                <li><a href=\"{{path(\"shopgrid\")}}\">Update Cart</a></li>\r\n                                <li><a href=\"#\">Check Out</a></li>\r\n                            </ul>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-6 offset-lg-6\">\r\n                        <div class=\"cartbox__total__area\">\r\n\r\n\r\n                            <div class=\"cart__total__amount\">\r\n                                <span>Grand Total</span>\r\n                                <span>{{ total }} €</span>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- cart-main-area end -->\r\n        <!-- Footer Area -->\r\n        <footer id=\"wn__footer\" class=\"footer__area bg__cat--8 brown--color\">\r\n            <div class=\"footer-static-top\">\r\n                <div class=\"container\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-lg-12\">\r\n                            <div class=\"footer__widget footer__menu\">\r\n                                <div class=\"ft__logo\">\r\n                                    <a href=\"index.html\">\r\n                                        <img src=\"images/logo/3.png\" alt=\"logo\">\r\n                                    </a>\r\n                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority\r\n                                        have suffered duskam alteration variations of passages</p>\r\n                                </div>\r\n                                <div class=\"footer__content\">\r\n                                    <ul class=\"social__net social__net--2 d-flex justify-content-center\">\r\n                                        <li><a href=\"#\"><i class=\"bi bi-facebook\"></i></a></li>\r\n                                        <li><a href=\"#\"><i class=\"bi bi-google\"></i></a></li>\r\n                                        <li><a href=\"#\"><i class=\"bi bi-twitter\"></i></a></li>\r\n                                        <li><a href=\"#\"><i class=\"bi bi-linkedin\"></i></a></li>\r\n                                        <li><a href=\"#\"><i class=\"bi bi-youtube\"></i></a></li>\r\n                                    </ul>\r\n                                    <ul class=\"mainmenu d-flex justify-content-center\">\r\n                                        <li><a href=\"index.html\">Trending</a></li>\r\n                                        <li><a href=\"index.html\">Best Seller</a></li>\r\n                                        <li><a href=\"index.html\">All produit</a></li>\r\n                                        <li><a href=\"index.html\">Wishlist</a></li>\r\n                                        <li><a href=\"index.html\">Blog</a></li>\r\n                                        <li><a href=\"index.html\">Contact</a></li>\r\n                                    </ul>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"copyright__wrapper\">\r\n                <div class=\"container\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-lg-6 col-md-6 col-sm-12\">\r\n                            <div class=\"copyright\">\r\n                                <div class=\"copy__right__inner text-left\">\r\n                                    <p>Copyright <i class=\"fa fa-copyright\"></i> <a href=\"#\">Boighor.</a> All Rights\r\n                                        Reserved</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-lg-6 col-md-6 col-sm-12\">\r\n                            <div class=\"payment text-right\">\r\n                                <img src=\"images/icons/payment.png\" alt=\"\" />\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </footer>\r\n\r\n    </div>\r\n\r\n    <!-- JS Files -->\r\n\r\n    <script src=\"js/vendor/jquery-3.2.1.min.js\"></script>\r\n    <script src=\"js/popper.min.js\"></script>\r\n    <script src=\"js/bootstrap.min.js\"></script>\r\n    <script src=\"js/plugins.js\"></script>\r\n    <script src=\"js/active.js\"></script>\r\n\r\n{% endblock %}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/cart/index.html.twig b/templates/cart/index.html.twig
+--- a/templates/cart/index.html.twig	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/templates/cart/index.html.twig	(date 1623595946064)
+@@ -6,6 +6,7 @@
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+ {% endblock %}
+ {% block body %}
++    {{ parent() }}
+     <!-- Main wrapper -->
+     <div class="wrapper" id="wrapper">
+         <!-- Start breadcrumb area -->
+@@ -101,7 +102,7 @@
+                                     </tr>
+                                     </thead>
+                                     <tbody>
+-                                    {% for element in data %}
++                                    {% for element in data_borrow %}
+                                         <tr>
+                                             <td>{{ element.produit.name }}</td>
+                                             <td></td>
+@@ -110,13 +111,13 @@
+                                             <td>{{ element.quantite }}</td>
+                                             <td class="text-end">{{ element.quantite * element.produit.price }} €</td>
+                                             <td>
+-                                                <a href="{{path("cart_add", {id: element.produit.id})}}" class="btn btn-outline-success">
++                                                <a href="{{path("for/borrow_add", {id: element.produit.id})}}" class="btn btn-outline-success">
+                                                     <i class="bi bi-plus"></i>
+                                                 </a>
+-                                                <a href="{{path("cart_remove", {id: element.produit.id})}}" class="btn btn-outline-warning">
++                                                <a href="{{path("for/borrow_remove", {id: element.produit.id})}}" class="btn btn-outline-warning">
+                                                     <i class="bi bi-dash"></i>
+                                                 </a>
+-                                                <a href="{{path("cart_delete", {id: element.produit.id})}}" class="btn btn-outline-danger">
++                                                <a href="{{path("for/borrow_delete", {id: element.produit.id})}}" class="btn btn-outline-danger">
+                                                     <i class="bi bi-cart-x"></i>
+                                                 </a>
+                                             </td>
+@@ -130,10 +131,10 @@
+                                     <tfoot>
+                                     <tr>
+                                         <td colspan="3">Total</td>
+-                                        <td class="text-end">{{ total }} €</td>
++                                        <td class="text-end">{{ totalborrow }} €</td>
+                                         <td class="text-end" colspan="2"></td>
+                                         <td>
+-                                            <a href="{{path("cart_delete_all")}}" class="btn btn-danger">
++                                            <a href="{{path("for/borrow_delete_all")}}" class="btn btn-danger">
+                                                 <i class="bi bi-cart-x"></i>
+                                             </a>
+                                         </td>
+@@ -159,7 +160,7 @@
+ 
+                             <div class="cart__total__amount">
+                                 <span>Grand Total</span>
+-                                <span>{{ total }} €</span>
++                                <span>{{ total + totalborrow  }} €</span>
+                             </div>
+                         </div>
+                     </div>
+Index: .idea/php.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"PhpIncludePathManager\">\r\n    <include_path>\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-guard\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-kernel\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/browser-kit\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/notifier\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/string\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/yaml\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/twig-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/serializer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/process\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/dotenv\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/asset\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/expression-language\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sensio/framework-extra-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nikic/php-parser\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/monolog/monolog\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/egulias/email-validator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/type-resolver\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-common\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/webmozart/assert\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/friendsofphp/proxy-manager-lts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/lexer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/deprecations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/twig/extra-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/event-manager\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/twig/twig\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/instantiator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/dbal\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/orm\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/sql-formatter\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/doctrine-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/collections\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/persistence\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/annotations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/inflector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/migrations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/common\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laminas/laminas-eventmanager\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laminas/laminas-code\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/cache-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-mbstring\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/deprecation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/form\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/var-exporter\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/monolog-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/container\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/css-selector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/log\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-core\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php80\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/link\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/property-info\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/property-access\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/proxy-manager-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-csrf\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/stopwatch\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/flex\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/options-resolver\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/var-dumper\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-foundation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/framework-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/validator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/dom-crawler\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/service-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/web-link\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/finder\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/routing\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/intl\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-client\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/composer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-client-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/monolog-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/doctrine-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/dependency-injection\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/phpunit-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/config\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-http\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/mailer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/mime\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/twig-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/debug-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/error-handler\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/filesystem\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php73\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/web-profiler-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/maker-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/console\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/data-fixtures\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/fzaninotto/faker\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/swiftmailer/swiftmailer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nomaya/social-bundle\" />\r\n    </include_path>\r\n  </component>\r\n  <component name=\"PhpProjectSharedConfiguration\" php_language_level=\"7.2\" />\r\n  <component name=\"PhpUnit\">\r\n    <phpunit_settings>\r\n      <PhpUnitSettings configuration_file_path=\"$PROJECT_DIR$/phpunit.xml.dist\" custom_loader_path=\"$PROJECT_DIR$/vendor/autoload.php\" use_configuration_file=\"true\" />\r\n    </phpunit_settings>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/php.xml b/.idea/php.xml
+--- a/.idea/php.xml	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/.idea/php.xml	(date 1623592387236)
+@@ -112,7 +112,7 @@
+       <path value="$PROJECT_DIR$/vendor/nomaya/social-bundle" />
+     </include_path>
+   </component>
+-  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
++  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
+   <component name="PhpUnit">
+     <phpunit_settings>
+       <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
+Index: .idea/dataSources.local.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"dataSourceStorageLocal\" created-in=\"PS-211.7142.44\">\r\n    <data-source name=\"MySQL - sfGL2021@localhost\" uuid=\"b1159e66-41a3-4aa6-bcb2-068bb6f3c190\">\r\n      <database-info product=\"\" version=\"\" jdbc-version=\"\" driver-name=\"\" driver-version=\"\" dbms=\"MYSQL\" exact-version=\"0\" />\r\n      <secret-storage>master_key</secret-storage>\r\n      <user-name>root</user-name>\r\n      <schema-mapping />\r\n    </data-source>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.local.xml b/.idea/dataSources.local.xml
+--- a/.idea/dataSources.local.xml	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/.idea/dataSources.local.xml	(date 1622725385046)
+@@ -7,5 +7,19 @@
+       <user-name>root</user-name>
+       <schema-mapping />
+     </data-source>
++    <data-source name="projet@localhost" uuid="01f8bfe5-d766-4f1f-9ce7-052612179eae">
++      <database-info product="MySQL" version="5.5.5-10.4.18-MariaDB" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.21 (Revision: 33f65445a1bcc544eb0120491926484da168f199)" dbms="MARIADB" exact-version="10.4.18" exact-driver-version="8.0">
++        <extra-name-characters>#@</extra-name-characters>
++        <identifier-quote-string>`</identifier-quote-string>
++      </database-info>
++      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
++      <secret-storage>master_key</secret-storage>
++      <user-name>root</user-name>
++      <schema-mapping>
++        <introspection-scope>
++          <node kind="schema" qname="@" />
++        </introspection-scope>
++      </schema-mapping>
++    </data-source>
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DataSourceManagerImpl\" format=\"xml\" multifile-model=\"true\">\r\n    <data-source source=\"LOCAL\" name=\"MySQL - sfGL2021@localhost\" uuid=\"b1159e66-41a3-4aa6-bcb2-068bb6f3c190\">\r\n      <driver-ref>mysql.8</driver-ref>\r\n      <synchronize>true</synchronize>\r\n      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>\r\n      <jdbc-url>jdbc:mysql://localhost:3306/sfGL2021</jdbc-url>\r\n      <working-dir>$ProjectFileDir$</working-dir>\r\n      <time-zone>GMT</time-zone>\r\n    </data-source>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+--- a/.idea/dataSources.xml	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/.idea/dataSources.xml	(date 1622725213014)
+@@ -9,5 +9,12 @@
+       <working-dir>$ProjectFileDir$</working-dir>
+       <time-zone>GMT</time-zone>
+     </data-source>
++    <data-source source="LOCAL" name="projet@localhost" uuid="01f8bfe5-d766-4f1f-9ce7-052612179eae">
++      <driver-ref>mysql.8</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
++      <jdbc-url>jdbc:mysql://localhost:3306/projet</jdbc-url>
++      <working-dir>$ProjectFileDir$</working-dir>
++    </data-source>
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/Controller/ForBorrowController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Controller;\r\n\r\nuse App\\Entity\\ForBorrow;\r\nuse App\\Form\\ForBorrowType;\r\nuse App\\Repository\\ForBorrowRepository;\r\nuse Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;\r\nuse Symfony\\Component\\HttpFoundation\\Request;\r\nuse Symfony\\Component\\HttpFoundation\\Response;\r\nuse Symfony\\Component\\Routing\\Annotation\\Route;\r\n\r\n#[Route('/for/borrow')]\r\nclass ForBorrowController extends AbstractController\r\n{\r\n    #[Route('/', name: 'for_borrow_index', methods: ['GET'])]\r\n    public function index(ForBorrowRepository $forBorrowRepository): Response\r\n    {\r\n        return $this->render('for_borrow/index.html.twig', [\r\n            'for_borrows' => $forBorrowRepository->findAll(),\r\n        ]);\r\n    }\r\n\r\n    #[Route('/new', name: 'for_borrow_new', methods: ['GET', 'POST'])]\r\n    public function new(Request $request): Response\r\n    {\r\n        $forBorrow = new ForBorrow();\r\n        $form = $this->createForm(ForBorrowType::class, $forBorrow);\r\n        $form->handleRequest($request);\r\n\r\n        if ($form->isSubmitted() && $form->isValid()) {\r\n            $entityManager = $this->getDoctrine()->getManager();\r\n            $entityManager->persist($forBorrow);\r\n            $entityManager->flush();\r\n\r\n            return $this->redirectToRoute('for_borrow_index');\r\n        }\r\n\r\n        return $this->render('for_borrow/new.html.twig', [\r\n            'for_borrow' => $forBorrow,\r\n            'form' => $form->createView(),\r\n        ]);\r\n    }\r\n\r\n    #[Route('/{id}', name: 'for_borrow_show', methods: ['GET'])]\r\n    public function show(ForBorrow $forBorrow): Response\r\n    {\r\n        return $this->render('for_borrow/show.html.twig', [\r\n            'for_borrow' => $forBorrow,\r\n        ]);\r\n    }\r\n\r\n    #[Route('/{id}/edit', name: 'for_borrow_edit', methods: ['GET', 'POST'])]\r\n    public function edit(Request $request, ForBorrow $forBorrow): Response\r\n    {\r\n        $form = $this->createForm(ForBorrowType::class, $forBorrow);\r\n        $form->handleRequest($request);\r\n\r\n        if ($form->isSubmitted() && $form->isValid()) {\r\n            $this->getDoctrine()->getManager()->flush();\r\n\r\n            return $this->redirectToRoute('for_borrow_index');\r\n        }\r\n\r\n        return $this->render('for_borrow/edit.html.twig', [\r\n            'for_borrow' => $forBorrow,\r\n            'form' => $form->createView(),\r\n        ]);\r\n    }\r\n\r\n    #[Route('/{id}', name: 'for_borrow_delete', methods: ['POST'])]\r\n    public function delete(Request $request, ForBorrow $forBorrow): Response\r\n    {\r\n        if ($this->isCsrfTokenValid('delete'.$forBorrow->getId(), $request->request->get('_token'))) {\r\n            $entityManager = $this->getDoctrine()->getManager();\r\n            $entityManager->remove($forBorrow);\r\n            $entityManager->flush();\r\n        }\r\n\r\n        return $this->redirectToRoute('for_borrow_index');\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Controller/ForBorrowController.php b/src/Controller/ForBorrowController.php
+--- a/src/Controller/ForBorrowController.php	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/src/Controller/ForBorrowController.php	(date 1623595604086)
+@@ -3,80 +3,99 @@
+ namespace App\Controller;
+ 
+ use App\Entity\ForBorrow;
++use App\Entity\Produit;
+ use App\Form\ForBorrowType;
+ use App\Repository\ForBorrowRepository;
++use App\Repository\ProduitRepository;
+ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
++use Symfony\Component\HttpFoundation\Session\SessionInterface;
+ use Symfony\Component\Routing\Annotation\Route;
+ 
+-#[Route('/for/borrow')]
++/**
++ * @Route("/for/borrow",name="for/borrow_")
++ */
+ class ForBorrowController extends AbstractController
+ {
+-    #[Route('/', name: 'for_borrow_index', methods: ['GET'])]
+-    public function index(ForBorrowRepository $forBorrowRepository): Response
++    /**
++     * @Route("/", name="index")
++     */
++    public function index(SessionInterface $session, ProduitRepository $productsRepository) : Response
+     {
+-        return $this->render('for_borrow/index.html.twig', [
+-            'for_borrows' => $forBorrowRepository->findAll(),
+-        ]);
++
++        return $this->redirectToRoute("cart_index");
+     }
+ 
+-    #[Route('/new', name: 'for_borrow_new', methods: ['GET', 'POST'])]
+-    public function new(Request $request): Response
++    /**
++     * @Route("/add/{id}", name="add")
++     */
++    public function add(Produit $product = null, SessionInterface $session) : Response
+     {
+-        $forBorrow = new ForBorrow();
+-        $form = $this->createForm(ForBorrowType::class, $forBorrow);
+-        $form->handleRequest($request);
+-
+-        if ($form->isSubmitted() && $form->isValid()) {
+-            $entityManager = $this->getDoctrine()->getManager();
+-            $entityManager->persist($forBorrow);
+-            $entityManager->flush();
+-
+-            return $this->redirectToRoute('for_borrow_index');
++        $borrow = $session->get("borrow", []);
++        if($product){
++            $id = $product->getId();
++            if(!empty($borrow[$id])){
++                $borrow[$id]++;
++            }else{
++                $borrow[$id] = 1;
++            }
++            $session->set("borrow", $borrow);
++        }
++        else {
++            $this->addFlash('danger',"The element you wish to add does not exist.");
+         }
+-
+-        return $this->render('for_borrow/new.html.twig', [
+-            'for_borrow' => $forBorrow,
+-            'form' => $form->createView(),
+-        ]);
++        return $this->redirectToRoute("cart_index");
+     }
+ 
+-    #[Route('/{id}', name: 'for_borrow_show', methods: ['GET'])]
+-    public function show(ForBorrow $forBorrow): Response
++    /**
++     * @Route("/remove/{id}", name="remove")
++     */
++    public function remove(Produit $product = null, SessionInterface $session) : Response
+     {
+-        return $this->render('for_borrow/show.html.twig', [
+-            'for_borrow' => $forBorrow,
+-        ]);
++        $borrow = $session->get("borrow", []);
++        if($product) {
++            $id = $product->getId();
++            if(!empty($borrow[$id])){
++                if($borrow[$id] > 1){
++                    $borrow[$id]--;
++                }else{
++                    unset($borrow[$id]);
++                }
++                $session->set("borrow", $borrow);
++            }
++            else{
++                $this->addFlash('error',"The element you wish to remove does not exist.");
++            }
++        }
++        return $this->redirectToRoute("cart_index");
+     }
+ 
+-    #[Route('/{id}/edit', name: 'for_borrow_edit', methods: ['GET', 'POST'])]
+-    public function edit(Request $request, ForBorrow $forBorrow): Response
++    /**
++     * @Route("/delete/{id}", name="delete")
++     */
++    public function delete(Produit $product, SessionInterface $session) : Response
+     {
+-        $form = $this->createForm(ForBorrowType::class, $forBorrow);
+-        $form->handleRequest($request);
++        $borrow = $session->get("borrow", []);
++        $id = $product->getId();
+ 
+-        if ($form->isSubmitted() && $form->isValid()) {
+-            $this->getDoctrine()->getManager()->flush();
++        if(!empty($borrow[$id])){
++            unset($borrow[$id]);
++        }
+ 
+-            return $this->redirectToRoute('for_borrow_index');
+-        }
++        $session->set("borrow", $borrow);
+ 
+-        return $this->render('for_borrow/edit.html.twig', [
+-            'for_borrow' => $forBorrow,
+-            'form' => $form->createView(),
+-        ]);
++        return $this->redirectToRoute("cart_index");
+     }
+ 
+-    #[Route('/{id}', name: 'for_borrow_delete', methods: ['POST'])]
+-    public function delete(Request $request, ForBorrow $forBorrow): Response
++    /**
++     * @Route("/delete", name="delete_all")
++     */
++    public function deleteAll(SessionInterface $session) : Response
+     {
+-        if ($this->isCsrfTokenValid('delete'.$forBorrow->getId(), $request->request->get('_token'))) {
+-            $entityManager = $this->getDoctrine()->getManager();
+-            $entityManager->remove($forBorrow);
+-            $entityManager->flush();
+-        }
++        $session->remove("borrow");
++
++        return $this->redirectToRoute("cart_index");
++    }
+ 
+-        return $this->redirectToRoute('for_borrow_index');
+-    }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a578664a-e43b-406f-a32b-ab92eb3c232c\" name=\"Default Changelist\" comment=\"projet\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/templates/cart/index.html.twig\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/templates/cart/index.html.twig\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\" doNotAsk=\"true\" synchronizationState=\"SYNCHRONIZE\">\r\n    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>\r\n    <execution>\r\n      <executable path=\"composer\" />\r\n    </execution>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"HTML File\" />\r\n        <option value=\"CSS File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"PhpWorkspaceProjectConfiguration\" interpreter_name=\"PHP 8.0\">\r\n    <include_path>\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-guard\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-kernel\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/browser-kit\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/notifier\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/string\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/yaml\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/twig-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/serializer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/process\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/dotenv\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/asset\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/expression-language\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sensio/framework-extra-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nikic/php-parser\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/monolog/monolog\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/egulias/email-validator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/type-resolver\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-common\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/webmozart/assert\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/friendsofphp/proxy-manager-lts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/lexer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/deprecations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/twig/extra-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/event-manager\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/twig/twig\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/instantiator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/dbal\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/orm\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/sql-formatter\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/doctrine-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/collections\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/persistence\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/annotations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/inflector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/migrations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/common\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laminas/laminas-eventmanager\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laminas/laminas-code\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/cache-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-mbstring\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/deprecation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/form\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/var-exporter\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/monolog-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/container\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/css-selector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/log\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-core\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php80\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/link\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/property-info\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/property-access\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/proxy-manager-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-csrf\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/stopwatch\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/flex\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/options-resolver\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/var-dumper\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-foundation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/framework-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/validator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/dom-crawler\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/service-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/web-link\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/finder\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/routing\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/intl\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-client\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/composer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-client-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/monolog-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/doctrine-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/dependency-injection\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/phpunit-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/config\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-http\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/mailer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/mime\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/twig-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/debug-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/error-handler\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/filesystem\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php73\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/web-profiler-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/maker-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/console\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/data-fixtures\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/fzaninotto/faker\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/swiftmailer/swiftmailer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nomaya/social-bundle\" />\r\n    </include_path>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1rfroeJmAl3Hyv5dbzGguAZw3VJ\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"DatabaseDriversLRU\" value=\"mysql\" />\r\n    <property name=\"DefaultHtmlFileTemplate\" value=\"HTML File\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/../../PHP2\" />\r\n    <property name=\"list.type.of.created.stylesheet\" value=\"CSS\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.keymap\" />\r\n    <property name=\"settings.editor.splitter.proportion\" value=\"0.24534161\" />\r\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\xampp\\htdocs\\Symfonynew\\symfoGL2021 - Copie\\config\" />\r\n      <recent name=\"C:\\xampp\\htdocs\\Symfonynew\\symfoGL2021 - Copie\\templates\\home\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\xampp\\htdocs\\Symfonynew\\symfoGL2021 - Copie\\config\\packages\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JavaScript Debug.firstController.php\">\r\n    <configuration name=\"firstController.php\" type=\"JavascriptDebugType\" temporary=\"true\" nameIsGenerated=\"true\" uri=\"http://localhost:63342/symfoGL2021/Controller/firstController.php\" useBuiltInWebServerPort=\"true\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"phpunit.xml.dist\" type=\"PHPUnitRunConfigurationType\" factoryName=\"PHPUnit\">\r\n      <TestRunner scope=\"XML\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JavaScript Debug.firstController.php\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a578664a-e43b-406f-a32b-ab92eb3c232c\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1619378161016</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1619378161016</updated>\r\n      <workItem from=\"1619378162315\" duration=\"442000\" />\r\n      <workItem from=\"1619378662609\" duration=\"1400000\" />\r\n      <workItem from=\"1619380099583\" duration=\"3419000\" />\r\n      <workItem from=\"1619450679166\" duration=\"706000\" />\r\n      <workItem from=\"1619451395063\" duration=\"72000\" />\r\n      <workItem from=\"1619452011052\" duration=\"119000\" />\r\n      <workItem from=\"1619452141691\" duration=\"507000\" />\r\n      <workItem from=\"1619452749837\" duration=\"123000\" />\r\n      <workItem from=\"1619452887487\" duration=\"27000\" />\r\n      <workItem from=\"1619453098318\" duration=\"109000\" />\r\n      <workItem from=\"1619453216485\" duration=\"81000\" />\r\n      <workItem from=\"1619453308380\" duration=\"84000\" />\r\n      <workItem from=\"1619453411569\" duration=\"252000\" />\r\n      <workItem from=\"1619453780091\" duration=\"8312000\" />\r\n      <workItem from=\"1619621749916\" duration=\"2683000\" />\r\n      <workItem from=\"1619972521578\" duration=\"83000\" />\r\n      <workItem from=\"1619972619391\" duration=\"12000\" />\r\n      <workItem from=\"1620075639059\" duration=\"163000\" />\r\n      <workItem from=\"1620405460071\" duration=\"8410000\" />\r\n      <workItem from=\"1620475276035\" duration=\"16000\" />\r\n      <workItem from=\"1620476651692\" duration=\"694000\" />\r\n      <workItem from=\"1620518216327\" duration=\"96000\" />\r\n      <workItem from=\"1620518391649\" duration=\"46000\" />\r\n      <workItem from=\"1620518468289\" duration=\"5052000\" />\r\n      <workItem from=\"1620557386176\" duration=\"1308000\" />\r\n      <workItem from=\"1620558733853\" duration=\"15529000\" />\r\n      <workItem from=\"1620645429071\" duration=\"977000\" />\r\n      <workItem from=\"1620647532209\" duration=\"24352000\" />\r\n      <workItem from=\"1621083058449\" duration=\"89000\" />\r\n      <workItem from=\"1621084188232\" duration=\"4031000\" />\r\n      <workItem from=\"1621090917773\" duration=\"1839000\" />\r\n      <workItem from=\"1621261279100\" duration=\"2152000\" />\r\n      <workItem from=\"1621279101312\" duration=\"690000\" />\r\n      <workItem from=\"1621342847156\" duration=\"1826000\" />\r\n      <workItem from=\"1621420379325\" duration=\"7551000\" />\r\n      <workItem from=\"1621438119467\" duration=\"718000\" />\r\n      <workItem from=\"1621439259157\" duration=\"104000\" />\r\n      <workItem from=\"1621441798123\" duration=\"1370000\" />\r\n      <workItem from=\"1621443669946\" duration=\"26656000\" />\r\n      <workItem from=\"1621844985891\" duration=\"2193000\" />\r\n      <workItem from=\"1621858094546\" duration=\"38642000\" />\r\n      <workItem from=\"1622103404820\" duration=\"27823000\" />\r\n      <workItem from=\"1622164083442\" duration=\"6788000\" />\r\n      <workItem from=\"1622287160518\" duration=\"6603000\" />\r\n      <workItem from=\"1622458431850\" duration=\"7286000\" />\r\n      <workItem from=\"1622486836563\" duration=\"223000\" />\r\n      <workItem from=\"1622490397501\" duration=\"2951000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"projet\">\r\n      <created>1622140690597</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1622140690598</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"projet\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"projet\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/.idea/workspace.xml	(date 1623597592551)
+@@ -1,9 +1,17 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="a578664a-e43b-406f-a32b-ab92eb3c232c" name="Default Changelist" comment="projet">
++    <list default="true" id="a578664a-e43b-406f-a32b-ab92eb3c232c" name="Default Changelist" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CartController.php" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Controller/ForBorrowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ForBorrowController.php" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/templates/cart/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cart/index.html.twig" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -25,6 +33,11 @@
+     </option>
+   </component>
+   <component name="Git.Settings">
++    <option name="PREVIOUS_COMMIT_AUTHORS">
++      <list>
++        <option value="gharbiamine" />
++      </list>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="GitSEFilterConfiguration">
+@@ -158,7 +171,7 @@
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../PHP2" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+     <property name="list.type.of.created.stylesheet" value="CSS" />
+     <property name="node.js.detected.package.eslint" value="true" />
+     <property name="node.js.detected.package.tslint" value="true" />
+@@ -246,7 +259,12 @@
+       <workItem from="1622287160518" duration="6603000" />
+       <workItem from="1622458431850" duration="7286000" />
+       <workItem from="1622486836563" duration="223000" />
+-      <workItem from="1622490397501" duration="2951000" />
++      <workItem from="1622490397501" duration="3238000" />
++      <workItem from="1622725137344" duration="246000" />
++      <workItem from="1623170102368" duration="1355000" />
++      <workItem from="1623521600030" duration="996000" />
++      <workItem from="1623522893802" duration="320000" />
++      <workItem from="1623589162537" duration="6687000" />
+     </task>
+     <task id="LOCAL-00001" summary="projet">
+       <created>1622140690597</created>
+@@ -255,12 +273,36 @@
+       <option name="project" value="LOCAL" />
+       <updated>1622140690598</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="projet">
++      <created>1622493857471</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1622493857471</updated>
++    </task>
++    <task id="LOCAL-00003" summary="proto for borrowing module and cart update&#10;code cleanup kinda">
++      <created>1622493922823</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1622493922823</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
++  <component name="Vcs.Log.History.Properties">
++    <option name="COLUMN_ID_ORDER">
++      <list>
++        <option value="Default.Root" />
++        <option value="Default.Author" />
++        <option value="Default.Date" />
++        <option value="Default.Subject" />
++      </list>
++    </option>
++  </component>
+   <component name="Vcs.Log.Tabs.Properties">
+     <option name="TAB_STATES">
+       <map>
+@@ -275,7 +317,8 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="projet" />
+-    <option name="LAST_COMMIT_MESSAGE" value="projet" />
++    <MESSAGE value="proto for borrowing module and cart update&#10;code cleanup kinda" />
++    <option name="LAST_COMMIT_MESSAGE" value="proto for borrowing module and cart update&#10;code cleanup kinda" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: src/Controller/CartController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Controller;\r\n\r\nuse App\\Entity\\Produit;\r\nuse App\\Repository\\ProduitRepository;\r\nuse Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;\r\nuse Symfony\\Component\\HttpFoundation\\Response;\r\nuse Symfony\\Component\\HttpFoundation\\Session\\SessionInterface;\r\nuse Symfony\\Component\\Routing\\Annotation\\Route;\r\n\r\n/**\r\n * @Route(\"/cart\", name=\"cart_\")\r\n */\r\nclass CartController extends AbstractController\r\n{\r\n    /**\r\n     * @Route(\"/\", name=\"index\")\r\n     */\r\n    public function index(SessionInterface $session, ProduitRepository $productsRepository) : Response\r\n    {\r\n        $panier = $session->get(\"panier\", []);\r\n\r\n        $data = [];\r\n        $total = 0;\r\n\r\n        foreach($panier as $id => $quantite){\r\n            $product = $productsRepository->find($id);\r\n            $data[] = [\r\n                \"produit\" => $product,\r\n                \"quantite\" => $quantite\r\n            ];\r\n            $total += $product->getPrice() * $quantite;\r\n        }\r\n\r\n        return $this->render('cart/index.html.twig', compact(\"data\", \"total\"));\r\n    }\r\n\r\n    /**\r\n     * @Route(\"/add/{id}\", name=\"add\")\r\n     */\r\n    public function add(Produit $product = null, SessionInterface $session) : Response\r\n    {\r\n        $panier = $session->get(\"panier\", []);\r\n        if($product){\r\n            $id = $product->getId();\r\n            if(!empty($panier[$id])){\r\n                $panier[$id]++;\r\n            }else{\r\n                $panier[$id] = 1;\r\n            }\r\n            $session->set(\"panier\", $panier);\r\n        }\r\n        else {\r\n            $this->addFlash('error',\"The element you wish to add does not exist.\");\r\n        }\r\n        return $this->redirectToRoute(\"cart_index\");\r\n    }\r\n\r\n    /**\r\n     * @Route(\"/remove/{id}\", name=\"remove\")\r\n     */\r\n    public function remove(Produit $product = null, SessionInterface $session) : Response\r\n    {\r\n        $panier = $session->get(\"panier\", []);\r\n        if($product) {\r\n            $id = $product->getId();\r\n            if(!empty($panier[$id])){\r\n                if($panier[$id] > 1){\r\n                    $panier[$id]--;\r\n                }else{\r\n                    unset($panier[$id]);\r\n                }\r\n                $session->set(\"panier\", $panier);\r\n            }\r\n            else{\r\n                $this->addFlash('error',\"The element you wish to remove does not exist.\");\r\n            }\r\n        }\r\n        return $this->redirectToRoute(\"cart_index\");\r\n    }\r\n\r\n    /**\r\n     * @Route(\"/delete/{id}\", name=\"delete\")\r\n     */\r\n    public function delete(Produit $product, SessionInterface $session) : Response\r\n    {\r\n        $panier = $session->get(\"panier\", []);\r\n        $id = $product->getId();\r\n\r\n        if(!empty($panier[$id])){\r\n            unset($panier[$id]);\r\n        }\r\n\r\n        $session->set(\"panier\", $panier);\r\n\r\n        return $this->redirectToRoute(\"cart_index\");\r\n    }\r\n\r\n    /**\r\n     * @Route(\"/delete\", name=\"delete_all\")\r\n     */\r\n    public function deleteAll(SessionInterface $session) : Response\r\n    {\r\n        $session->remove(\"panier\");\r\n\r\n        return $this->redirectToRoute(\"cart_index\");\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Controller/CartController.php b/src/Controller/CartController.php
+--- a/src/Controller/CartController.php	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/src/Controller/CartController.php	(date 1623595659991)
+@@ -32,8 +32,20 @@
+             ];
+             $total += $product->getPrice() * $quantite;
+         }
++        $borrow = $session->get("borrow", []);
+ 
+-        return $this->render('cart/index.html.twig', compact("data", "total"));
++        $data_borrow = [];
++        $totalborrow = 0;
++
++        foreach($borrow as $id => $quantite){
++            $product = $productsRepository->find($id);
++            $data_borrow[] = [
++                "produit" => $product,
++                "quantite" => $quantite
++            ];
++            $totalborrow += $product->getPrice() * $quantite;
++        }
++        return $this->render('cart/index.html.twig', compact("data","data_borrow", "total","totalborrow",));
+     }
+ 
+     /**
+@@ -52,7 +64,7 @@
+             $session->set("panier", $panier);
+         }
+         else {
+-            $this->addFlash('error',"The element you wish to add does not exist.");
++            $this->addFlash('danger',"The element you wish to add does not exist.");
+         }
+         return $this->redirectToRoute("cart_index");
+     }
+Index: composer.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n    \"type\": \"project\",\r\n    \"license\": \"proprietary\",\r\n    \"minimum-stability\": \"dev\",\r\n    \"prefer-stable\": true,\r\n    \"require\": {\r\n        \"php\": \">=7.2.5\",\r\n        \"ext-ctype\": \"*\",\r\n        \"ext-iconv\": \"*\",\r\n        \"composer/package-versions-deprecated\": \"1.11.99.1\",\r\n        \"doctrine/annotations\": \"^1.0\",\r\n        \"doctrine/doctrine-bundle\": \"^2.3\",\r\n        \"doctrine/doctrine-migrations-bundle\": \"^3.1\",\r\n        \"doctrine/orm\": \"^2.8\",\r\n        \"fzaninotto/faker\": \"^1.9\",\r\n        \"phpdocumentor/reflection-docblock\": \"^5.2\",\r\n        \"sensio/framework-extra-bundle\": \"^5.1\",\r\n        \"symfony/asset\": \"5.2.*\",\r\n        \"symfony/console\": \"5.2.*\",\r\n        \"symfony/dotenv\": \"5.2.*\",\r\n        \"symfony/expression-language\": \"5.2.*\",\r\n        \"symfony/flex\": \"^1.3.1\",\r\n        \"symfony/form\": \"5.2.*\",\r\n        \"symfony/framework-bundle\": \"5.2.*\",\r\n        \"symfony/http-client\": \"5.2.*\",\r\n        \"symfony/intl\": \"5.2.*\",\r\n        \"symfony/mailer\": \"5.2.*\",\r\n        \"symfony/mime\": \"5.2.*\",\r\n        \"symfony/monolog-bundle\": \"^3.1\",\r\n        \"symfony/notifier\": \"5.2.*\",\r\n        \"symfony/process\": \"5.2.*\",\r\n        \"symfony/property-access\": \"5.2.*\",\r\n        \"symfony/property-info\": \"5.2.*\",\r\n        \"symfony/proxy-manager-bridge\": \"5.2.*\",\r\n        \"symfony/security-bundle\": \"5.2.*\",\r\n        \"symfony/serializer\": \"5.2.*\",\r\n        \"symfony/string\": \"5.2.*\",\r\n        \"symfony/swiftmailer-bundle\": \"^3.5\",\r\n        \"symfony/translation\": \"5.2.*\",\r\n        \"symfony/twig-bundle\": \"^5.2\",\r\n        \"symfony/validator\": \"5.2.*\",\r\n        \"symfony/web-link\": \"5.2.*\",\r\n        \"symfony/yaml\": \"5.2.*\",\r\n        \"twig/extra-bundle\": \"^2.12|^3.0\",\r\n        \"twig/twig\": \"^2.12|^3.0\",\r\n        \"nomaya/social-bundle\": \"dev-master\"\r\n    },\r\n    \"require-dev\": {\r\n        \"doctrine/doctrine-fixtures-bundle\": \"^3.4\",\r\n        \"symfony/browser-kit\": \"^5.2\",\r\n        \"symfony/css-selector\": \"^5.2\",\r\n        \"symfony/debug-bundle\": \"^5.2\",\r\n        \"symfony/maker-bundle\": \"^1.0\",\r\n        \"symfony/phpunit-bridge\": \"^5.2\",\r\n        \"symfony/stopwatch\": \"^5.2\",\r\n        \"symfony/var-dumper\": \"^5.2\",\r\n        \"symfony/web-profiler-bundle\": \"^5.2\"\r\n    },\r\n    \"config\": {\r\n        \"optimize-autoloader\": true,\r\n        \"preferred-install\": {\r\n            \"*\": \"dist\"\r\n        },\r\n        \"sort-packages\": true\r\n    },\r\n    \"autoload\": {\r\n        \"psr-4\": {\r\n            \"App\\\\\": \"src/\"\r\n        }\r\n    },\r\n    \"autoload-dev\": {\r\n        \"psr-4\": {\r\n            \"App\\\\Tests\\\\\": \"tests/\"\r\n        }\r\n    },\r\n    \"replace\": {\r\n        \"symfony/polyfill-ctype\": \"*\",\r\n        \"symfony/polyfill-iconv\": \"*\",\r\n        \"symfony/polyfill-php72\": \"*\"\r\n    },\r\n    \"scripts\": {\r\n        \"auto-scripts\": {\r\n            \"cache:clear\": \"symfony-cmd\",\r\n            \"assets:install %PUBLIC_DIR%\": \"symfony-cmd\"\r\n        },\r\n        \"post-install-cmd\": [\r\n            \"@auto-scripts\"\r\n        ],\r\n        \"post-update-cmd\": [\r\n            \"@auto-scripts\"\r\n        ]\r\n    },\r\n    \"conflict\": {\r\n        \"symfony/symfony\": \"*\"\r\n    },\r\n    \"extra\": {\r\n        \"symfony\": {\r\n            \"allow-contrib\": false,\r\n            \"require\": \"5.2.*\"\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/composer.json b/composer.json
+--- a/composer.json	(revision de73b373a0c76db3ac9a6d691d41cc09b36ac3e3)
++++ b/composer.json	(date 1623592348367)
+@@ -4,7 +4,7 @@
+     "minimum-stability": "dev",
+     "prefer-stable": true,
+     "require": {
+-        "php": ">=7.2.5",
++        "php": ">=8.0",
+         "ext-ctype": "*",
+         "ext-iconv": "*",
+         "composer/package-versions-deprecated": "1.11.99.1",

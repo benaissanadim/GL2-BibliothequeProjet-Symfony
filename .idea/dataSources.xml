@@ -9,5 +9,12 @@
       <working-dir>$ProjectFileDir$</working-dir>
       <time-zone>GMT</time-zone>
     </data-source>
+    <data-source source="LOCAL" name="projet@localhost" uuid="01f8bfe5-d766-4f1f-9ce7-052612179eae">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/projet</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

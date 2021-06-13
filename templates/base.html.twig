@@ -159,24 +159,24 @@
 {% endblock %}
 {% block body %}
 <body>
-</body>
-</html>
-{% endblock %}
-
-{% block flashbag %}
+<div class="flashbag">
+    <main>
     {% for  message in  app.session.flashBag.get('info') %}
-        <div class="alert alert-info">
+      <div class="alert alert-info">
             {{ message }}
         </div>
     {% endfor %}
     {% for  message in  app.session.flashBag.get('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
+      <div class="alert alert-success">
+           {{ message }}
+      </div>
     {% endfor %}
     {% for  message in  app.session.flashBag.get('error') %}
         <div class="alert alert-danger">
             {{ message }}
         </div>
-    {% endfor %}
+    </main>
+</div>
+{% endfor %}
 {% endblock %}
+

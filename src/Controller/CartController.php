@@ -32,8 +32,20 @@ class CartController extends AbstractController
             ];
             $total += $product->getPrice() * $quantite;
         }
+        $borrow = $session->get("borrow", []);
 
-        return $this->render('cart/index.html.twig', compact("data", "total"));
+        $data_borrow = [];
+        $totalborrow = 0;
+
+        foreach($borrow as $id => $quantite){
+            $product = $productsRepository->find($id);
+            $data_borrow[] = [
+                "produit" => $product,
+                "quantite" => $quantite
+            ];
+            $totalborrow += $product->getPrice() * $quantite;
+        }
+        return $this->render('cart/index.html.twig', compact("data","data_borrow", "total","totalborrow",));
     }
 
     /**
@@ -52,7 +64,7 @@ class CartController extends AbstractController
             $session->set("panier", $panier);
         }
         else {
-            $this->addFlash('error',"The element you wish to add does not exist.");
+            $this->addFlash('danger',"The element you wish to add does not exist.");
         }
         return $this->redirectToRoute("cart_index");
     }
