@@ -5,11 +5,12 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -17,11 +18,24 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="integer")
      */
     private $id;
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
 
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+        return $this ;
+    }
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
      */
-    private $username;
+    private $plainPassword;
+
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,22 +47,22 @@ class User implements UserInterface, \Serializable
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastName;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
 
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
 
     public function getPassword(): ?string
     {
@@ -87,25 +101,34 @@ class User implements UserInterface, \Serializable
     {
 
     }
-    public function serialize()
+
+
+    public function getFirstName(): ?string
     {
-        return serialize([
-            $this->id,
-            $this->username,
-            $this->email,
-            $this->password
-        ]);
+        return $this->firstName;
     }
 
-
-    public function unserialize($data)
+    public function setFirstName(string $firstName): self
     {
-        list (
-            $this->id,
-            $this->username,
-            $this->email,
-            $this->password
-            ) = $this->unserialize(String, ['allowed_classes' => false]);
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
     }
 
 }

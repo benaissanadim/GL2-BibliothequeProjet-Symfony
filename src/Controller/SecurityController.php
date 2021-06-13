@@ -16,17 +16,20 @@ class SecurityController extends AbstractController
     {
         $error = $utils->getLastAuthenticationError();
         $lastUsername = $utils->getLastUsername();
-        return $this->render('security/login.html.twig', [
+        return $this->render('loginInscription/login.html.twig', [
             'error' => $error,
-            'last_username' => $lastUsername
+            'last_username' => $lastUsername ,
+
         ]);
     }
 
     /**
-     * @Route("/logout", name="logout")
-     */
+    * @Route("/logout", name="logout")
+    */
     public function logout()
     {
-
+        throw new \Exception('Don\'t forget to activate logout in loginInscription.yaml');
     }
+
+
 }
