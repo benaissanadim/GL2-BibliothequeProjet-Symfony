@@ -9,14 +9,14 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/login", name="app_login")
      */
 
     public function login(Request $request, AuthenticationUtils $utils): \Symfony\Component\HttpFoundation\Response
     {
         $error = $utils->getLastAuthenticationError();
         $lastUsername = $utils->getLastUsername();
-        return $this->render('loginInscription/login.html.twig', [
+        return $this->render('security/login.html.twig', [
             'error' => $error,
             'last_username' => $lastUsername ,
 
@@ -28,7 +28,7 @@ class SecurityController extends AbstractController
     */
     public function logout()
     {
-        throw new \Exception('Don\'t forget to activate logout in loginInscription.yaml');
+
     }
 
 

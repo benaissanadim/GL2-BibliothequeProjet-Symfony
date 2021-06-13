@@ -1,5 +1,25 @@
 
+    {% block StyleSheet %}
+        <link  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"  rel="stylesheet"  type='text/css'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('CSS/styleLogin.css')}}">
+    {% endblock %}
+    {% block Title %}Sign in{% endblock %}
 
+{% block Body %}
+    {% block Header %}
+    {% endblock %}
+
+
+
+
+    <div class="container box">
+
+        <div class="square" style="--i:1;"></div>
+        <div class="square" style="--i:3;"></div>
+        <div class="square" style="--i:2;"></div>
+        <div class="square" style="--i:4;"></div>
+        <div class="square" style="--i:5;"></div>
 {{ form_start(form  ) }}
 <div class="form-group ">
 
@@ -26,3 +46,17 @@
 
 
 </div>
+<div class="color"></div>
+<div class="color"></div>
+<div class="color"></div>
+<div class="color"></div>
+{% endblock %}
+
+{% block Scripts %}
+    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('Scripts/InsciptionScripts/ControleFormInscrit.js')}}"></script>
+{% endblock %}
+
+{% block Footer %}
+{% endblock %}
