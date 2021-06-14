@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ForBorrow index{% endblock %}
+
+{% block body %}
+    <h1>ForBorrow index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Starting_date</th>
+                <th>Return_date</th>
+                <th>Fee</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for for_borrow in for_borrows %}
+            <tr>
+                <td>{{ for_borrow.id }}</td>
+                <td>{{ for_borrow.name }}</td>
+                <td>{{ for_borrow.startingDate ? for_borrow.startingDate|date('Y-m-d') : '' }}</td>
+                <td>{{ for_borrow.returnDate ? for_borrow.returnDate|date('Y-m-d') : '' }}</td>
+                <td>{{ for_borrow.fee }}</td>
+                <td>
+                    <a href="{{ path('for_borrow_show', {'id': for_borrow.id}) }}">show</a>
+                    <a href="{{ path('for_borrow_edit', {'id': for_borrow.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('for_borrow_new') }}">Create new</a>
+{% endblock %}

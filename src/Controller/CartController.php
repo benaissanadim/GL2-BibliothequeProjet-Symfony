@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @Route("/cart", name="cart_")
@@ -15,81 +17,93 @@ class CartController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(SessionInterface $session)
+    public function index(SessionInterface $session, ProduitRepository $productsRepository) : Response
     {
-        $cart = $session->get("cart", []);
+        $panier = $session->get("panier", []);
 
         $data = [];
         $total = 0;
-
-        foreach($cart as $id => $quantity){
-            $product = $id;
-            if (isset($product)) {
-                $data[] = [
-                    "product" => $product,
-                    "quantity" => $quantity
-                ];
-                $total += $product->getPrice() * $quantity;
-            }
+        foreach($panier as $id => $quantite){
+            $product = $productsRepository->find($id);
+            $data[] = [
+                "produit" => $product,
+                "quantite" => $quantite
+            ];
+            $total += $product->getPrice() * $quantite;
         }
+        $borrow = $session->get("borrow", []);
 
-        return $this->render('cart/index.html.twig', compact("data", "total"));
+        $data_borrow = [];
+        $totalborrow = 0;
+
+        foreach($borrow as $id => $quantite){
+            $product = $productsRepository->find($id);
+            $data_borrow[] = [
+                "produit" => $product,
+                "quantite" => $quantite
+            ];
+            $totalborrow += $product->getPrice() * $quantite;
+        }
+        return $this->render('cart/index.html.twig', compact("data","data_borrow", "total","totalborrow",));
     }
 
     /**
      * @Route("/add/{id}", name="add")
      */
-    public function add(Products $product, SessionInterface $session)
+    public function add(Produit $product = null, SessionInterface $session) : Response
     {
-        $cart = $session->get("cart", []);
-        $id = $product->getId();
-
-        if(isset($cart[$id])){
-            $cart[$id]++;
-        }else{
-            $cart[$id] = 1;
+        $panier = $session->get("panier", []);
+        if($product){
+            $id = $product->getId();
+            if(!empty($panier[$id])){
+                $panier[$id]++;
+            }else{
+                $panier[$id] = 1;
+            }
+            $session->set("panier", $panier);
         }
-
-        $session->set("cart", $cart);
-
+        else {
+            $this->addFlash('danger',"The element you wish to add does not exist.");
+        }
         return $this->redirectToRoute("cart_index");
     }
 
     /**
      * @Route("/remove/{id}", name="remove")
      */
-    public function remove(Products $product, SessionInterface $session)
+    public function remove(Produit $product = null, SessionInterface $session) : Response
     {
-        // On récupère le cart actuel
-        $cart = $session->get("cart", []);
-        $id = $product->getId();
-
-        if(isset($cart[$id])){
-            if($cart[$id] > 1){
-                $cart[$id]--;
-            }else{
-                unset($cart[$id]);
+        $panier = $session->get("panier", []);
+        if($product) {
+            $id = $product->getId();
+            if(!empty($panier[$id])){
+                if($panier[$id] > 1){
+                    $panier[$id]--;
+                }else{
+                    unset($panier[$id]);
+                }
+                $session->set("panier", $panier);
+            }
+            else{
+                $this->addFlash('error',"The element you wish to remove does not exist.");
             }
         }
-
-        $session->set("cart", $cart);
-
         return $this->redirectToRoute("cart_index");
     }
 
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function delete(Products $product, SessionInterface $session)
+    public function delete(Produit $product, SessionInterface $session) : Response
     {
-        $cart = $session->get("cart", []);
+        $panier = $session->get("panier", []);
         $id = $product->getId();
 
-        if(!empty($cart[$id])){
-            unset($cart[$id]);
+        if(!empty($panier[$id])){
+            unset($panier[$id]);
         }
 
-        $session->set("cart", $cart);
+        $session->set("panier", $panier);
 
         return $this->redirectToRoute("cart_index");
     }
@@ -97,9 +111,9 @@ class CartController extends AbstractController
     /**
      * @Route("/delete", name="delete_all")
      */
-    public function deleteAll(SessionInterface $session)
+    public function deleteAll(SessionInterface $session) : Response
     {
-        $session->remove("cart");
+        $session->remove("panier");
 
         return $this->redirectToRoute("cart_index");
     }

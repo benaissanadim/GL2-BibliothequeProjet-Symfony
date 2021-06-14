@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}My Shopping Cart{% endblock %}
-
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+{% endblock %}
 {% block body %}
+    {{ parent() }}
     <!-- Main wrapper -->
     <div class="wrapper" id="wrapper">
         <!-- Start breadcrumb area -->
@@ -13,7 +17,7 @@
                         <div class="breadcrumb__inner text-center">
                             <h2 class="breadcrumb-title">Shopping Cart</h2>
                             <nav class="breadcrumb-content">
-                                <a class="breadcrumb_item" href="index.html">Home</a>
+                                <a class="breadcrumb_item" href="{{ path('welcome') }}">Home</a>
                                 <span class="brd-separator">/</span>
                                 <span class="breadcrumb_item active">Shopping Cart</span>
                             </nav>
@@ -29,6 +33,9 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 ol-lg-12">
                         <form action="#">
+                            <div class="section__title--3">
+                                <h3><span>  Bought : </span> </h3> <br>
+                            </div>
                             <div class="table-content wnro__table table-responsive">
                                 <table class="table">
                                     <thead>
@@ -43,18 +50,18 @@
                                     <tbody>
                                     {% for element in data %}
                                         <tr>
-                                            <td>{{ element.product.title }}</td>
-                                            <td class="text-end">{{ element.product.price }} €</td>
+                                            <td>{{ element.produit.name }}</td>
+                                            <td class="text-end">{{ element.produit.price }} €</td>
                                             <td>{{ element.quantite }}</td>
-                                            <td class="text-end">{{ element.quantite * element.product.price }} €</td>
+                                            <td class="text-end">{{ element.quantite * element.produit.price }} €</td>
                                             <td>
-                                                <a href="{{path("cart_add", {id: element.product.id})}}" class="btn btn-success">
-                                                    <i class="bi bi-cart-plus"></i>
+                                                <a href="{{path("cart_add", {id: element.produit.id})}}" class="btn btn-outline-success">
+                                                    <i class="bi bi-plus"></i>
                                                 </a>
-                                                <a href="{{path("cart_remove", {id: element.product.id})}}" class="btn btn-warning">
-                                                    <i class="bi bi-cart-dash"></i>
+                                                <a href="{{path("cart_remove", {id: element.produit.id})}}" class="btn btn-outline-warning">
+                                                    <i class="bi bi-dash"></i>
                                                 </a>
-                                                <a href="{{path("cart_delete", {id: element.product.id})}}" class="btn btn-danger">
+                                                <a href="{{path("cart_delete", {id: element.produit.id})}}" class="btn btn-outline-danger">
                                                     <i class="bi bi-cart-x"></i>
                                                 </a>
                                             </td>
@@ -78,12 +85,69 @@
                                     </tfoot>
                                 </table>
                             </div>
+                            <div class="section__title--3">
+                                <h3><span>  Borrowed : </span> </h3> <br>
+                            </div>
+                            <div class="table-content wnro__table table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Started</th>
+                                        <th>Returned</th>
+                                        <th>Fee</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for element in data_borrow %}
+                                        <tr>
+                                            <td>{{ element.produit.name }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-end">{{ element.produit.price }} €</td>
+                                            <td>{{ element.quantite }}</td>
+                                            <td class="text-end">{{ element.quantite * element.produit.price }} €</td>
+                                            <td>
+                                                <a href="{{path("for/borrow_add", {id: element.produit.id})}}" class="btn btn-outline-success">
+                                                    <i class="bi bi-plus"></i>
+                                                </a>
+                                                <a href="{{path("for/borrow_remove", {id: element.produit.id})}}" class="btn btn-outline-warning">
+                                                    <i class="bi bi-dash"></i>
+                                                </a>
+                                                <a href="{{path("for/borrow_delete", {id: element.produit.id})}}" class="btn btn-outline-danger">
+                                                    <i class="bi bi-cart-x"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="5" class="text-center">Your cart is empty. Consider adding some items to it</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="3">Total</td>
+                                        <td class="text-end">{{ totalborrow }} €</td>
+                                        <td class="text-end" colspan="2"></td>
+                                        <td>
+                                            <a href="{{path("for/borrow_delete_all")}}" class="btn btn-danger">
+                                                <i class="bi bi-cart-x"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </form>
                         <div class="cartbox__btn">
                             <ul
                                     class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
 
-                                <li><a href="#">Update Cart</a></li>
+                                <li><a href="{{path("shopgrid")}}">Update Cart</a></li>
                                 <li><a href="#">Check Out</a></li>
                             </ul>
                         </div>
@@ -96,7 +160,7 @@
 
                             <div class="cart__total__amount">
                                 <span>Grand Total</span>
-                                <span>$140</span>
+                                <span>{{ total + totalborrow  }} €</span>
                             </div>
                         </div>
                     </div>
@@ -129,7 +193,7 @@
                                     <ul class="mainmenu d-flex justify-content-center">
                                         <li><a href="index.html">Trending</a></li>
                                         <li><a href="index.html">Best Seller</a></li>
-                                        <li><a href="index.html">All Product</a></li>
+                                        <li><a href="index.html">All produit</a></li>
                                         <li><a href="index.html">Wishlist</a></li>
                                         <li><a href="index.html">Blog</a></li>
                                         <li><a href="index.html">Contact</a></li>
@@ -160,12 +224,11 @@
                 </div>
             </div>
         </footer>
-        <!-- //Footer Area -->
 
     </div>
-    <!-- //Main wrapper -->
 
     <!-- JS Files -->
+
     <script src="js/vendor/jquery-3.2.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -173,3 +236,4 @@
     <script src="js/active.js"></script>
 
 {% endblock %}
+
