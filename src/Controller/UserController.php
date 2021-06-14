@@ -28,6 +28,7 @@ class UserController extends AbstractController
            $password = $passwordEncoder->encodePassword($user , $user->getPlainPassword());
            $user->setPassword($password) ;
 
+
            $em = $this->getDoctrine()->getManager();
            $em->persist($user);
            $em->flush();
