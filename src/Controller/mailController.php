@@ -23,8 +23,8 @@ class mailController extends AbstractController
     public function index( $emailUser)
     {
         $transport = (new \Swift_SmtpTransport('smtp.gmail.com' ,465 , 'ssl' ))
-            ->setUsername("ltconlineschool@gmail.com")
-            ->setPassword("projetweb") ;
+            ->setUsername("biblio.bouarada@gmail.com")
+            ->setPassword("Mohamed123Mohamed") ;
 
         $mailer = new \Swift_Mailer($transport);
 
@@ -43,7 +43,7 @@ class mailController extends AbstractController
 
        $mailer->send($message)  ;
 
-        return $this->render('mail/EmailVerif.html.twig') ;
+        return $this->redirect($this->generateUrl('app_login'));
     }
 
 
