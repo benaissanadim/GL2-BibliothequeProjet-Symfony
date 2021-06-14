@@ -31,16 +31,14 @@ class UserController extends AbstractController
            $em = $this->getDoctrine()->getManager();
            $em->persist($user);
            $em->flush();
+           return
+               $this->redirectToRoute('mail' , array(
+                   'emailUser' => $user->getEmail(),
+               ));
 
-    $formLogin = $this->createFormBuilder($user)
-        ->add('email' , EmailType::class)
-        ->add('password' , PasswordType::class)
-        ->getForm();
 
-    return
-    $this->redirectToRoute('signUpSuccess' , array(
-        'name' => $user->getFirstName(),
-    ));
+
+
 
 
        }
