@@ -1,0 +1,532 @@
+Index: src/Controller/UserController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Controller;\r\n\r\nuse App\\Entity\\User;\r\nuse App\\Form\\UserType;\r\nuse Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;\r\nuse Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType;\r\nuse Symfony\\Component\\Form\\Extension\\Core\\Type\\PasswordType;\r\nuse Symfony\\Component\\HttpFoundation\\Request;\r\nuse Symfony\\Component\\HttpFoundation\\Response;\r\nuse Symfony\\Component\\Mime\\Email;\r\nuse Symfony\\Component\\Routing\\Annotation\\Route;\r\nuse Symfony\\Component\\Security\\Core\\Encoder\\UserPasswordEncoderInterface;\r\n\r\nclass UserController extends AbstractController\r\n{\r\n    /**\r\n     *\r\n     * @Route(\"/user\", name=\"user\")\r\n     */\r\n    public function index(UserPasswordEncoderInterface $passwordEncoder , Request $request): Response\r\n    {\r\n       $user = new User();\r\n       $form = $this->createForm(UserType::class, $user);\r\n       $form->handleRequest($request) ;\r\n       if($form->isSubmitted() && $form->isValid()) {\r\n           $password = $passwordEncoder->encodePassword($user , $user->getPlainPassword());\r\n           $user->setPassword($password) ;\r\n\r\n           $em = $this->getDoctrine()->getManager();\r\n           $em->persist($user);\r\n           $em->flush();\r\n           return\r\n               $this->redirectToRoute('mail' , array(\r\n                   'emailUser' => $user->getEmail(),\r\n               ));\r\n\r\n\r\n\r\n\r\n\r\n\r\n       }\r\n\r\n\r\n       return $this->render(\"loginInscription/inscription.html.twig\",[\r\n           \"form\" => $form->createView(),\r\n\r\n       ]);\r\n\r\n    }\r\n\r\n    /**\r\n     * @Route(\"signUpSuccess/{name}\" , name = \"signUpSuccess\")\r\n     */\r\n\r\n\r\n    public function goToLogin($name) {\r\n        return\r\n        $this->redirectToRoute(\"app_login\") ;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Controller/UserController.php b/src/Controller/UserController.php
+--- a/src/Controller/UserController.php	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ b/src/Controller/UserController.php	(date 1623700774056)
+@@ -28,6 +28,7 @@
+            $password = $passwordEncoder->encodePassword($user , $user->getPlainPassword());
+            $user->setPassword($password) ;
+ 
++
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+Index: src/Entity/User.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Entity;\r\n\r\nuse App\\Repository\\UserRepository;\r\nuse Doctrine\\ORM\\Mapping as ORM;\r\nuse Symfony\\Component\\Security\\Core\\User\\UserInterface;\r\nuse Symfony\\Component\\Validator\\Constraints as Assert;\r\n\r\n/**\r\n * @ORM\\Entity(repositoryClass=UserRepository::class)\r\n */\r\nclass User implements UserInterface\r\n{\r\n    /**\r\n     * @ORM\\Id\r\n     * @ORM\\GeneratedValue\r\n     * @ORM\\Column(type=\"integer\")\r\n     */\r\n    private $id;\r\n    public function getPlainPassword(): ?string\r\n    {\r\n        return $this->plainPassword;\r\n    }\r\n\r\n    public function setPlainPassword(?string $plainPassword): self\r\n    {\r\n        $this->plainPassword = $plainPassword;\r\n        return $this ;\r\n    }\r\n    /**\r\n\r\n     * @Assert\\NotBlank()\r\n     * @Assert\\Length(max=4096)\r\n     */\r\n    private $plainPassword;\r\n\r\n\r\n\r\n    /**\r\n     * @ORM\\Column(type=\"string\", length=255)\r\n     */\r\n    private $password;\r\n\r\n    /**\r\n     * @ORM\\Column(type=\"string\", length=255, unique=true)\r\n     */\r\n    private $email;\r\n\r\n    /**\r\n     * @ORM\\Column(type=\"string\", length=255)\r\n     */\r\n    private $firstName;\r\n\r\n    /**\r\n     * @ORM\\Column(type=\"string\", length=255)\r\n     */\r\n    private $lastName;\r\n\r\n    public function getId(): ?int\r\n    {\r\n        return $this->id;\r\n    }\r\n\r\n\r\n\r\n    public function getPassword(): ?string\r\n    {\r\n        return $this->password;\r\n    }\r\n\r\n    public function setPassword(string $password): self\r\n    {\r\n        $this->password = $password;\r\n\r\n        return $this;\r\n    }\r\n\r\n    public function getEmail(): ?string\r\n    {\r\n        return $this->email;\r\n    }\r\n\r\n    public function setEmail(string $email): self\r\n    {\r\n        $this->email = $email;\r\n\r\n        return $this;\r\n    }\r\n    public function getRoles()\r\n    {\r\n        return [\r\n            'ROLE_USER'\r\n        ];\r\n    }\r\n    public function getSalt()\r\n    {\r\n\r\n    }\r\n    public function eraseCredentials()\r\n    {\r\n\r\n    }\r\n\r\n\r\n    public function getFirstName(): ?string\r\n    {\r\n        return $this->firstName;\r\n    }\r\n\r\n    public function setFirstName(string $firstName): self\r\n    {\r\n        $this->firstName = $firstName;\r\n\r\n        return $this;\r\n    }\r\n\r\n    public function getLastName(): ?string\r\n    {\r\n        return $this->lastName;\r\n    }\r\n\r\n    public function setLastName(string $lastName): self\r\n    {\r\n        $this->lastName = $lastName;\r\n\r\n        return $this;\r\n    }\r\n    public function getUsername()\r\n    {\r\n        // TODO: Implement getUsername() method.\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entity/User.php b/src/Entity/User.php
+--- a/src/Entity/User.php	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ b/src/Entity/User.php	(date 1623700774057)
+@@ -36,7 +36,11 @@
+     private $plainPassword;
+ 
+ 
++    public function __construct()
++    {
++        $this->roles = array('ROLE_READER');
+ 
++    }
+     /**
+      * @ORM\Column(type="string", length=255)
+      */
+@@ -57,6 +61,15 @@
+      */
+     private $lastName;
+ 
++
++    /**
++     * @ORM\Column(type="json")
++     */
++    private $roles = [];
++
++
++
++
+     public function getId(): ?int
+     {
+         return $this->id;
+@@ -87,12 +100,7 @@
+ 
+         return $this;
+     }
+-    public function getRoles()
+-    {
+-        return [
+-            'ROLE_USER'
+-        ];
+-    }
++
+     public function getSalt()
+     {
+ 
+@@ -131,4 +139,15 @@
+         // TODO: Implement getUsername() method.
+     }
+ 
++
++    public function getRoles()
++    {
++        $roles = $this->roles;
++        // guarantee every user at least has ROLE_USER
++        $roles[] = 'ROLE_USER';
++
++        return array_unique($roles);
++    }
++
++
+ }
+Index: config/packages/security.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>security:\r\n    encoders:\r\n        App\\Entity\\User:\r\n            algorithm: bcrypt\r\n\r\n    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers\r\n    providers:\r\n        # used to reload user from session & other features (e.g. switch_user)\r\n        app_user_provider:\r\n            entity:\r\n                class: App\\Entity\\User\r\n                property: email\r\n    firewalls:\r\n        dev:\r\n            pattern: ^/(_(profiler|wdt)|css|images|js)/\r\n            security: false\r\n        main:\r\n            anonymous: true\r\n            lazy: true\r\n            provider: app_user_provider\r\n            guard:\r\n                authenticators:\r\n                    - App\\Security\\LoginFormAuthenticator\r\n            logout:\r\n                path: app_logout\r\n                # where to redirect after logout\r\n                # target: app_any_route\r\n\r\n            # activate different ways to authenticate\r\n            # https://symfony.com/doc/current/security.html#firewalls-authentication\r\n\r\n            # https://symfony.com/doc/current/security/impersonating_user.html\r\n            # switch_user: true\r\n\r\n    # Easy way to control access for large sections of your site\r\n    # Note: Only the first access control that matches will be used\r\n    access_control:\r\n     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }\r\n     - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }\r\n     - { path: ^/admin, roles: ROLE_ADMIN }
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/packages/security.yaml b/config/packages/security.yaml
+--- a/config/packages/security.yaml	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ b/config/packages/security.yaml	(date 1623700774051)
+@@ -23,6 +23,7 @@
+                     - App\Security\LoginFormAuthenticator
+             logout:
+                 path: app_logout
++
+                 # where to redirect after logout
+                 # target: app_any_route
+ 
+@@ -35,6 +36,7 @@
+     # Easy way to control access for large sections of your site
+     # Note: Only the first access control that matches will be used
+     access_control:
+-     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }
+-     - { path: ^/admin, roles: ROLE_ADMIN }
+\ No newline at end of file
++     - { path: ^/admin, roles: ROLE_ADMIN }
++     - { path: ^/cart, roles: [ROLE_READER]}
++
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a578664a-e43b-406f-a32b-ab92eb3c232c\" name=\"Default Changelist\" comment=\"projet\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/dataSources.local.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/dataSources.local.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/dataSources/01f8bfe5-d766-4f1f-9ce7-052612179eae.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/dataSources/01f8bfe5-d766-4f1f-9ce7-052612179eae.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/php.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/php.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/symfoGL2021.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/symfoGL2021.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/composer.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/composer.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/composer.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/composer.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/config/bundles.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/config/bundles.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/config/packages/security.yaml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/config/packages/security.yaml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Controller/CartController.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Controller/CartController.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Controller/WelcomeController.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Controller/WelcomeController.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/symfony.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/symfony.lock\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/templates/base.html.twig\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/templates/base.html.twig\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\" doNotAsk=\"true\" synchronizationState=\"SYNCHRONIZE\">\r\n    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>\r\n    <execution>\r\n      <executable path=\"composer\" />\r\n    </execution>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"HTML File\" />\r\n        <option value=\"CSS File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"PhpWorkspaceProjectConfiguration\" interpreter_name=\"PHP\">\r\n    <include_path>\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-guard\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-kernel\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/browser-kit\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/notifier\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/string\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/yaml\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/twig-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/process\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/dotenv\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/asset\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/expression-language\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/sensio/framework-extra-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nikic/php-parser\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/monolog/monolog\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/egulias/email-validator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/type-resolver\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/phpdocumentor/reflection-common\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/webmozart/assert\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/friendsofphp/proxy-manager-lts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/lexer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/deprecations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/twig/extra-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/event-manager\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/twig/twig\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/instantiator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/dbal\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/orm\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/sql-formatter\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/collections\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/persistence\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/annotations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/inflector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/migrations\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/common\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laminas/laminas-eventmanager\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/laminas/laminas-code\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/cache-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-mbstring\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/deprecation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/form\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/var-exporter\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/monolog-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/container\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/css-selector\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/log\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/cache\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-core\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php80\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/psr/link\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/property-info\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/property-access\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/proxy-manager-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/stopwatch\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/flex\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/options-resolver\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/event-dispatcher\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/var-dumper\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-foundation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/framework-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/validator\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/dom-crawler\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/service-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/translation\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/finder\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/routing\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-client\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/composer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/http-client-contracts\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/monolog-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/doctrine-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/dependency-injection\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/phpunit-bridge\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/config\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-http\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/mailer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/twig-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/debug-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/error-handler\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/filesystem\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php73\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/web-profiler-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/maker-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/console\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/data-fixtures\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/fzaninotto/faker\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/swiftmailer/swiftmailer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/nomaya/social-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-php81\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/doctrine/doctrine-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/intl\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/mime\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/security-csrf\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/serializer\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/web-link\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/easycorp/easyadmin-bundle\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/polyfill-uuid\" />\r\n      <path value=\"$PROJECT_DIR$/vendor/symfony/uid\" />\r\n    </include_path>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1rfroeJmAl3Hyv5dbzGguAZw3VJ\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"DatabaseDriversLRU\" value=\"mysql\" />\r\n    <property name=\"DefaultHtmlFileTemplate\" value=\"HTML File\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/../../PHP2\" />\r\n    <property name=\"list.type.of.created.stylesheet\" value=\"CSS\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"reference.webide.settings.project.settings.php\" />\r\n    <property name=\"settings.editor.splitter.proportion\" value=\"0.24534161\" />\r\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\xampp\\htdocs\\Symfonynew\\symfoGL2021 - Copie\\config\" />\r\n      <recent name=\"C:\\xampp\\htdocs\\Symfonynew\\symfoGL2021 - Copie\\templates\\home\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\xampp\\Projet\\src\\Security\" />\r\n      <recent name=\"C:\\xampp\\htdocs\\Symfonynew\\symfoGL2021 - Copie\\config\\packages\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JavaScript Debug.firstController.php\">\r\n    <configuration name=\"firstController.php\" type=\"JavascriptDebugType\" temporary=\"true\" nameIsGenerated=\"true\" uri=\"http://localhost:63342/symfoGL2021/Controller/firstController.php\" useBuiltInWebServerPort=\"true\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"phpunit.xml.dist\" type=\"PHPUnitRunConfigurationType\" factoryName=\"PHPUnit\">\r\n      <TestRunner scope=\"XML\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JavaScript Debug.firstController.php\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a578664a-e43b-406f-a32b-ab92eb3c232c\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1619378161016</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1619378161016</updated>\r\n      <workItem from=\"1619378162315\" duration=\"442000\" />\r\n      <workItem from=\"1619378662609\" duration=\"1400000\" />\r\n      <workItem from=\"1619380099583\" duration=\"3419000\" />\r\n      <workItem from=\"1619450679166\" duration=\"706000\" />\r\n      <workItem from=\"1619451395063\" duration=\"72000\" />\r\n      <workItem from=\"1619452011052\" duration=\"119000\" />\r\n      <workItem from=\"1619452141691\" duration=\"507000\" />\r\n      <workItem from=\"1619452749837\" duration=\"123000\" />\r\n      <workItem from=\"1619452887487\" duration=\"27000\" />\r\n      <workItem from=\"1619453098318\" duration=\"109000\" />\r\n      <workItem from=\"1619453216485\" duration=\"81000\" />\r\n      <workItem from=\"1619453308380\" duration=\"84000\" />\r\n      <workItem from=\"1619453411569\" duration=\"252000\" />\r\n      <workItem from=\"1619453780091\" duration=\"8312000\" />\r\n      <workItem from=\"1619621749916\" duration=\"2683000\" />\r\n      <workItem from=\"1619972521578\" duration=\"83000\" />\r\n      <workItem from=\"1619972619391\" duration=\"12000\" />\r\n      <workItem from=\"1620075639059\" duration=\"163000\" />\r\n      <workItem from=\"1620405460071\" duration=\"8410000\" />\r\n      <workItem from=\"1620475276035\" duration=\"16000\" />\r\n      <workItem from=\"1620476651692\" duration=\"694000\" />\r\n      <workItem from=\"1620518216327\" duration=\"96000\" />\r\n      <workItem from=\"1620518391649\" duration=\"46000\" />\r\n      <workItem from=\"1620518468289\" duration=\"5052000\" />\r\n      <workItem from=\"1620557386176\" duration=\"1308000\" />\r\n      <workItem from=\"1620558733853\" duration=\"15529000\" />\r\n      <workItem from=\"1620645429071\" duration=\"977000\" />\r\n      <workItem from=\"1620647532209\" duration=\"24352000\" />\r\n      <workItem from=\"1621083058449\" duration=\"89000\" />\r\n      <workItem from=\"1621084188232\" duration=\"4031000\" />\r\n      <workItem from=\"1621090917773\" duration=\"1839000\" />\r\n      <workItem from=\"1621261279100\" duration=\"2152000\" />\r\n      <workItem from=\"1621279101312\" duration=\"690000\" />\r\n      <workItem from=\"1621342847156\" duration=\"1826000\" />\r\n      <workItem from=\"1621420379325\" duration=\"7551000\" />\r\n      <workItem from=\"1621438119467\" duration=\"718000\" />\r\n      <workItem from=\"1621439259157\" duration=\"104000\" />\r\n      <workItem from=\"1621441798123\" duration=\"1370000\" />\r\n      <workItem from=\"1621443669946\" duration=\"26656000\" />\r\n      <workItem from=\"1621844985891\" duration=\"2193000\" />\r\n      <workItem from=\"1621858094546\" duration=\"38642000\" />\r\n      <workItem from=\"1622103404820\" duration=\"27823000\" />\r\n      <workItem from=\"1622164083442\" duration=\"6788000\" />\r\n      <workItem from=\"1622287160518\" duration=\"6603000\" />\r\n      <workItem from=\"1622458431850\" duration=\"7286000\" />\r\n      <workItem from=\"1622486836563\" duration=\"223000\" />\r\n      <workItem from=\"1622490397501\" duration=\"2951000\" />\r\n      <workItem from=\"1623428175477\" duration=\"4061000\" />\r\n      <workItem from=\"1623449853293\" duration=\"935000\" />\r\n      <workItem from=\"1623497031442\" duration=\"16894000\" />\r\n      <workItem from=\"1623518091468\" duration=\"327000\" />\r\n      <workItem from=\"1623518782764\" duration=\"4224000\" />\r\n      <workItem from=\"1623531487475\" duration=\"23137000\" />\r\n      <workItem from=\"1623580751951\" duration=\"10282000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"projet\">\r\n      <created>1622140690597</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1622140690598</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"projet\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"projet\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ b/.idea/workspace.xml	(date 1623701142399)
+@@ -2,19 +2,7 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="a578664a-e43b-406f-a32b-ab92eb3c232c" name="Default Changelist" comment="projet">
+-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/01f8bfe5-d766-4f1f-9ce7-052612179eae.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/01f8bfe5-d766-4f1f-9ce7-052612179eae.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/symfoGL2021.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfoGL2021.iml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Controller/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CartController.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Controller/WelcomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/WelcomeController.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+Index: templates/rating/edit.html.twig
+===================================================================
+diff --git a/templates/rating/edit.html.twig b/templates/rating/edit.html.twig
+deleted file mode 100644
+--- a/templates/rating/edit.html.twig	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ /dev/null	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
+@@ -1,13 +0,0 @@
+-{% extends 'base.html.twig' %}
+-
+-{% block title %}Edit Rating{% endblock %}
+-
+-{% block body %}
+-    <h1>Edit Rating</h1>
+-
+-    {{ include('rating/_form.html.twig', {'button_label': 'Update'}) }}
+-
+-    <a href="{{ path('rating_index') }}">back to list</a>
+-
+-    {{ include('rating/_delete_form.html.twig') }}
+-{% endblock %}
+Index: templates/rating/new.html.twig
+===================================================================
+diff --git a/templates/rating/new.html.twig b/templates/rating/new.html.twig
+deleted file mode 100644
+--- a/templates/rating/new.html.twig	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ /dev/null	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
+@@ -1,11 +0,0 @@
+-{% extends 'base.html.twig' %}
+-
+-{% block title %}New Rating{% endblock %}
+-
+-{% block body %}
+-    <h1>Create new Rating</h1>
+-
+-    {{ include('rating/_form.html.twig') }}
+-
+-    <a href="{{ path('rating_index') }}">back to list</a>
+-{% endblock %}
+Index: templates/rating/_delete_form.html.twig
+===================================================================
+diff --git a/templates/rating/_delete_form.html.twig b/templates/rating/_delete_form.html.twig
+deleted file mode 100644
+--- a/templates/rating/_delete_form.html.twig	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ /dev/null	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
+@@ -1,4 +0,0 @@
+-<form method="post" action="{{ path('rating_delete', {'id': rating.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rating.id) }}">
+-    <button class="btn">Delete</button>
+-</form>
+Index: templates/rating/show.html.twig
+===================================================================
+diff --git a/templates/rating/show.html.twig b/templates/rating/show.html.twig
+deleted file mode 100644
+--- a/templates/rating/show.html.twig	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ /dev/null	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
+@@ -1,30 +0,0 @@
+-{% extends 'base.html.twig' %}
+-
+-{% block title %}Rating{% endblock %}
+-
+-{% block body %}
+-    <h1>Rating</h1>
+-
+-    <table class="table">
+-        <tbody>
+-            <tr>
+-                <th>Id</th>
+-                <td>{{ rating.id }}</td>
+-            </tr>
+-            <tr>
+-                <th>Nicckname</th>
+-                <td>{{ rating.nicckname }}</td>
+-            </tr>
+-            <tr>
+-                <th>Stars</th>
+-                <td>{{ rating.stars }}</td>
+-            </tr>
+-        </tbody>
+-    </table>
+-
+-    <a href="{{ path('rating_index') }}">back to list</a>
+-
+-    <a href="{{ path('rating_edit', {'id': rating.id}) }}">edit</a>
+-
+-    {{ include('rating/_delete_form.html.twig') }}
+-{% endblock %}
+Index: templates/rating/_form.html.twig
+===================================================================
+diff --git a/templates/rating/_form.html.twig b/templates/rating/_form.html.twig
+deleted file mode 100644
+--- a/templates/rating/_form.html.twig	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ /dev/null	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
+@@ -1,4 +0,0 @@
+-{{ form_start(form) }}
+-    {{ form_widget(form) }}
+-    <button class="btn">{{ button_label|default('Save') }}</button>
+-{{ form_end(form) }}
+Index: templates/rating/index.html.twig
+===================================================================
+diff --git a/templates/rating/index.html.twig b/templates/rating/index.html.twig
+deleted file mode 100644
+--- a/templates/rating/index.html.twig	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ /dev/null	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
+@@ -1,37 +0,0 @@
+-{% extends 'base.html.twig' %}
+-
+-{% block title %}Rating index{% endblock %}
+-
+-{% block body %}
+-    <h1>Rating index</h1>
+-
+-    <table class="table">
+-        <thead>
+-            <tr>
+-                <th>Id</th>
+-                <th>Nicckname</th>
+-                <th>Stars</th>
+-                <th>actions</th>
+-            </tr>
+-        </thead>
+-        <tbody>
+-        {% for rating in ratings %}
+-            <tr>
+-                <td>{{ rating.id }}</td>
+-                <td>{{ rating.nicckname }}</td>
+-                <td>{{ rating.stars }}</td>
+-                <td>
+-                    <a href="{{ path('rating_show', {'id': rating.id}) }}">show</a>
+-                    <a href="{{ path('rating_edit', {'id': rating.id}) }}">edit</a>
+-                </td>
+-            </tr>
+-        {% else %}
+-            <tr>
+-                <td colspan="4">no records found</td>
+-            </tr>
+-        {% endfor %}
+-        </tbody>
+-    </table>
+-
+-    <a href="{{ path('rating_new') }}">Create new</a>
+-{% endblock %}
+Index: migrations/Version20210614162517.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/migrations/Version20210614162517.php b/migrations/Version20210614162517.php
+new file mode 100644
+--- /dev/null	(date 1623700774055)
++++ b/migrations/Version20210614162517.php	(date 1623700774055)
+@@ -0,0 +1,31 @@
++<?php
++
++declare(strict_types=1);
++
++namespace DoctrineMigrations;
++
++use Doctrine\DBAL\Schema\Schema;
++use Doctrine\Migrations\AbstractMigration;
++
++/**
++ * Auto-generated Migration: Please modify to your needs!
++ */
++final class Version20210614162517 extends AbstractMigration
++{
++    public function getDescription(): string
++    {
++        return '';
++    }
++
++    public function up(Schema $schema): void
++    {
++        // this up() migration is auto-generated, please modify it to your needs
++        $this->addSql('ALTER TABLE user CHANGE roles roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\'');
++    }
++
++    public function down(Schema $schema): void
++    {
++        // this down() migration is auto-generated, please modify it to your needs
++        $this->addSql('ALTER TABLE user CHANGE roles roles VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
++    }
++}
+Index: migrations/Version20210614161444.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/migrations/Version20210614161444.php b/migrations/Version20210614161444.php
+new file mode 100644
+--- /dev/null	(date 1623700774053)
++++ b/migrations/Version20210614161444.php	(date 1623700774053)
+@@ -0,0 +1,31 @@
++<?php
++
++declare(strict_types=1);
++
++namespace DoctrineMigrations;
++
++use Doctrine\DBAL\Schema\Schema;
++use Doctrine\Migrations\AbstractMigration;
++
++/**
++ * Auto-generated Migration: Please modify to your needs!
++ */
++final class Version20210614161444 extends AbstractMigration
++{
++    public function getDescription(): string
++    {
++        return '';
++    }
++
++    public function up(Schema $schema): void
++    {
++        // this up() migration is auto-generated, please modify it to your needs
++        $this->addSql('ALTER TABLE user DROP roles');
++    }
++
++    public function down(Schema $schema): void
++    {
++        // this down() migration is auto-generated, please modify it to your needs
++        $this->addSql('ALTER TABLE user ADD roles LONGTEXT CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci` COMMENT \'(DC2Type:json)\'');
++    }
++}
+Index: .idea/dataSources.local.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"dataSourceStorageLocal\" created-in=\"PS-211.7142.44\">\r\n    <data-source name=\"MySQL - sfGL2021@localhost\" uuid=\"b1159e66-41a3-4aa6-bcb2-068bb6f3c190\">\r\n      <database-info product=\"\" version=\"\" jdbc-version=\"\" driver-name=\"\" driver-version=\"\" dbms=\"MYSQL\" exact-version=\"0\" />\r\n      <secret-storage>master_key</secret-storage>\r\n      <user-name>root</user-name>\r\n      <schema-mapping />\r\n    </data-source>\r\n    <data-source name=\"projet@localhost\" uuid=\"01f8bfe5-d766-4f1f-9ce7-052612179eae\">\r\n      <database-info product=\"MySQL\" version=\"5.5.5-10.4.18-MariaDB\" jdbc-version=\"4.2\" driver-name=\"MySQL Connector/J\" driver-version=\"mysql-connector-java-8.0.21 (Revision: 33f65445a1bcc544eb0120491926484da168f199)\" dbms=\"MARIADB\" exact-version=\"10.4.18\" exact-driver-version=\"8.0\">\r\n        <extra-name-characters>#@</extra-name-characters>\r\n        <identifier-quote-string>`</identifier-quote-string>\r\n      </database-info>\r\n      <case-sensitivity plain-identifiers=\"lower\" quoted-identifiers=\"lower\" />\r\n      <secret-storage>master_key</secret-storage>\r\n      <user-name>root</user-name>\r\n      <schema-mapping>\r\n        <introspection-scope>\r\n          <node kind=\"schema\" qname=\"@\" />\r\n        </introspection-scope>\r\n      </schema-mapping>\r\n    </data-source>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.local.xml b/.idea/dataSources.local.xml
+--- a/.idea/dataSources.local.xml	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ b/.idea/dataSources.local.xml	(date 1623700774049)
+@@ -8,18 +8,8 @@
+       <schema-mapping />
+     </data-source>
+     <data-source name="projet@localhost" uuid="01f8bfe5-d766-4f1f-9ce7-052612179eae">
+-      <database-info product="MySQL" version="5.5.5-10.4.18-MariaDB" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.21 (Revision: 33f65445a1bcc544eb0120491926484da168f199)" dbms="MARIADB" exact-version="10.4.18" exact-driver-version="8.0">
+-        <extra-name-characters>#@</extra-name-characters>
+-        <identifier-quote-string>`</identifier-quote-string>
+-      </database-info>
+-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+-      <secret-storage>master_key</secret-storage>
+-      <user-name>root</user-name>
+-      <schema-mapping>
+-        <introspection-scope>
+-          <node kind="schema" qname="@" />
+-        </introspection-scope>
+-      </schema-mapping>
++      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
++      <schema-mapping />
+     </data-source>
+   </component>
+ </project>
+\ No newline at end of file
+Index: templates/security/login.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{% block StyleSheet %}\r\n    <link  href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css\"  rel=\"stylesheet\"  type='text/css'>\r\n    <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" integrity=\"sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z\" crossorigin=\"anonymous\">\r\n    <link rel=\"stylesheet\" href='{{ asset(\"CSS/styleLogin.css\") }}' >\r\n{% endblock %}\r\n\r\n\r\n\r\n{% block body %}\r\n    {% block Header %}\r\n    {% endblock %}\r\n    <section>\r\n        <div class=\"container box\">\r\n\r\n            <div class=\"square\" style=\"--i:1;\"></div>\r\n            <div class=\"square\" style=\"--i:3;\"></div>\r\n            <div class=\"square\" style=\"--i:2;\"></div>\r\n            <div class=\"square\" style=\"--i:4;\"></div>\r\n            <div class=\"square\" style=\"--i:5;\"></div>\r\n\r\n            <form method=\"post\">\r\n\r\n\r\n\r\n\r\n                <h1 class=\"h3 mb-3 font-weight-normal\">Please sign in</h1>\r\n                <label for=\"inputEmail\">Email</label>\r\n                <input type=\"email\" value=\"{{ last_username }}\" name=\"email\" id=\"inputEmail\" class=\"form-control\" required autofocus>\r\n                <label for=\"inputPassword\">Password</label>\r\n                <input type=\"password\" name=\"password\" id=\"inputPassword\" class=\"form-control\" required>\r\n\r\n                <input type=\"hidden\" name=\"_csrf_token\"\r\n                       value=\"{{ csrf_token('authenticate') }}\"\r\n                >\r\n\r\n                {#\r\n                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.\r\n                See https://symfony.com/doc/current/security/remember_me.html\r\n\r\n                <div class=\"checkbox mb-3\">\r\n                    <label>\r\n                        <input type=\"checkbox\" name=\"_remember_me\"> Remember me\r\n                    </label>\r\n                </div>\r\n                #}\r\n                <div class=\"checkbox mb-3\">\r\n                    <label>\r\n                        <input type=\"checkbox\" name=\"_remember_me\"> Remember me\r\n                    </label>\r\n                </div>\r\n\r\n                <div class=\"container\">\r\n                    <h6>   forgot password ? <a href=\"\">click here</a> </h6>\r\n                </div>\r\n                <div class=\"container\">\r\n                    <h6>Dont have an account? <a href=\"{{ path('user') }}\">Sign up</a></h6>\r\n                </div>\r\n\r\n                <button class=\"btn btn-lg btn-primary\" type=\"submit\">\r\n                    Sign in\r\n                </button>\r\n            </form>\r\n        </div>\r\n\r\n        <div class=\"color\"></div>\r\n        <div class=\"color\"></div>\r\n        <div class=\"color\"></div>\r\n        <div class=\"color\"></div>\r\n    </section>\r\n{% endblock %}\r\n{% block Scripts %}\r\n    <script src=\"{{ asset('node_modules/jquery/dist/jquery.min.js')}}\"></script>\r\n    <script src=\"{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js')}}\"></script>\r\n{% endblock %}\r\n{% block Footer %}\r\n{% endblock %}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/security/login.html.twig b/templates/security/login.html.twig
+--- a/templates/security/login.html.twig	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ b/templates/security/login.html.twig	(date 1623700774061)
+@@ -55,7 +55,7 @@
+                 <div class="container">
+                     <h6>Dont have an account? <a href="{{ path('user') }}">Sign up</a></h6>
+                 </div>
+-
++                
+                 <button class="btn btn-lg btn-primary" type="submit">
+                     Sign in
+                 </button>
+Index: migrations/Version20210613152859.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/migrations/Version20210613152859.php b/migrations/Version20210614155322.php
+rename from migrations/Version20210613152859.php
+rename to migrations/Version20210614155322.php
+--- a/migrations/Version20210613152859.php	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ b/migrations/Version20210614155322.php	(date 1623700774052)
+@@ -10,7 +10,7 @@
+ /**
+  * Auto-generated Migration: Please modify to your needs!
+  */
+-final class Version20210613152859 extends AbstractMigration
++final class Version20210614155322 extends AbstractMigration
+ {
+     public function getDescription(): string
+     {
+@@ -20,12 +20,12 @@
+     public function up(Schema $schema): void
+     {
+         // this up() migration is auto-generated, please modify it to your needs
+-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, password VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
++        $this->addSql('ALTER TABLE user ADD roles LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\'');
+     }
+ 
+     public function down(Schema $schema): void
+     {
+         // this down() migration is auto-generated, please modify it to your needs
+-        $this->addSql('DROP TABLE user');
++        $this->addSql('ALTER TABLE user DROP roles');
+     }
+ }
+Index: migrations/Version20210614161746.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/migrations/Version20210614161746.php b/migrations/Version20210614161746.php
+new file mode 100644
+--- /dev/null	(date 1623700774054)
++++ b/migrations/Version20210614161746.php	(date 1623700774054)
+@@ -0,0 +1,31 @@
++<?php
++
++declare(strict_types=1);
++
++namespace DoctrineMigrations;
++
++use Doctrine\DBAL\Schema\Schema;
++use Doctrine\Migrations\AbstractMigration;
++
++/**
++ * Auto-generated Migration: Please modify to your needs!
++ */
++final class Version20210614161746 extends AbstractMigration
++{
++    public function getDescription(): string
++    {
++        return '';
++    }
++
++    public function up(Schema $schema): void
++    {
++        // this up() migration is auto-generated, please modify it to your needs
++        $this->addSql('ALTER TABLE user ADD roles VARCHAR(255) NOT NULL');
++    }
++
++    public function down(Schema $schema): void
++    {
++        // this down() migration is auto-generated, please modify it to your needs
++        $this->addSql('ALTER TABLE user DROP roles');
++    }
++}
+Index: src/Security/LoginFormAuthenticator.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\nnamespace App\\Security;\r\n\r\nuse App\\Entity\\User;\r\nuse Doctrine\\ORM\\EntityManagerInterface;\r\nuse Symfony\\Component\\HttpFoundation\\RedirectResponse;\r\nuse Symfony\\Component\\HttpFoundation\\Request;\r\nuse Symfony\\Component\\HttpFoundation\\Response;\r\nuse Symfony\\Component\\Routing\\Generator\\UrlGeneratorInterface;\r\nuse Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface;\r\nuse Symfony\\Component\\Security\\Core\\Encoder\\UserPasswordEncoderInterface;\r\nuse Symfony\\Component\\Security\\Core\\Exception\\CustomUserMessageAuthenticationException;\r\nuse Symfony\\Component\\Security\\Core\\Exception\\InvalidCsrfTokenException;\r\nuse Symfony\\Component\\Security\\Core\\Security;\r\nuse Symfony\\Component\\Security\\Core\\User\\UserInterface;\r\nuse Symfony\\Component\\Security\\Core\\User\\UserProviderInterface;\r\nuse Symfony\\Component\\Security\\Csrf\\CsrfToken;\r\nuse Symfony\\Component\\Security\\Csrf\\CsrfTokenManagerInterface;\r\nuse Symfony\\Component\\Security\\Guard\\Authenticator\\AbstractFormLoginAuthenticator;\r\nuse Symfony\\Component\\Security\\Guard\\PasswordAuthenticatedInterface;\r\nuse Symfony\\Component\\Security\\Http\\Util\\TargetPathTrait;\r\nuse Symfony\\Component\\Routing;\r\nclass LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface\r\n{\r\n    use TargetPathTrait;\r\n\r\n    public const LOGIN_ROUTE = 'app_login';\r\n\r\n    private $entityManager;\r\n    private $urlGenerator;\r\n    private $csrfTokenManager;\r\n    private $passwordEncoder;\r\n\r\n    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)\r\n    {\r\n        $this->entityManager = $entityManager;\r\n        $this->urlGenerator = $urlGenerator;\r\n        $this->csrfTokenManager = $csrfTokenManager;\r\n        $this->passwordEncoder = $passwordEncoder;\r\n    }\r\n\r\n    public function supports(Request $request): bool\r\n    {\r\n        return self::LOGIN_ROUTE === $request->attributes->get('_route')\r\n            && $request->isMethod('POST');\r\n    }\r\n\r\n    public function getCredentials(Request $request)\r\n    {\r\n        $credentials = [\r\n            'email' => $request->request->get('email'),\r\n            'password' => $request->request->get('password'),\r\n            'csrf_token' => $request->request->get('_csrf_token'),\r\n        ];\r\n        $request->getSession()->set(\r\n            Security::LAST_USERNAME,\r\n            $credentials['email']\r\n        );\r\n\r\n        return $credentials;\r\n    }\r\n\r\n    public function getUser($credentials, UserProviderInterface $userProvider): ?User\r\n    {\r\n        $token = new CsrfToken('authenticate', $credentials['csrf_token']);\r\n        if (!$this->csrfTokenManager->isTokenValid($token)) {\r\n            throw new InvalidCsrfTokenException();\r\n        }\r\n\r\n        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);\r\n\r\n        if (!$user) {\r\n            // fail authentication with a custom error\r\n            throw new CustomUserMessageAuthenticationException('Email could not be found.');\r\n        }\r\n\r\n        return $user;\r\n    }\r\n\r\n    public function checkCredentials($credentials, UserInterface $user): bool\r\n    {\r\n        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);\r\n    }\r\n\r\n    /**\r\n     * Used to upgrade (rehash) the user's password automatically over time.\r\n     */\r\n    public function getPassword($credentials): ?string\r\n    {\r\n        return $credentials['password'];\r\n    }\r\n\r\n    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response\r\n    {\r\n        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {\r\n            return new RedirectResponse($targetPath);\r\n        }\r\n\r\n        return new RedirectResponse($this->urlGenerator->generate('welcome'));\r\n        //throw new \\Exception(' TODO: provide a valid redirect inside '.__FILE__);\r\n    }\r\n\r\n    protected function getLoginUrl(): string\r\n    {\r\n        return $this->urlGenerator->generate(self::LOGIN_ROUTE);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Security/LoginFormAuthenticator.php b/src/Security/LoginFormAuthenticator.php
+--- a/src/Security/LoginFormAuthenticator.php	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ b/src/Security/LoginFormAuthenticator.php	(date 1623700774058)
+@@ -96,7 +96,7 @@
+             return new RedirectResponse($targetPath);
+         }
+ 
+-        return new RedirectResponse($this->urlGenerator->generate('welcome'));
++        return new RedirectResponse($this->urlGenerator->generate('cart_index'));
+         //throw new \Exception(' TODO: provide a valid redirect inside '.__FILE__);
+     }
+ 
+Index: templates/base.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{% block head %}\r\n<!doctype html>\r\n<html class=\"no-js\" lang=\"zxx\" xmlns=\"http://www.w3.org/1999/html\">\r\n<head>\r\n    <meta charset=\"utf-8\">\r\n    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\r\n    <title>Home | Books Library eCommerce Store</title>\r\n    <meta name=\"description\" content=\"\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n</head>\r\n{% endblock %}\r\n{% block stylesheet %}\r\n    <link rel=\"stylesheet\" href=\"{{ asset('assets/css/bootstrap.min.css') }}\">\r\n    <link rel=\"stylesheet\" href=\"{{asset(\"assets/css/plugins.css\")  }}\">\r\n    <link rel=\"stylesheet\" href=\"{{asset(\"style.css\")  }}\">\r\n    <link rel=\"shortcut icon\" href=\"{{asset('assets/images/favicon.ico')  }}\">\r\n    <link rel=\"apple-touch-icon\" href=\"{{asset('assets/images/icon.png')  }}\">\r\n    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800\" rel=\"stylesheet\">\r\n    <link href=\"https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,600,600i,700,700i,800\"\r\n          rel=\"stylesheet\">\r\n    <link href=\"https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900\" rel=\"stylesheet\">\r\n    <link rel=\"stylesheet\" href=\"{{asset(\"assets/css/custom.css\")  }}\">\r\n    <link rel=\"stylesheet\" href=\"{{asset(\"fontawesome-free-5.15.3-web/css/all.css\")  }}\">\r\n{% endblock %}\r\n{% block Js %}\r\n    <script src=\"{{asset(\"assets/js/vendor/modernizr-3.5.0.min.js\") }}\"></script>\r\n{% endblock %}\r\n\r\n{% block header %}\r\n<header id=\"wn__header\" class=\"header__area header__absolute sticky__header\">\r\n    <div class=\"container-fluid\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-6 col-sm-6 col-6 col-lg-2\">\r\n                <div class=\"logo\">\r\n                    <a href=\"welcome\">\r\n                        <img src=\"{{asset('assets/images/logo/3.png')}}\" alt=\"logo\">\r\n                    </a>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-lg-8 d-none d-lg-block\">\r\n                <nav class=\"mainmenu__nav\">\r\n                    <ul class=\"meninmenu d-flex justify-content-start\">\r\n                        <li><a href=\"{{ path(\"home\") }}\">Home</a></li>\r\n\r\n                        <li class=\"drop\"><a href=\"shop-grid.html\">Buy Books</a>\r\n                            <div class=\"megamenu dropdown\">\r\n                                <ul class=\"item item01\">\r\n                                    <li class=\"title\">Categories</li>\r\n                                    <li><a href=\"shop-grid.html\">UniversityBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">BiographyBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">KidBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">CookBooks</a></li>\r\n                                    <li><a href=\"shop-grid.html\">HeathBooks</a></li>\r\n                                </ul>\r\n                            </div>\r\n                        </li>\r\n\r\n                        <li class=\"drop\"><a href=\"shop-grid.html\">Borrow Books</a>\r\n                            <div class=\"megamenu dropdown\">\r\n                                <ul class=\"item item01\">\r\n                                    <li class=\"title\">Categories</li>\r\n                                    <li><a href=\"shop-grid.html\">University Books</a></li>\r\n                                    <li><a href=\"shop-grid.html\">Biography Books</a></li>\r\n                                    <li><a href=\"shop-grid.html\">Children's Books</a></li>\r\n                                    <li><a href=\"shop-grid.html\">Cook Books</a></li>\r\n                                    <li><a href=\"shop-grid.html\">Health Books</a></li>\r\n                            </div>\r\n                        </li>\r\n\r\n                        <li><a href=\"blog.html\">Blogs</a> </li>\r\n\r\n                        <li><a href=\"contact.html\">Contact</a></li>\r\n\r\n                    </ul>\r\n                </nav>\r\n            </div>\r\n\r\n            <div class=\"col-md-6 col-sm-6 col-6 col-lg-2\">\r\n                <ul class=\"header__sidebar__right d-flex justify-content-end align-items-center\">\r\n                    <li><a href=\"{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}\"><i class=\"fas fa-search\"></i></a></li>\r\n                    <li><a href=\"wishlist\"><i class=\"fas fa-list\"></i></a></li>\r\n                    <li><a href=\"cart\" ><i class=\"fas fa-shopping-basket\"></i></a></li>\r\n                    <li class=\"setting__bar__icon\"><a href=\"#\"><i class=\"fas fa-user-circle\"></i></a></li>\r\n                        <div class=\"searchbar__content setting__block\">\r\n                            <div class=\"content-inner\">\r\n\r\n                                <div class=\"switcher-currency\">\r\n\r\n                                    <div class=\"switcher-options\">\r\n                                        <div class=\"switcher-currency-trigger\">\r\n                                            <div class=\"setting__menu\">\r\n                                                <span><a href=\"{{ path('app_login') }}\">Sign In</a></span>\r\n                                                <span><a href=\"{{ path('app_login') }}\">Create An Account</a></span>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </li>\r\n                </ul>\r\n\r\n                <!-- Start Mobile Menu -->\r\n                <div class=\"row d-none\">\r\n                    <div class=\"col-lg-12 d-none\">\r\n                        <nav class=\"mobilemenu__nav\">\r\n                            <ul class=\"meninmenu\">\r\n                                <li><a href=\"index-2.html\">Home</a></li>\r\n\r\n\r\n\r\n                                <li><a href=\"shop-grid.html\"> Borrow Books</a>\r\n                                    <ul>\r\n                                        <li><a href=\"shop-grid.html\">University Books</a></li>\r\n                                        <li><a href=\"shop-grid.html\">Biography Books</a></li>\r\n                                        <li><a href=\"shop-grid.html\">Children's Books</a></li>\r\n                                        <li><a href=\"shop-grid.html\">Cook Books</a></li>\r\n                                        <li><a href=\"shop-grid.html\">Health Books</a></li>\r\n                                    </ul>\r\n\r\n                                </li>\r\n                                <li><a href=\"shop-grid.html\"> Borrow Books</a>\r\n                                    <ul>\r\n                                        <li><a href=\"shop-grid.html\">University Books</a></li>\r\n                                        <li><a href=\"shop-grid.html\">Biography Books</a></li>\r\n                                        <li><a href=\"shop-grid.html\">Children's Books</a></li>\r\n                                        <li><a href=\"shop-grid.html\">Cook Books</a></li>\r\n                                        <li><a href=\"shop-grid.html\">Health Books</a></li>\r\n                                    </ul>\r\n                                </li>\r\n\r\n                                <li><a href=\"blog.html\">Blog</a></li>\r\n                                <li><a href=\"contact.html\">Contact</a></li>\r\n                            </ul>\r\n                        </nav>\r\n                    </div>\r\n                </div>\r\n                <!-- End Mobile Menu -->\r\n                <div class=\"mobile-menu d-block d-lg-none\">\r\n                </div>\r\n                <!-- Mobile Menu -->\r\n            </div>\r\n        </div>\r\n    </div>\r\n</header>\r\n\r\n{% endblock %}\r\n{% block body %}\r\n<div class=\"brown--color box-search-content search_active block-bg close__top\">\r\n    <form id=\"search_mini_form\" class=\"minisearch\" action=\"#\">\r\n        <div class=\"field__search\">\r\n            <input type=\"text\" placeholder=\"Search entire store here...\">\r\n            <div class=\"action\">\r\n                <a href=\"#\"><i class=\"zmdi zmdi-search\"></i></a>\r\n            </div>\r\n        </div>\r\n    </form>\r\n    <div class=\"close__wrap\">\r\n        <span>close</span>\r\n    </div>\r\n</div>\r\n<body>\r\n<div class=\"flashbag\">\r\n    <main>\r\n    {% for  message in  app.session.flashBag.get('info') %}\r\n      <div class=\"alert alert-info\">\r\n            {{ message }}\r\n        </div>\r\n    {% endfor %}\r\n    {% for  message in  app.session.flashBag.get('success') %}\r\n      <div class=\"alert alert-success\">\r\n           {{ message }}\r\n      </div>\r\n    {% endfor %}\r\n    {% for  message in  app.session.flashBag.get('error') %}\r\n        <div class=\"alert alert-danger\">\r\n            {{ message }}\r\n        </div>\r\n    </main>\r\n</div>\r\n{% endfor %}\r\n{% endblock %}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+--- a/templates/base.html.twig	(revision f5d8c2482f3a08e8c72a2ee3f4fe0f332f8c5463)
++++ b/templates/base.html.twig	(date 1623700774059)
+@@ -79,7 +79,7 @@
+                 <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
+                     <li><a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}"><i class="fas fa-search"></i></a></li>
+                     <li><a href="wishlist"><i class="fas fa-list"></i></a></li>
+-                    <li><a href="cart" ><i class="fas fa-shopping-basket"></i></a></li>
++                    <li><a href="{{ path('cart_index') }}" ><i class="fas fa-shopping-basket"></i></a></li>
+                     <li class="setting__bar__icon"><a href="#"><i class="fas fa-user-circle"></i></a></li>
+                         <div class="searchbar__content setting__block">
+                             <div class="content-inner">

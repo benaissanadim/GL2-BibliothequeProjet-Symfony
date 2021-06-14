@@ -2,18 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a578664a-e43b-406f-a32b-ab92eb3c232c" name="Default Changelist" comment="projet">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_06_2021_16_19__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_06_2021_16_19__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210613152859.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210614155322.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210614161444.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210614161746.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210614162517.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,14 +270,7 @@
       <workItem from="1623518091468" duration="327000" />
       <workItem from="1623518782764" duration="4224000" />
       <workItem from="1623531487475" duration="23137000" />
-
-      <workItem from="1623580751951" duration="16338000" />
-      <workItem from="1623604785792" duration="1184000" />
-      <workItem from="1623605996475" duration="2588000" />
-      <workItem from="1623621042911" duration="10263000" />
-      <workItem from="1623686799148" duration="432000" />
-      <workItem from="1623687250451" duration="884000" />
-      <workItem from="1623688156017" duration="624000" />
+      <workItem from="1623580751951" duration="10282000" />
     </task>
     <task id="LOCAL-00001" summary="projet">
       <created>1622140690597</created>
