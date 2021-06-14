@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a578664a-e43b-406f-a32b-ab92eb3c232c" name="Default Changelist" comment="projet">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_06_2021_16_19__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13_06_2021_16_19__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/mailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/mailController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/loginInscription/inscription.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginInscription/inscription.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/loginInscription/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginInscription/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/EmailVerif.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/EmailVerif.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210613152859.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -177,6 +180,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="settings.editor.splitter.proportion" value="0.24534161" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -270,6 +274,9 @@
       <workItem from="1623604785792" duration="1184000" />
       <workItem from="1623605996475" duration="2588000" />
       <workItem from="1623621042911" duration="10263000" />
+      <workItem from="1623686799148" duration="432000" />
+      <workItem from="1623687250451" duration="884000" />
+      <workItem from="1623688156017" duration="624000" />
     </task>
     <task id="LOCAL-00001" summary="projet">
       <created>1622140690597</created>

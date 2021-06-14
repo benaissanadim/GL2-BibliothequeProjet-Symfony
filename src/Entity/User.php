@@ -36,7 +36,11 @@ class User implements UserInterface
     private $plainPassword;
 
 
+    public function __construct()
+    {
+        $this->roles = array('ROLE_READER');
 
+    }
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -56,6 +60,15 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;
+
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+
+
 
     public function getId(): ?int
     {
@@ -87,12 +100,7 @@ class User implements UserInterface
 
         return $this;
     }
-    public function getRoles()
-    {
-        return [
-            'ROLE_USER'
-        ];
-    }
+
     public function getSalt()
     {
 
@@ -130,5 +138,16 @@ class User implements UserInterface
     {
         // TODO: Implement getUsername() method.
     }
+
+
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
 
 }
