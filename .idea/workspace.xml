@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a578664a-e43b-406f-a32b-ab92eb3c232c" name="Default Changelist" comment="projet">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/mailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/mailController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/loginInscription/inscription.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginInscription/inscription.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/loginInscription/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginInscription/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/mail/EmailVerif.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/EmailVerif.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +266,10 @@
       <workItem from="1623518091468" duration="327000" />
       <workItem from="1623518782764" duration="4224000" />
       <workItem from="1623531487475" duration="23137000" />
-      <workItem from="1623580751951" duration="10282000" />
+      <workItem from="1623580751951" duration="16338000" />
+      <workItem from="1623604785792" duration="1184000" />
+      <workItem from="1623605996475" duration="2588000" />
+      <workItem from="1623621042911" duration="10263000" />
     </task>
     <task id="LOCAL-00001" summary="projet">
       <created>1622140690597</created>
