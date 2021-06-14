@@ -1,0 +1,302 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product details{% endblock %}
+
+    {% block body %}
+
+    <div class="ht__breadcrumb__area bg-image--6" style="background-image: url('{{asset('assets/images/bg/6.jpg')}}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__inner text-center">
+                        <h2 class="breadcrumb-title">Product Details</h2>
+                        <nav class="breadcrumb-content">
+                            <a class="breadcrumb_item" href="{{ path('shopgrid') }}">Shop Grid </a>
+                            <span class="brd-separator">/</span>
+                            <span class="breadcrumb_item active">Details</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumb area -->
+
+
+    <div class="maincontent bg--white pt--80 pb--55">
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-12 col-12">
+                   <div class="wn__single__product">
+                       <div class="row">
+                           <div class="col-lg-6 col-12">
+                               <div class="wn__fotorama__wrapper">
+                                   <div class="fotorama wn__fotorama__action" data-nav="thumbs">
+                                       <img src="{{ asset(produit.path) }}" alt="">
+                                       <img src="{{ asset(produit.path2) }}" alt="">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-lg-6 col-12">
+                               <div class="product__info__main">
+                                   <h1>{{ produit.name }}</h1>
+                                   <div>
+                                       {% for i in 1..(rating | number_format) %}
+                                           <span class="fa fa-star star-active "></span>
+                                       {% endfor %}
+                                       {% if rating != 5 %}
+                                           {% for j in ((rating | number_format)+1)..5 %}
+                                               <span class="fa fa-star star-inactive mx-1"></span>
+                                           {% endfor %}
+                                       {% endif %}
+                                   </div>
+                                   <div class="price-box">
+                                       <span>{{ produit.price }} DT</span>
+                                   </div>
+                                   <div class="product__overview">
+                                       {{ produit.description }}
+                                   </div>
+                                   <div class="box-tocart d-flex">
+                                       <span>Qty</span>
+                                       <input id="qty" class="input-text qty" name="qty" min="1" value="1" title="Qty" type="number">
+                                       <div class="addtocart__actions">
+                                           <button class="tocart" type="submit" title="Add to Cart">Add to Cart</button>
+                                       </div>
+                                   </div>
+                                   <div class="product_meta">
+                                       <span class="posted_in">Category:
+                                           <a href="#">{{ produit.category.name }}</a>
+                                       </span>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="product__info__detailed">
+                       <div class="pro_details_nav nav justify-content-start" role="tablist">
+                           <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>
+                       </div>
+                       <div class="tab__container">
+                           <div class="pro__tab_label tab-pane fade show active" id="nav-review" role="tabpanel">
+                               <div class="review__attribute">
+                                   <h2>Customer Rating</h2>
+
+                                   <h3> {{ nbrating}} Ratings</h3>
+                                   <br>
+                                   <div class="col-xl-9 col-lg-8
+                                    col-md-10 col-20 text-center mb-5">
+                                       <div class="row justify-content-left d-flex">
+                                           <div class="col-md-4 d-flex flex-column">
+                                               <div class="rating-box">
+                                                   <h1 class="pt-4">{{ (rating | number_format(1)) }}</h1>
+                                                   <p class="">out of 5</p>
+                                               </div>
+                                               <div>
+                                               {% for i in 1..(rating | number_format) %}
+                                                   <span class="fa fa-star star-active "></span>
+                                               {% endfor %}
+                                               {% if rating != 5 %}
+                                                   {% for j in ((rating | number_format)+1)..5 %}
+                                                       <span class="fa fa-star star-inactive mx-1"></span>
+                                                   {% endfor %}
+                                               {% endif %}
+                                               </div>
+                                           </div>
+                                           <div class="col-md-8">
+                                               <div class="rating-bar0 justify-cont<ent-center">
+                                                   <table class="text-left mx-auto">
+                                                       <tr>
+                                                           <td class="rating-label">Excellent</td>
+                                                           <td class="rating-bar">
+                                                               <div class="bar-container">
+                                                                   {% if nbrating ==0 %}
+                                                                   <div class="bar-5"style="width:0"></div>
+                                                                    {% else %}
+                                                               <div class="bar-5"style="width:
+                                                                   {{ ((nbStars[5]/(nbrating))*100 | number_format)}}%"></div>
+                                                               </div>
+                                                               {% endif %}
+                                                           </td>
+                                                           <td class="text-right">{{ nbStars[5] }}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td class="rating-label">Good</td>
+                                                           <td class="rating-bar">
+                                                               <div class="bar-container">
+                                                                   {% if nbrating ==0 %}
+                                                                   <div class="bar-4"style="width:0"></div>
+                                                                   {% else %}
+                                                                   <div class="bar-4" style="width:
+                                                                   {{ ((nbStars[4]/(nbrating))*100 | number_format)}}%"></div>
+                                                                   {% endif %}
+                                                               </div>
+                                                           </td>
+                                                           <td class="text-right">{{ nbStars[4] }}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td class="rating-label">Average</td>
+                                                           <td class="rating-bar">
+                                                               <div class="bar-container">
+                                                                   {% if nbrating ==0 %}
+                                                                   <div class="bar-3"style="width:0"></div>
+                                                                   {% else %}
+                                                                   <div class="bar-3"style="width:
+                                                                   {{ ((nbStars[3]/(nbrating))*100 | number_format)}}%"></div>
+                                                                   {% endif %}
+                                                               </div>
+                                                           </td>
+                                                           <td class="text-right">{{ nbStars[3] }}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td class="rating-label">Poor</td>
+                                                           <td class="rating-bar">
+                                                               <div class="bar-container">
+                                                                   {% if nbrating ==0 %}
+                                                                   <div class="bar-2"style="width:0"></div>
+                                                                   {% else %}
+                                                                   <div class="bar-2" style="width:
+                                                                        {{ ((nbStars[2]/(nbrating))*100 | number_format)}}%"></div>
+                                                                   {% endif %}
+                                                               </div>
+                                                           </td>
+                                                           <td class="text-right">{{ nbStars[2] }}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td class="rating-label">Terrible</td>
+                                                           <td class="rating-bar">
+                                                               <div class="bar-container">
+                                                                   {% if nbrating ==0 %}
+                                                                   <div class="bar-1"style="width:0"></div>
+                                                                   {% else %}
+                                                                   <div class="bar-1" style="width:
+                                                                        {{ ((nbStars[1]/nbrating)*100 | number_format)}}%"></div>
+                                                                   {% endif %}
+                                                               </div>
+                                                           </td>
+                                                           <td class="text-right">{{ nbStars[1] }}</td>
+                                                       </tr>
+                                                   </table>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               </div>
+                           <hr> <br>
+                               <div class="review__attribute">
+                                   <h2>Customer Comments</h2>
+                                       <div class="container">
+                                           <div class="row">
+                                               <div class="col-lg-9 col-12">
+                                                   <div class="blog-details content">
+                                                       <div class="comments_area">
+                                                           <h3 class="comment__title"> {{ nbComments }} Comments</h3>
+                                                           <center>
+                                                               {% for  message in  app.session.flashBag.get('succes') %}
+                                                                   <div class="alert alert-success col-lg-6 ">
+                                                                       {{ message }}
+                                                                   </div>
+                                                               {% endfor %}
+                                                           </center>
+
+                                                           <ul class="comment__list">
+                                                               {% for comment in produit.comments %}
+                                                                   {% if comment.parent == null %}
+                                                                       <li>
+                                                                           <div class="wn__comment">
+                                                                               <div class="thumb">
+                                                                                   <img src={{asset('assets/images/blog/comment/1.jpg') }} alt="comment images">
+                                                                               </div>
+                                                                               <div class="content">
+                                                                                   <div style="float: right; color: #ce7852">
+                                                                                       {% if comment.nbStars%}
+                                                                                           {% for i in 1..comment.nbStars %}
+                                                                                               <span class="fa fa-star star-active"></span>
+                                                                                           {% endfor %}
+                                                                                           {% if comment.nbStars != 5 %}
+                                                                                               {% for j in (comment.nbStars+1)..5 %}
+                                                                                                   <span class="fa fa-star star-inactive"></span>
+                                                                                               {% endfor %}
+                                                                                           {% endif %}
+                                                                                       {% endif %}
+                                                                                   </div>
+                                                                                   <div class="comnt__author d-block d-sm-flex">
+                                                                                                                        <span>{{comment.nickname}}</span>
+                                                                                                                        <span>{{comment.createdAt|date("d/m/Y H:i")}}</span>
+                                                                                                                        <div class="reply__btn">
+                                                                                                                            <a href="#ajout-commentaire"  data-reply data-id="{{comment.id}}" data-name="{{ comment.nickname }}"> Reply </a>
+                                                                                                                        </div>
+                                                                                                                    </div>
+
+                                                                                                                    <p>{{comment.content|raw}}</p>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </li>
+                                                                                                        {% for reply in comment.replies %}
+                                                                                                            <li class="comment_reply">
+                                                                                                                <div class="wn__comment">
+                                                                                                                    <div class="thumb">
+                                                                                                                        <img src={{asset('assets/images/blog/comment/1.jpg') }}>
+                                                                                                                    </div>
+                                                                                                                    <div class="content">
+                                                                                                                        <div class="comnt__author d-block d-sm-flex">
+                                                                                                                            <span>{{reply.nickname}}</span>
+                                                                                                                            <span>{{reply.createdAt|date("d/m/Y H:i") }}</span>
+                                                                                                                        </div>
+                                                                                                                        <p>{{reply.content|raw}}</p>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </li>
+                                                                                                        {% endfor %}
+                                                                                                    {% endif %}
+                                                                                                {% endfor %}
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                        <hr id="ajout-commentaire"> <br><br>
+                                                                                        <div class="comment_respond" >
+                                                                                            <div class="container">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-8">
+                                                                                                        <span class="reply_title"> Add new Review  </span>
+                                                                                                    </div>
+                                                                                                    <div class="col">
+                                                                                                        <small ><a id="undo" href="#ajout-commentaire"></a></small>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <br>
+                                                                                            {{ form_start(commentForm) }}
+                                                                                             {{ form_row(commentForm.nickname) }}
+                                                                                            {{ form_row(commentForm.content) }}
+
+                                                                                                <div class="row justify-content-md-center">
+
+                                                                                                        <div class="rating">
+                                                                                                            <span class="rating__result"></span>
+                                                                                                            <i class="rating__star far fa-star fa-2x"></i>
+                                                                                                            <i class="rating__star far fa-star fa-2x"></i>
+                                                                                                            <i class="rating__star far fa-star fa-2x"></i>
+                                                                                                            <i class="rating__star far fa-star fa-2x"></i>
+                                                                                                            <i class="rating__star far fa-star fa-2x"></i>
+                                                                                                        <br>
+                                                                                                    </div>
+                                                                                                </div>{{ form_end(commentForm) }}</div></div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                               </div>
+                       </div>
+                   </div>
+               </div>
+               </div>
+           </div>
+       </div>
+    </div>
+    </div>
+
+
+{% endblock %}
+{% block javascriptt %}
+     {{ parent() }}
+    <script src="{{asset('assets/js/forrating.js')  }}"></script>
+{% endblock %}

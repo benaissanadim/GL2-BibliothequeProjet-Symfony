@@ -11,6 +11,7 @@ use App\Utilities\TimeStampTrait;
 
 /**
  * @ORM\Table(name="produit")
+ * @ORM\Table(name="produit", indexes={@ORM\Index(columns={"name", "description"}, flags={"fulltext"})})
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
@@ -65,6 +66,31 @@ class Produit
      * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="Produit")
      */
     private $ratings;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $disponibility;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $StartDate;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $ReturnDate;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $ForSale;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $forBorrow;
 
 
     public function __construct()
@@ -209,6 +235,67 @@ class Produit
 
         return $this;
     }
+
+    public function getDisponibility(): ?bool
+    {
+        return $this->disponibility;
+    }
+
+    public function setDisponibility(?bool $disponibility): self
+    {
+        $this->disponibility = $disponibility;
+
+        return $this;
+    }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->StartDate;
+    }
+
+    public function setStartDate(?\DateTimeInterface $StartDate): self
+    {
+        $this->StartDate = $StartDate;
+
+        return $this;
+    }
+
+    public function getReturnDate(): ?\DateTimeInterface
+    {
+        return $this->ReturnDate;
+    }
+
+    public function setReturnDate(?\DateTimeInterface $ReturnDate): self
+    {
+        $this->ReturnDate = $ReturnDate;
+
+        return $this;
+    }
+
+    public function getForSale(): ?bool
+    {
+        return $this->ForSale;
+    }
+
+    public function setForSale(?bool $ForSale): self
+    {
+        $this->ForSale = $ForSale;
+
+        return $this;
+    }
+
+    public function getForBorrow(): ?bool
+    {
+        return $this->forBorrow;
+    }
+
+    public function setForBorrow(?bool $forBorrow): self
+    {
+        $this->forBorrow = $forBorrow;
+
+        return $this;
+    }
+
 
 
 }

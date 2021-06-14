@@ -15,28 +15,34 @@ class CantactMailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
-            ->add('yours', EmailType::class, [
-                'label' => 'Your address',
+            ->add('Subject', TextType::class,[
+            'label' => 'Subject',
                 'attr' => [
-                    'class' => 'form-control'
+                'class' => 'form-control',
+                'placeholder' =>'Your subject',
+                    ]
+                    ])
+
+            ->add('email', EmailType::class,[
+                'label' => 'Subject',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' =>'Your subject',
                 ]
             ])
-            ->add('destination', EmailType::class, [
-                'label' => 'address',
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
-
             ->add('message', TextareaType::class ,[
-                'label' => 'Your comment',
+                'label' => 'Your message',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' =>'your comment',
                 ]
             ])
-        ->add('envoyer', SubmitType::class);
+            ->add('send', SubmitType::class,[
+                'attr' => [
+                    'class' => 'btn',
+                ]
 
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

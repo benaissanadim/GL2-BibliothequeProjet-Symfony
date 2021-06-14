@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Produit;
+use App\Filter\FindByFilter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,23 +19,54 @@ class ProduitRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Produit::class);
     }
-
-    // /**
-    //  * @return Produit[] Returns an array of Produit objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Recherche les annonces en fonction du formulaire
+     * @return void
+     */
+    public function search($mots){
+        $query = $this->createQueryBuilder('p');
+        if($mots != null){
+            $query->where('MATCH_AGAINST(p.name, p.description) AGAINST (:mots boolean)>0')
+                ->setParameter('mots', '*'.$mots.'*');
+        }
+        return $query->getQuery()->getResult();
+    }
+    /**
+      * @return int[]
+     */
+    public function findPrice()
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('p.price')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
+    /**
+     * @return Produit[]
+     */
+    public function findByFilter(FindByFilter $find):array
+    {
+        $query=
+            $this->createQueryBuilder('p')
+            ->select('c','p')
+            ->join('p.Category','c');
+
+        if(!empty($find->min)) {
+            $query = $query -> andWhere('p.price>= :min')
+                ->setParameter('min', $find->min);
+        }
+        if(!empty($find->max)) {
+            $query = $query -> andWhere('p.price>= :max')
+                ->setParameter('min', $find->max);
+        }
+        return $query->getQuery()->getResult();
+
+    }
+
+
+
 
     /*
     public function findOneBySomeField($value): ?Produit

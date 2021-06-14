@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,6 +29,9 @@ class Category
      * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="Category")
      */
     private $produits;
+
+
+
 
     public function __construct()
     {
@@ -80,4 +84,10 @@ class Category
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->name ;
+    }
+
 }

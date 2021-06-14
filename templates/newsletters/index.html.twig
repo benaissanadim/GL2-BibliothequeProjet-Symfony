@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Newsletterlist Admin{% endblock %}
+
+    {% block body %}
+        <div class="ht__breadcrumb__area bg-image--6" style="background-image: url('{{asset('assets/images/bg/6.jpg')}}')">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb__inner text-center">
+                            <h2 class="breadcrumb-title">Newsletter </h2>
+                            <nav class="breadcrumb-content">
+                                <a class="breadcrumb_item" href="{{ path('newsletterlist') }}">Newsletter </a>
+                                <span class="brd-separator">/</span>
+                                <span class="breadcrumb_item active">list</span>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <br><br>
+        <div class="container">
+
+            <h5>Newsletter list</h5>
+        <!-- Button trigger modal -->
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Content</th>
+                <th>SentTo </th>
+                <th>CreatedAt</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for newsletter in newsletters %}
+                <tr>
+                    <td>{{ newsletter.name }}</td>
+                    <td>{{ newsletter.content }}</td>
+                    <td>{{ newsletter.nbofsent }}</td>
+                    <td>{{ newsletter.createdAt ? newsletter.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('newsletteradd') }}">Create new Newsletter</a>
+            <br>
+            <h4>if you want to add new product <a href="{{ path('produitnew') }}">Create new product</a> </h4>
+        </div>
+        <br>
+    {% endblock %}
+

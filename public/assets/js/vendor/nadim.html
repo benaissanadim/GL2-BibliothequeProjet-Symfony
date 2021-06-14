@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="values">
+                Price :
+                <span id="range1">
+                    0 
+                </span>
+                <span>
+                    &dash;
+                </span>
+                <span id="range2">
+                    200 
+                </span>
+
+            </div>
+            <div class="container">
+                <div class="slider-track"> </div>
+                    <input type="range" min="0" max="50" value="0" oninput="slideOne()" id="slider-1">
+                    <input type="range" min="0" max="50" value="50" oninput="slideTwo()" id="slider-2">
+                </div>
+            </div>
+            <script>
+            let sliderOne = document.getElementById("slider-1");
+            let sliderTwo = document.getElementById("slider-2");
+            let displayValueOne = document.getElementById("range1");
+            let displayValueTwo = document.getElementById("range2");
+            let minGap = 0;
+
+function slideOne(){
+    if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap)
+    {
+        sliderOne.value = parseInt(sliderTwo.value)-minGap;
+        }
+        displayValueOne.textContent = sliderOne.value + "DT";
+}
+
+function slideTwo(){
+    if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap)
+    {
+        sliderTwo.value = parseInt(sliderOne.value)+minGap;
+        }
+        displayValueTwo.textContent = sliderTwo.value + "DT";
+}           
+            </script>
+            </body>
+</html>

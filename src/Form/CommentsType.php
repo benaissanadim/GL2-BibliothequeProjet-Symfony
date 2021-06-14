@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Comments;
 use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,15 +21,17 @@ class CommentsType extends AbstractType
         $builder
 
             ->add('nickname', TextType::class, [
-                'label' => 'Votre pseudo',
+                'label' => 'You Name',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' =>'Write yourName',
                 ]
             ])
             ->add('content', TextareaType::class ,[
                 'label' => 'Your comment',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' =>'your comment',
                 ]
             ])
             ->add('createdAt', HiddenType::class,)
@@ -38,7 +41,14 @@ class CommentsType extends AbstractType
             ->add('parentid', HiddenType::class, [
                 'mapped' => false
             ])
-            ->add('envoyer', SubmitType::class);
+            ->add('stars', HiddenType::class, [
+                'mapped' => false
+            ])
+            ->add('submit', SubmitType::class ,[
+                'attr' => [
+                    'class' => 'btn',
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

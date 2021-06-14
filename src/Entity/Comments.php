@@ -52,6 +52,11 @@ class Comments
      */
     private $parent;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbStars;
+
     public function __construct()
     {
         $this->replies = new ArrayCollection();
@@ -137,6 +142,18 @@ class Comments
     public function setParent(?self $parent): self
     {
         $this->parent = $parent;
+        return $this;
+    }
+
+    public function getNbStars(): ?int
+    {
+        return $this->nbStars;
+    }
+
+    public function setNbStars(?int $nbStars): self
+    {
+        $this->nbStars = $nbStars;
+
         return $this;
     }
 }
