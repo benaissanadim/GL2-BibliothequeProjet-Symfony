@@ -49,27 +49,24 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
-                    <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-                        <a class="search__active" href=""><i class="fas fa-search fa-lg" style="color: white"></i></a>
-                        <li class="setting__bar__icon">
-                            <div class="searchbar__content setting__block">
-                                <div class="content-inner">
-                                    <div class="switcher-currency">
+            <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
 
-                                        <div class="switcher-options">
-                                            <div class="switcher-currency-trigger">
-                                                <div class="setting__menu">
-                                                    <span><a href="">Sign In</a></span>
-                                                    <span><a href="">Create An Account</a></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}">Catalogue</i></a>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{{ path('cart_index') }}" >Cart</a>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{{ path('app_login') }}">Sign In</a>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{{ path('logout') }}" >Logout</a>
+                    </button>
+
+                </ul>
 
                     <div class="row d-none">
                         <div class="col-lg-12 d-none">
@@ -78,7 +75,7 @@
                                     <li><a href="{{ path('home') }}">Home</a></li>
                                     <li><a href="{{ path('shopgrid') }}"> Borrow Books</a></li>
                                     <li><a href="{{ path('shopgrid') }}"> Borrow Books</a></li>
-                                    <li><a href="">Contact</a></li>
+                                    <li><a href="{{ path('cantactmail') }}">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
