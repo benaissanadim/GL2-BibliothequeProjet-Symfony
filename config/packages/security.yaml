@@ -22,7 +22,9 @@ security:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
-                path: "/logout"
+
+                path: logout
+
 
                 # where to redirect after logout
                 # target: app_any_route
@@ -40,4 +42,8 @@ security:
      # - { path: ^/admin, roles: ROLE_ADMIN }
 
 
+
+
+    # - { path: ^/profile, roles: ROLE_USER }
+     - { path: ^/cart, roles: [ROLE_READER]}
 

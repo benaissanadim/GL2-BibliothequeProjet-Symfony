@@ -20,6 +20,10 @@ class WelcomeController extends AbstractController
 
     /**
 
+
+    /**
+
+
      * @Route("/welcome", name="welcomeHome")
      */
     public function goToHome() : Response
