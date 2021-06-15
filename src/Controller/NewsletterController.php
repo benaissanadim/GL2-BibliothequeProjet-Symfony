@@ -25,7 +25,7 @@ class NewsletterController extends AbstractController
     /**
      * @Route("/newsletteradd", name="newsletteradd")
      */
-    public function welcome(Request $request, \Swift_Mailer $mailer): Response
+    public function welcome(Request $request, SendMailService $mailer): Response
     {
         $usersrepository = $this->getDoctrine()->getRepository('App:Newsletters\Users');
         $users = $usersrepository->findBy([]);
@@ -34,21 +34,17 @@ class NewsletterController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
              $nb = 0 ;
+             $newsletter = $form->getData();
+
             // On crée le message
             foreach ($users as $user) {
                 if($user->getIsValid())
                  $nb++;
-                $message = (new \Swift_Message($newsletter->getName()))
-                    ->setTo($user->getEmail())
-                    ->setFrom('nadim.ben.aissaa@gmail.com')
-                    ->setBody(
-                        $this->renderView(
-                            'home/newslettersend.html.twig', compact('newsletter')
-                        ),
-                        'text/html'
-                    );
-                $mailer->send($message);
-            }
+                 $context = ['newsletter' => $newsletter];
+                 
+                $mailer->send($newsletter['name'] , $user->getEmail(),nadim.ben.aissaa@gmail.com,
+                'newsletter/newslettersend.html.twig', 'text/html', $context);
+            };
             $newsletter->setNbofsent($nb);
             $em = $this->getDoctrine()->getManager();
             $em->persist($newsletter);
