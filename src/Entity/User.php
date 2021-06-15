@@ -29,7 +29,6 @@ class User implements UserInterface
         return $this ;
     }
     /**
-
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */

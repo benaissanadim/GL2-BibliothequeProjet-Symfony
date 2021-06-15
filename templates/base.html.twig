@@ -77,6 +77,8 @@
 
             <div class="col-md-6 col-sm-6 col-6 col-lg-2">
                 <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
+
+
                     <button type="button" class="btn btn-outline-secondary">
                         <a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}">Catalogue</i></a>
                     </button>
@@ -93,6 +95,22 @@
                     <li><a href="wishlist"><i class="fas fa-list"></i></a></li>
                     <li><a href="{{ path('cart_index') }}" ><i class="fas fa-shopping-basket"></i></a></li>
                     <li class="setting__bar__icon"><a href="#"><i class="fas fa-user-circle"></i></a></li>
+
+
+                        <li><a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}"><button class="btn btn-sm btn-secondary">
+                                    Catalogue
+                                </button></a></li>
+                    <li><a href="wishlist"><button class="btn btn-sm btn-secondary">
+                                wishlist
+                            </button></a></li>
+                    <li><a href="{{ path('cart_index') }}" ><button class="btn btn-sm btn-secondary">
+                                cart
+                            </button></a></li>
+                    <li class="setting__bar__icon"><a href="{{path('app_login')}}"><button class="btn btn-sm btn-secondary">
+                                account
+                            </button></a></li>
+
+
                         <div class="searchbar__content setting__block">
                             <div class="content-inner">
 
@@ -152,22 +170,25 @@
                 </div>
                 <!-- Mobile Menu -->
             </div>
-</header>
-    <div class="brown--color box-search-content search_active block-bg close__top">
-        <form id="search_mini_form" class="minisearch" action="#">
-            <div class="field__search">
-                <input type="text" placeholder="Search entire store here...">
-                <div class="action">
-                    <a href="#"><i class="zmdi zmdi-search"></i></a>
-                </div>
-            </div>
-        </form>
-        <div class="close__wrap">
-            <span>close</span>
         </div>
     </div>
+</header>
+
 {% endblock %}
 {% block body %}
+<div class="brown--color box-search-content search_active block-bg close__top">
+    <form id="search_mini_form" class="minisearch" action="#">
+        <div class="field__search">
+            <input type="text" placeholder="Search entire store here...">
+            <div class="action">
+                <a href="#"><i class="zmdi zmdi-search"></i></a>
+            </div>
+        </div>
+    </form>
+    <div class="close__wrap">
+        <span>close</span>
+    </div>
+</div>
 <body>
 <div class="flashbag">
     <main>

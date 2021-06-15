@@ -17,7 +17,13 @@ class WelcomeController extends AbstractController
     {
         return $this->render('welcome/index.html.twig');
     }
+
     /**
+
+
+    /**
+
+
      * @Route("/welcome", name="welcomeHome")
      */
     public function goToHome() : Response
@@ -25,5 +31,4 @@ class WelcomeController extends AbstractController
         return
             $this->redirectToRoute("welcome") ;
     }
-
 }

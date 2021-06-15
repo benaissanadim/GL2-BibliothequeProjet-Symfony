@@ -23,7 +23,6 @@ class CartController extends AbstractController
 
         $data = [];
         $total = 0;
-
         foreach($panier as $id => $quantite){
             $product = $productsRepository->find($id);
             $data[] = [
