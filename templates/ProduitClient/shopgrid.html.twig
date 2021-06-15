@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+{% block title %}Shop{% endblock %}
+{% block body %}
+<body>
+
+<div class="wrapper" id="wrapper">
+
+    <header id="wn__header" class="oth-page header__area header__absolute sticky__header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                    <div class="logo">
+                        <a href="{{ path("home") }}">
+                            <img src="{{asset('assets/images/logo/3.png')}}" alt="logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8 d-none d-lg-block">
+                    <nav class="mainmenu__nav">
+                        <ul class="meninmenu d-flex justify-content-start">
+                            <li><a href="{{ path("home") }}">Home</a></li>
+                            <li><a href="{{ path('shopgrid' ,{'typebook' : "ForSale"}) }}">Buy Books</a></li>
+                            <li><a href="{{ path('shopgrid' ,{'typebook' : "forBorrow"}) }}">Borrow Books</a></li>
+                            <li><a href="{{ path('cantactmail') }}">Contact</a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                    <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
+                        <a class="search__active" href=""><i class="fas fa-search fa-lg" style="color: white"></i></a>
+                        <li class="setting__bar__icon">
+                            <div class="searchbar__content setting__block">
+                                <div class="content-inner">
+                                    <div class="switcher-currency">
+
+                                        <div class="switcher-options">
+                                            <div class="switcher-currency-trigger">
+                                                <div class="setting__menu">
+                                                    <span><a href="">Sign In</a></span>
+                                                    <span><a href="">Create An Account</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div> </header>
+    <!-- //Header -->
+    <!-- Start Search Popup -->
+    <div class="box-search-content search_active block-bg close__top">
+
+        <div class="minisearch">
+            {{ form_start(SearchForm) }}
+            <div class="field__search">
+                {{ form_row(SearchForm.mots) }}
+            <div class="action">
+                {{ form_row(SearchForm.search) }}
+            </div>
+            </div>
+        </div>
+        {{ form_end(SearchForm) }}
+
+        <div class="close__wrap">
+            <span>close</span>
+        </div>
+    </div>
+    <!-- End Search Popup -->
+    <!-- Start breadcrumb area -->
+                <div class="ht__breadcrumb__area bg-image--6" style="background-image: url('{{asset('assets/images/bg/6.jpg')}}')">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="breadcrumb__inner text-center">
+                                    <h2 class="breadcrumb-title">Shop Grid</h2>
+                                    <nav class="breadcrumb-content">
+                                        <a class="breadcrumb_item" href="">Home</a>
+                                        <span class="brd-separator">/</span>
+                                        <span class="breadcrumb_item active">Shop Grid</span>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    <!-- End breadcrumb area -->
+    <!-- Start Shop Page -->
+    <div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
+                    <div class="shop__sidebar">
+                        <aside class="widget__categories products--cat">
+                            <h3 class="widget__title">Product Categories for Borrow and Sale</h3>
+                            <ul>
+                                {% for category in Categories %}
+                                    {% if category.produits|length !=0 %}
+                                    <li><a href="{{ path('shopgrid',{'page':1 ,'sort': sort , 'filter':filter, 'actualcategory': category })  }}">
+                                            {{ category.name }}  <span>{{ category.produits|length }}</span></a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </aside>
+                        <br>
+
+                        </aside>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-9 col-12 order-1 order-lg-2">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div
+                                    class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
+                                <div class="shop__list nav justify-content-center" role="tablist">
+                                    <a class="nav-item nav-link active" data-toggle="tab"
+                                       role="tab"><i class="fa fa-th"></i></a>
+
+                                </div>
+                                <p>Showing {{ typebook }} products </p>
+                                <div class="orderby__wrapper">
+                                    <span>Sort By</span>
+                                    <select class="shot__byselect"  onChange="location.href= this.options[this.selectedIndex].value;">
+                                        <option value="{{ path('shopgrid',{'page':1  ,'sort': sort , 'filter':filter, 'typeBook':typebook })  }}">{{ sort }}</option>
+                                        {% if sort != "price" %}
+                                        <option value="{{ path('shopgrid',{'page':1 ,'sort': 'price' , 'filter':filter, 'typeBook':typebook })  }}">price</option>
+                                        {% endif %}
+                                        {% if sort != "name" %}
+                                            <option value="{{ path('shopgrid',{'page':1 ,'sort': 'name' , 'filter':filter, 'typeBook':typebook })  }}">name</option>
+                                        {% endif %}
+                                        {% if sort != "CreatedAt"  %}
+                                        <option value="{{ path('shopgrid',{'page':1 ,'sort': 'createdAt' , 'filter':filter, 'typeBook':typebook })  }}">createdAt</option>
+                                        {% endif %}
+                                    </select>
+                                    {% if filter == "asc" %}
+                                      <a href="{{ path('shopgrid',{'page':1 ,'sort': sort , 'filter':"desc", 'typeBook':typebook })  }}">
+                                        <i class="fas fa-arrow-up fa-lg" style="color:#c1bebe"></i></a>
+                                    {% elseif filter =="desc" %}
+                                    <a href="{{ path('shopgrid',{'page':1 ,'sort': sort , 'filter':"asc", 'typeBook':typebook })  }}">
+                                        <i class="fas fa-arrow-down fa-lg" style="color:#c1bebe"></i></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab__container">
+                        <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
+                            <div class="row">
+
+                                {% for produit in produits %}
+                                    {% if (actualcategory =="all" )  %}
+                                <!-- Start Single Product -->
+                                <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+                                    <div class="product__thumb">
+                                        <a class="first__img" href="{{ path('details',{'id':produit.id}) }}">
+                                            <img
+                                                    src="{{ asset(produit.path) }}" alt="product image"></a>
+                                        <a class="second__img animation1" href="#"><img src="{{ asset(produit.path2) }}" alt="product image"></a>
+                                    </div>
+                                    <div class="product__content content--center">
+                                        <h4><a href="#">{{ produit.name}}</a></h4>
+                                        <ul class="price d-flex">
+                                            <li>DT{{ produit.price}}</li>
+                                        </ul>
+                                        <div class="action">
+                                            <div class="actions_inner">
+                                                <ul class="add_to_links">
+                                                    <li><a class="cart" href=""><i
+                                                                    class="bi bi-shopping-bag4"></i></a></li>
+                                                    <li><a data-toggle="modal" title="Quick View"
+                                                           class="quickview modal-view detail-link"
+                                                           href="{{ path('details',{'id':produit.id}) }}">
+                                                            <i class="bi bi-search"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    {% endif %}
+                                <!-- End Single Product -->
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="wn__pagination">
+                {% if page !=1 %}
+                    <li><a href="{{ path('shopgrid',{'page':page -1 ,'sort': sort , 'filter':filter, 'typeBook':typebook })  }}"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                {% endif %}
+                {% for p in 1..nbPage %}
+                    {% if page == p %}
+                <li class="active"><a href="{{ path('shopgrid',{'page':p,'sort': sort , 'filter':filter, 'typeBook':typebook })  }}">{{ p }}</a></li>
+                {% else %}
+                    <li> <a href="{{ path('shopgrid',{'page':p,'sort': sort , 'filter':filter, 'typeBook':typebook })  }}">{{ p }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page !=  (nbPage | number_format) %}
+                <li><a href="{{ path('shopgrid',{'page':page  ,'sort': sort , 'filter':filter, 'typeBook':typebook })  }}"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+    <!-- End Shop Page -->
+
+
+
+{% endblock %}
