@@ -1,5 +1,5 @@
 {% block head %}
-<!doctype html>
+    <!doctype html>
 <html class="no-js" lang="zxx" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
@@ -15,199 +15,142 @@
     <link rel="stylesheet" href="{{asset("style.css")  }}">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')  }}">
     <link rel="apple-touch-icon" href="{{asset('assets/images/icon.png')  }}">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,600,600i,700,700i,800"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("assets/css/custom.css")  }}">
-    <link rel="stylesheet" href="{{asset("fontawesome-free-5.15.3-web/css/all.css")  }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset("stylenew.css")  }}">
 {% endblock %}
 {% block Js %}
     <script src="{{asset("assets/js/vendor/modernizr-3.5.0.min.js") }}"></script>
 {% endblock %}
 
+
+{% block  headerclass %}
+        <header id="wn__header" class="oth-page header__area header__absolute sticky__header">
+{% endblock %}
+
 {% block header %}
-<header id="wn__header" class="header__area header__absolute sticky__header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-6 col-lg-2">
-                <div class="logo">
-                    <a href="welcome">
-                        <img src="{{asset('assets/images/logo/3.png')}}" alt="logo">
-                    </a>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                    <div class="logo">
+                        <a href="{{ path('home') }}">
+                            <img src="{{asset('assets/images/logo/3.png')}}" alt="logo">
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-8 d-none d-lg-block">
-                <nav class="mainmenu__nav">
-                    <ul class="meninmenu d-flex justify-content-start">
-                        <li><a href="{{ path('welcome') }}">Home</a></li>
+                <div class="col-lg-8 d-none d-lg-block">
+                    <nav class="mainmenu__nav">
+                        <ul class="meninmenu d-flex justify-content-start">
+                            <li><a href="{{ path("home") }}">Home</a></li>
+                            <li><a href="{{ path('shopgrid') }}">Buy Books</a></li>
+                            <li><a href="{{ path('shopgrid') }}">Borrow Books</a></li>
+                            <li><a href="{{ path('cantactmail') }}">Cantact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                    <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
+                        <a class="search__active" href=""><i class="fas fa-search fa-lg" style="color: white"></i></a>
+                        <li class="setting__bar__icon">
+                            <div class="searchbar__content setting__block">
+                                <div class="content-inner">
+                                    <div class="switcher-currency">
 
-                        <li class="drop"><a href="shop-grid.html">Buy Books</a>
-                            <div class="megamenu dropdown">
-                                <ul class="item item01">
-                                    <li class="title">Categories</li>
-                                    <li><a href="shop-grid.html">UniversityBooks</a></li>
-                                    <li><a href="shop-grid.html">BiographyBooks</a></li>
-                                    <li><a href="shop-grid.html">KidBooks</a></li>
-                                    <li><a href="shop-grid.html">CookBooks</a></li>
-                                    <li><a href="shop-grid.html">HeathBooks</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="drop"><a href="shop-grid.html">Borrow Books</a>
-                            <div class="megamenu dropdown">
-                                <ul class="item item01">
-                                    <li class="title">Categories</li>
-                                    <li><a href="shop-grid.html">University Books</a></li>
-                                    <li><a href="shop-grid.html">Biography Books</a></li>
-                                    <li><a href="shop-grid.html">Children's Books</a></li>
-                                    <li><a href="shop-grid.html">Cook Books</a></li>
-                                    <li><a href="shop-grid.html">Health Books</a></li>
-                            </div>
-                        </li>
-
-                        <li><a href="blog.html">Blogs</a> </li>
-
-                        <li><a href="contact.html">Contact</a></li>
-
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-6 col-lg-2">
-                <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-
-
-                    <button type="button" class="btn btn-outline-secondary">
-                        <a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}">Catalogue</i></a>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary">
-                        <a href="{{ path('cart_index') }}" >Cart</a>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary">
-                        <a href="{{ path('app_login') }}">Sign In</a>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary">
-                        <a href="{{ path('logout') }}" >Logout</a>
-                    </button>
-                    {#    <li><a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}"><i class="fas fa-search"></i></a></li>
-                    <li><a href="wishlist"><i class="fas fa-list"></i></a></li>
-                    <li><a href="{{ path('cart_index') }}" ><i class="fas fa-shopping-basket"></i></a></li>
-                    <li class="setting__bar__icon"><a href="#"><i class="fas fa-user-circle"></i></a></li>
-
-
-                        <li><a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}"><button class="btn btn-sm btn-secondary">
-                                    Catalogue
-                                </button></a></li>
-                    <li><a href="wishlist"><button class="btn btn-sm btn-secondary">
-                                wishlist
-                            </button></a></li>
-                    <li><a href="{{ path('cart_index') }}" ><button class="btn btn-sm btn-secondary">
-                                cart
-                            </button></a></li>
-                    <li class="setting__bar__icon"><a href="{{path('app_login')}}"><button class="btn btn-sm btn-secondary">
-                                account
-                            </button></a></li>
-
-
-                        <div class="searchbar__content setting__block">
-                            <div class="content-inner">
-
-                                <div class="switcher-currency">
-
-                                    <div class="switcher-options">
-                                        <div class="switcher-currency-trigger">
-                                            <div class="setting__menu">
-                                                <span><a href="{{ path('app_login') }}">Sign In</a></span>
-                                                <span><a href="{{ path('app_login') }}">Create An Account</a></span>
+                                        <div class="switcher-options">
+                                            <div class="switcher-currency-trigger">
+                                                <div class="setting__menu">
+                                                    <span><a href="">Sign In</a></span>
+                                                    <span><a href="">Create An Account</a></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </li>
+                    </ul>
+
+                    <div class="row d-none">
+                        <div class="col-lg-12 d-none">
+                            <nav class="mobilemenu__nav">
+                                <ul class="meninmenu">
+                                    <li><a href="{{ path('home') }}">Home</a></li>
+                                    <li><a href="{{ path('shopgrid') }}"> Borrow Books</a></li>
+                                    <li><a href="{{ path('shopgrid') }}"> Borrow Books</a></li>
+                                    <li><a href="">Contact</a></li>
+                                </ul>
+                            </nav>
                         </div>
-                    </li>#}
-                </ul>
-
-                <!-- Start Mobile Menu -->
-                <div class="row d-none">
-                    <div class="col-lg-12 d-none">
-                        <nav class="mobilemenu__nav">
-                            <ul class="meninmenu">
-                                <li><a href="index-2.html">Home</a></li>
-
-
-
-                                <li><a href="shop-grid.html"> Borrow Books</a>
-                                    <ul>
-                                        <li><a href="shop-grid.html">University Books</a></li>
-                                        <li><a href="shop-grid.html">Biography Books</a></li>
-                                        <li><a href="shop-grid.html">Children's Books</a></li>
-                                        <li><a href="shop-grid.html">Cook Books</a></li>
-                                        <li><a href="shop-grid.html">Health Books</a></li>
-                                    </ul>
-
-                                </li>
-                                <li><a href="shop-grid.html"> Borrow Books</a>
-                                    <ul>
-                                        <li><a href="shop-grid.html">University Books</a></li>
-                                        <li><a href="shop-grid.html">Biography Books</a></li>
-                                        <li><a href="shop-grid.html">Children's Books</a></li>
-                                        <li><a href="shop-grid.html">Cook Books</a></li>
-                                        <li><a href="shop-grid.html">Health Books</a></li>
-                                    </ul>
-                                </li>
-
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
-                <!-- End Mobile Menu -->
-                <div class="mobile-menu d-block d-lg-none">
-                </div>
-                <!-- Mobile Menu -->
-            </div>
-        </div>
-    </div>
-</header>
+    </header>
 
 {% endblock %}
 {% block body %}
-<div class="brown--color box-search-content search_active block-bg close__top">
-    <form id="search_mini_form" class="minisearch" action="#">
-        <div class="field__search">
-            <input type="text" placeholder="Search entire store here...">
-            <div class="action">
-                <a href="#"><i class="zmdi zmdi-search"></i></a>
+<body>
+</body>
+</html>
+{% endblock %}
+{% block javascriptt %}
+    <script src="{{asset('assets/js/popper.min.js')  }}"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')  }}"></script>
+    <script src="{{asset('assets/js/vendor/jquery-3.2.1.min.js')  }}"></script>
+    <script src="{{asset('assets/js/plugins.js')  }}"></script>
+    <script src="{{asset('assets/js/active.js')  }}"></script>
+
+{% endblock %}
+
+{% block footer %}
+    <footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
+        <div class="footer-static-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer__widget footer__menu">
+                            <div class="ft__logo">
+                                <a href="{{ path('home') }}"><img src="{{asset('assets/images/logo/3.png')}}" alt="logo">
+                                </a>
+                                <p>Our site provides many benifits for the users</p>
+                            </div>
+                            <div class="footer__content">
+                                <ul class="social__net social__net--2 d-flex justify-content-center">
+                                    <li><a href=""><i class="bi bi-facebook"></i></a></li>
+                                    <li><a href=""><i class="bi bi-twitter"></i></a></li>
+                                    <li><a href=""><i class="bi bi-linkedin"></i></a></li>
+                                    <li><a href=""><i class="bi bi-youtube"></i></a></li>
+                                </ul>
+                                <ul class="mainmenu d-flex justify-content-center">
+                                    <li><a href="{{ path('shopgrid') }}">All Product</a></li>
+                                    <li><a href="{{ path('home') }}">Home</a></li>
+                                    <li><a href="{{ path('cantactmail') }}">Cantact</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </form>
-    <div class="close__wrap">
-        <span>close</span>
-    </div>
-</div>
-<body>
-<div class="flashbag">
-    <main>
+        </div>
+
+    </footer>
+
+{% endblock %}
+{% block flashbag %}
     {% for  message in  app.session.flashBag.get('info') %}
-      <div class="alert alert-info">
+        <div class="alert alert-info">
             {{ message }}
         </div>
     {% endfor %}
     {% for  message in  app.session.flashBag.get('success') %}
-      <div class="alert alert-success">
-           {{ message }}
-      </div>
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
     {% endfor %}
     {% for  message in  app.session.flashBag.get('error') %}
         <div class="alert alert-danger">
             {{ message }}
         </div>
-    </main>
-</div>
-{% endfor %}
+    {% endfor %}
 {% endblock %}
-
