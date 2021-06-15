@@ -40,7 +40,7 @@
             <div class="col-lg-8 d-none d-lg-block">
                 <nav class="mainmenu__nav">
                     <ul class="meninmenu d-flex justify-content-start">
-                        <li><a href="{{ path("home") }}">Home</a></li>
+                        <li><a href="{{ path('welcome') }}">Home</a></li>
 
                         <li class="drop"><a href="shop-grid.html">Buy Books</a>
                             <div class="megamenu dropdown">
@@ -77,10 +77,40 @@
 
             <div class="col-md-6 col-sm-6 col-6 col-lg-2">
                 <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-                    <li><a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}"><i class="fas fa-search"></i></a></li>
+
+
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}">Catalogue</i></a>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{{ path('cart_index') }}" >Cart</a>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{{ path('app_login') }}">Sign In</a>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{{ path('logout') }}" >Logout</a>
+                    </button>
+                    {#    <li><a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}"><i class="fas fa-search"></i></a></li>
                     <li><a href="wishlist"><i class="fas fa-list"></i></a></li>
                     <li><a href="{{ path('cart_index') }}" ><i class="fas fa-shopping-basket"></i></a></li>
                     <li class="setting__bar__icon"><a href="#"><i class="fas fa-user-circle"></i></a></li>
+
+
+                        <li><a href="{{ path('shopgrid', {'number': '1', 'page': '2', 'sort': '1'}) }}"><button class="btn btn-sm btn-secondary">
+                                    Catalogue
+                                </button></a></li>
+                    <li><a href="wishlist"><button class="btn btn-sm btn-secondary">
+                                wishlist
+                            </button></a></li>
+                    <li><a href="{{ path('cart_index') }}" ><button class="btn btn-sm btn-secondary">
+                                cart
+                            </button></a></li>
+                    <li class="setting__bar__icon"><a href="{{path('app_login')}}"><button class="btn btn-sm btn-secondary">
+                                account
+                            </button></a></li>
+
+
                         <div class="searchbar__content setting__block">
                             <div class="content-inner">
 
@@ -97,7 +127,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li>#}
                 </ul>
 
                 <!-- Start Mobile Menu -->

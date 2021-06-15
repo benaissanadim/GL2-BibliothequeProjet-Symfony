@@ -13,7 +13,7 @@ section {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to bottom , #f1f4f9 , #dff1ff);
+    background: linear-gradient(to bottom , brown , darkgoldenrod);
 
 }
 section .color {
@@ -25,21 +25,21 @@ section .color:nth-child(4) {
     left: 100px;
     width: 600px;
     height: 600px;
-    background: #9face6;
+    background: darkgoldenrod;
 }
 section .color:nth-child(2) {
     bottom: -150px;
     left: 100px;
     width: 550px;
     height: 550px;
-    background: #79CBCA ;
+    background: brown ;
 }
 section .color:nth-child(3) {
     bottom: 100px;
     right: 160px;
     width: 550px;
     height: 550px;
-    background: #77A1D3 ;
+    background: white ;
 }
 
 div.container {
