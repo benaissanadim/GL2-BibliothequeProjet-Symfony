@@ -4,10 +4,9 @@
 Notre projet Gestion de bibliothèque consiste à faire une librairie en ligne pour la vente et  l’empreint des livres.
 
     2- Conception et architecture du projet :
-<br>
-![image](https://user-images.githubusercontent.com/80357350/151247000-60496beb-7baf-47b6-95cc-2ff392f29ee0.png)
 
-<br><br>
+![image](https://user-images.githubusercontent.com/80357350/151247119-f97b0fb0-3205-4b6b-abdd-88e9e1159ed4.png)
+
 
     3- Description des Fonctionnalitées Réalisées:
 a) Gestion User :
