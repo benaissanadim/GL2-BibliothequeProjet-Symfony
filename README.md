@@ -4,13 +4,10 @@
 Notre projet Gestion de bibliothèque consiste à faire une librairie en ligne pour la vente et  l’empreint des livres.
 
     2- Conception et architecture du projet :
-a) Diagramme de cas d'utilisation :
-    <br>
-![image](https://user-images.githubusercontent.com/80357350/151242756-e9d4b998-4015-42b0-a845-9e4546e67fa3.png)
-<br><br>
-b) Diagramme de classe :
 <br>
-![image](https://user-images.githubusercontent.com/80357350/151242981-561e5037-311a-4849-b71f-09a934670ca3.png)
+![image](https://user-images.githubusercontent.com/80357350/151247000-60496beb-7baf-47b6-95cc-2ff392f29ee0.png)
+
+<br><br>
 
     3- Description des Fonctionnalitées Réalisées:
 a) Gestion User :
