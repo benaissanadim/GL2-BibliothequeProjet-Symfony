@@ -11,18 +11,20 @@ Notre projet Gestion de bibliothèque consiste à faire une librairie en ligne p
 
     3- Description des fonctionnalitées réalisées:
 a) Gestion User :
+<br>
 Le visiteur peut 
 -  S’inscrire en saisissant son email et son mot de passe (Le mot de passe sera crypté pour la sécurité).
 -  S’authentifier en utilisant son email.(on a utilisé SwiftMailer pour l'envoie de l'email).
 -  Se déconnecter.
-L’administrateur peut : 
+
+<br>L’administrateur peut : 
 - Consulter la liste des utilisateurs inscrit dans notre application.
 
 ![image](https://user-images.githubusercontent.com/80357350/151249761-c9cda2bc-00e0-42af-b33a-0aa135523474.png)
 <br>
 
 b) Gestion Livre :
-L’administrateur peut : 
+<br>L’administrateur peut : 
 - Ajouter, supprmier, modifier des catégories de livre
 - Ajouter, supprmier, modifier des livres
 
@@ -37,7 +39,7 @@ Le visiteur peut :
 <br>
 
 c) Gestion avis des livres :
-L'utilisateur peut : 
+<br>L'utilisateur peut : 
 - Consulter les avis et le l'évaluation de chaque livre
 - Ajouter son commentaire et le nombre d'étoiles d'un produit
 
@@ -45,7 +47,7 @@ L'utilisateur peut :
 <br>
 
 d) Gestion des newsLetters :
-Le visiteur peut :
+<br>Le visiteur peut :
 - S’inscrire à newsletters par email pour consulter toutes les nouveautés.
 
 ![image](https://user-images.githubusercontent.com/80357350/151252515-176b067a-1da2-42ee-bbb1-a805e66f108f.png)
@@ -58,6 +60,14 @@ L’administrateur peut :
 <br>
 
 e) Gestion de panier :
-L’utilisateur peut : 
-- Ajouter un livre désirable à acheter ou à empruntet dans son panier
+<br>L’utilisateur peut : 
+- Ajouter un livre désirable à acheter ou à empruntet dans son panier.
+
 ![image](https://user-images.githubusercontent.com/80357350/151253615-2b80d74d-1c05-40f6-a4d5-e243345e8ca4.png)
+<br>
+f) Gestion de contact :
+<br>Le visiteur peut :
+- Contacter l’administrateur en envoyant un email.
+
+![image](https://user-images.githubusercontent.com/80357350/151257225-9e695653-4463-4803-ab77-97053cbfedd9.png)
+
