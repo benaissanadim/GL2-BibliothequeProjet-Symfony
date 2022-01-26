@@ -65,6 +65,7 @@ e) Gestion de panier :
 
 ![image](https://user-images.githubusercontent.com/80357350/151253615-2b80d74d-1c05-40f6-a4d5-e243345e8ca4.png)
 <br>
+
 f) Gestion de contact :
 <br>Le visiteur peut :
 - Contacter l’administrateur en envoyant un email.
