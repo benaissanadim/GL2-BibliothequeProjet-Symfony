@@ -23,10 +23,10 @@ L’administrateur peut :
 
 b) Gestion Livre :
 L’administrateur peut : 
-- ajouter des catégories de livre
-- ajouter des livres
+- Ajouter, supprmier, modifier des catégories de livre
+- Ajouter, supprmier, modifier des livres
 
-![image](https://user-images.githubusercontent.com/80357350/151249894-47a4491b-1c0d-4716-b992-994c6d05d717.png)
+![image](https://user-images.githubusercontent.com/80357350/151254135-2a90da84-c008-49b9-9b38-7bb214ebf16b.png)
 <br>
 Le visiteur peut : 
 - Consulter la liste des livres.
